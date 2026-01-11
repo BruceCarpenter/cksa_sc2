@@ -1,0 +1,1397 @@
+﻿@using CKSA.Helpers
+@inject Microsoft.Extensions.Caching.Memory.IMemoryCache MyCache
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div id="mastWrap">
+	<div class="container mast">
+		<div class="headerrow row">
+
+			<div id="hamburger" class="col-xs-3 col-sm-2 visible-xs-block visible-sm-block">
+				<a id="mobile-menu" aria-label="Mobile Menu" class="menu-button" href="#sidr" title="Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+			</div>
+			<div class="hidden-md hidden-lg">
+				<a href="/" style="float: right;"><img src="/img/country-kitchen-logo1.jpg" alt="Country Kitchen Sweetart" itemscope itemtype="http://schema.org/Organization"></a>
+			</div>
+		</div>
+
+		<!-- mobile nav start -->
+		<div id="sidr" class="sidr right visible-xs-block visible-sm-block">
+			<ul>
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/shops/">Shop</a>
+				</li>
+				<li>
+					<a href="/shop/occasions/42/">Themes</a>
+				</li>
+				<li>
+					<a href="/shop/brand-name/48/">Brand</a>
+				</li>
+				<li>
+					<a href="/catalog/latest.aspx">New Items</a>
+				</li>
+				<li>
+					<a href="/catalog/bargains.aspx">Sale</a>
+				</li>
+				<li>
+					<a href="/idea/">Ideas &amp; Recipes</a>
+				</li>
+				<li>
+					<a href="/customerservice/customerservice2.aspx">Customer Service</a>
+				</li>
+				<li>
+					<a href="/account/manage/">My Account</a>
+				</li>
+			</ul>
+		</div>
+		<!-- mobile nav end  -->
+		<!-- desktop nav start -->
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2 hidden-sm hidden-xs">
+					<a href="/"><img src="/img/country-kitchen-logo1.jpg" alt="Country Kitchen Sweetart" itemscope itemtype="http://schema.org/Organization"></a>
+				</div>
+				<nav class="navbar navbar-default col-md-7 hidden-sm hidden-xs">
+					<ul id="mainMenu" class="nav navbar-nav">
+						<li class="dropdown" id="dropdownCategoryHover">
+							<a href="/shops/" class="dropdown-toggle dropdown-hover" data-toggle="dropdown" onclick="window.location.href='/shops/';">Shop</a>
+							<ul class="dropdown-menu" id="dropdownCategory" style="display: none;">
+								<li>
+									<div class="row dropdown-common mainNav" id="mainNav">
+										<ul class="col-sm-2 dropdown-box menuItemList" id="menuItemList" style="border-right:0px solid lightgrey;">
+											<li><p class="list-menu-item" id="M1">Ingredients, Icing,<br>Flavor &amp; Colors</p></li>
+											<li><p class="list-menu-item" id="M2">Sprinkles, Toppers<br>&amp; Decorations</p></li>
+											<li><p class="list-menu-item" id="M3">Chocolate</p></li>
+											<li><p class="list-menu-item" id="M4">Essentials</p></li>
+											<li><p class="list-menu-item" id="M5">Bakeware</p></li>
+											<li><p class="list-menu-item" id="M6">Cupcake Liners</p></li>
+											<li><p class="list-menu-item" id="M7">Tools for Icing<br>&amp; Fondant</p></li>
+											<li><p class="list-menu-item" id="M8">Cutters &amp; Molds</p></li>
+											<li><p class="list-menu-item" id="M9">Assembly &amp; Display</p></li>
+											<li><p class="list-menu-item" id="M10">Packaging</p></li>
+											<li><p class="list-menu-item" id="M11">Gifts & Apparel</p></li>
+											<li><p class="list-menu-item" id="M12">Brands</p></li>
+											<li><p class="list-menu-item" id="M18">Wholesale &amp; Bulk</p></li>
+										</ul>
+										<div id="menuDisplayDivCategory" class="col-sm-10" style="height:570px;">
+											<!-- New THing -->
+											<a id="BigMenuDisplayLink" href="/shop/ingredients-icing-colors-flavors/gel-food-color/46/535/1053/">
+												<img id="BigMenuDisplayImg" alt="Chefmaster"
+													 srcset="/images/menu-main.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+													 src="/images/menu-main.jpg"
+													 style="height:98%;width:100%;padding-top:1%;" />
+											</a>
+										</div>
+										<div class="list-group" id="SM1" style="display: none;">
+											<ul class="col-sm-3">
+												<li class="sub-menu-item" id="SS1">
+													<a href="/shop/ingredients-icing-colors-flavors/candy-centers-crunches-caramel-fillings/46/587/">Candy Centers, Crunches, &amp; Fillings </a>
+
+													<div class="sub-list-group" id="SSM1">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/candy-centers/46/587/506/">Candy Centers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/candy-crunches-bars-bits/46/587/508/">Candy Crunches, Bars & Bits</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/caramel/46/587/1136/">Caramel</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/coconut/46/587/1421/">Coconut</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/dry-fondant/46/587/521/">Dry Fondant</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/pastry-fillings/46/587/798/">Pastry Fillings</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS2">
+													<a href="/shop/ingredients-icing-colors-flavors/flavorings-extracts-emulsions/46/589/">Flavorings, Extracts, &amp; Emulsions</a>
+
+													<div class="sub-list-group" id="SSM2">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/flavoring-emulsions/46/589/1589/">Emulsions</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/flavoring-extracts/46/589/1056/">Flavorings & Extracts</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/flavor-enhancers/46/589/2224/">Flavor Enhancers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/flavoring-syrups/46/589/2523/">Flavoring Syrups</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/pure-vanilla/46/589/1813/">Pure Vanilla</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/super-strengthconcentrated-flavorings/46/589/1055/">Super-strength Flavors & Oils</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS3">
+													<a href="/shop/ingredients-icing-colors-flavors/icing/46/532/">Icing & Fondant</a>
+													<div class="sub-list-group" id="SSM3">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/buttercream-icing/46/532/1013/">Buttercream</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/gum-paste/46/532/2269/">Gum Paste</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/marzipan/46/532/776/">Marzipan</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/miscellaneous-icings/46/532/1016/">Miscellaneous Icings</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/rolled-fondant/46/532/1015/">Rolled Fondant</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/royal-icing/46/532/1014/">Royal Icing</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-3">
+												<li class="sub-menu-item" id="SS4">
+													<a href="/shop/ingredients-icing-colors-flavors/miscellaneous-ingredients/46/593/">Miscellaneous Ingredients</a>
+													<div class="sub-list-group" id="SSM4">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/gelatin-sheets/46/593/1155/">Gelatin</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/gums-tylose/46/593/528/">Gums & Tylose</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/high-ratio-shortening/46/593/1069/">Hi Ratio Shortening</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/icing-fruits-compound-flavors/46/593/799/">Icing Fruits & Compound Flavors</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/icing-sugars-invert-sugar-glucose/46/593/784/">Sugars & Glucose</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/isomalt-hard-candy-mix/46/593/786/">Isomalt & Hard Candy</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/meringue-powder/46/593/2270/">Meringue Powder & Dried Egg Whites</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/nuts-nut-pastes/46/593/800/">Nuts & Nut Pastes</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/paramount-crystals-cocoa-butter/46/593/794/">Paramount Crystals & Cocoa Butter</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/piping-gel/46/593/555/">Piping Gel</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/premium-cake-mix/46/593/1761/">Premium Cake Mix</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/miscellaneous-food-items/46/593/1118/">Miscellaneous Food Items</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS5">
+													<a href="/shop/ingredients-icing-colors-flavors/gourmet-specialty-food/46/638/">Gourmet & Specialty<br>Foods</a>
+
+													<div class="sub-list-group" id="SSM5">
+														<ul>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/cheeseball-mixes/46/638/1751/">Cheeseball Mixes</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/desserts-baking-mixes/46/638/1651/">Desserts and Baking Mixes</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/drink-mixes/46/638/1753/">Drink Mixes</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/premade-gingerbread-house-kits-cookie/46/638/557/">Gingerbread Houses & Cookie Kits</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/jams-dessert-sauces/46/638/2551/">Jams and Dessert Sauces</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/novelties-treats/46/638/2474/">Novelties and Treats</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/popcorn/46/638/1650/">Popcorn</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/savory-mixes-specialty-foods/46/638/1672/">Savory Mixes & Specialty Foods</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="sub-menu-item" id="SS7">
+													<a href="/shop/ingredients-icing-colors-flavors/food-color/46/535/">Color </a>
+													<div class="sub-list-group" id="SSM7">
+														<ul>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/airbrush-liquid-food-color/46/535/1860/">Airbrush Color</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/food-color-paints/46/535/1811/">Edible Paint</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/food-pens-markers/46/535/1210/">Food Color Markers</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/gel-food-color/46/535/1053/">Gel Color</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/liquid-food-color/46/535/2486/">Liquid Color</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/oil-based-food-color/46/535/1422/">Oil-Based Color</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/powdered-food-color/46/535/1716/">Powdered Color</a></li>
+															<li class="list-item"><a href="/shop/ingredients-icing-colors-flavors/aerosol-spray-food-color/46/535/1290/">Spray Color</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS6">
+													<a href="/shop/ingredients-icing-colors-flavors/dusting-powders/46/752/">Dusting Powders</a>
+													<div class="sub-list-group" id="SSM6">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/fda-approved-dusting-powders/46/752/2082/">FDA Approved</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/non-toxic-dusting-powders/46/752/2330/">Non-Toxic</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/ingredients-icing-colors-flavors/decorative-use-only-dusting-powders/46/752/1105/">Decorative Use Only</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage1"
+														 srcset="/images/menu-ingredients.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-ingredients.jpg" alt="Sugar Flowers">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM2" style="display: none;">
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS35">
+													<a href="/shop/sprinkles-decorations-toppers/edible-lay-on-decorations/50/751/">Edible Lay-On Decorations</a>
+													<div class="sub-list-group" id="SSM35">
+														<ul>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/candy-decorations/50/751/1516/">Candy Decorations</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/flowerleaf-layon-decorations/50/751/2329/">Flower/Leaf Lay-ons</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/icing-eyes-candy-eyeballs/50/751/1526/">Icing Eyes</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/themeoccasion-layon-decorations/50/751/1518/">Theme/Occasion Lay-Ons</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS38">
+													<a href="/shop/sprinkles-decorations-toppers/edible-images-chocolate-transfers/50/749/">Edible Sheets, Strips, Cake Lace &amp; Chocolate Transfers</a>
+
+													<div class="sub-list-group" id="SSM38">
+														<ul>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/chocolate-transfer-sheets/50/749/1544/">Chocolate Transfer Sheets</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/wafer-paper-blank-printable-frosting/50/749/1057/">Wafer Paper & Blank Frosting Sheets</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS36">
+													<a href="/shop/sprinkles-decorations-toppers/toppers-accents/50/769/">Toppers &amp; Accents</a>
+													<div class="sub-list-group" id="SSM36">
+														<ul>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/birthday-shape-candles/50/769/2286/">Birthday & Shape Candles</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/number-candles-sparkler-candles/50/769/2285/">Number & Letter Candles</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/pearl-strands-food-safe-ribbon/50/769/2272/">Food Safe Ribbon</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/gum-paste-fondant-flowers-accents/50/769/1661/">Gum Paste & Fondant Flowers & Accents</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/toppers-rings-picks/50/769/765/">Toppers, Rings, & Picks</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS37">
+													<a href="/shop/sprinkles-decorations-toppers/sugars-sprinkles-edible-glitters-dragees/50/624/">Sugars, Sprinkles, Glitters<br>&amp; Dragees</a>
+
+													<div class="sub-list-group" id="SSM37">
+														<ul>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/chocolate-sprinkles-decorations/50/624/2291/">Chocolate Sprinkles & Decorations</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/sprinkles-confetti/50/624/2206/">Confetti & Shaped Sprinkles</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/sanding-sugar-coarse-sugar/50/624/1534/">Decorating Sugars</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/edible-glitter/50/624/1521/">Edible Glitter</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/edible-sugar-pearls-dragees-candy-beads/50/624/1678/">Edible Pearls & Dragees</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/flavored-sugars/50/624/2432/">Flavored Sugars</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/jimmies/50/624/1528/">Jimmies</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/nonpareils/50/624/2505/">Nonpareils</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/non-edible-dragees/50/624/1876/">Non-Edible Dragees</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/non-edible-glitters/50/624/1581/">Non-Edible Non-Edible Glitters</a></li>
+															<li class="list-item"><a href="/shop/sprinkles-decorations-toppers/sprinkle-mixes/50/624/2385/">Sprinkle Mixes</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2" style="overflow:visible;">
+												<li class="list-item" style="overflow:visible;">
+													<img class="sideBanner" id="CategorySideImage2"
+														 srcset="/images/sprinkles.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/sprinkles.jpg" style="overflow:visible;" alt="Sprinkles">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM3" style="display: none;">
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS8">
+													<a href="/shop/chocolate/chocolate-candy-coating/49/588/">Chocolate Type</a>
+													<div class="sub-list-group" id="SSM8">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/chocolate/baking-chips/49/588/569/">Baking Chips</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/chocolate/chocolate-wafers-candy-melts/49/588/564/">Candy Coating</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/chocolate/candy-writers/49/588/571/">Candy Writers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/chocolate/cocoa-powder-nibs/49/588/2271/">Cocoa Powder & Nibs</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/chocolate/fountain-chocolate/49/588/1502/">Fountain Chocolate</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/chocolate/real-chocolate-chocolate-with-cocoa/49/588/563/">Real Chocolate</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/chocolate/sugar-free-chocolate-candy-coating/49/588/570/">Sugar-Free</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-6">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage3"
+														 srcset="/images/menu-chocolate.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-chocolate.jpg" style="overflow:visible;" alt="Strawberries dipped in chocolate">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM4" style="display: none;">
+											<ul class="col-sm-3">
+												<li class="sub-menu-item" id="SS9">
+													<a href="/shop/essentials/candy-chocolate-tools-gadgets/40/582/">Candy Making Tools</a>
+													<div class="sub-list-group" id="SSM9">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/icing-fondant-tools/brushes-paint-water-tray/38/755/161/">Brushes & Paint Trays</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/dipping-tools/40/582/616/">Dipping Tools</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/chocolate-melting-pots-double-boilers/40/582/1011/">Double Boilers & Melting Pots</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/funnels-droppers/40/582/1852/">Funnels & Droppers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/skewers-toothpicks/40/582/1157/">Skewers & Toothpicks</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/squeeze-bottles/40/582/614/">Squeeze Bottles</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/miscellaneous-candy-tools/40/582/617/">Miscellaneous Candy Tools</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS10">
+													<a href="/shop/essentials/pie-pastry-tools/40/607/">Pie &amp; Pastry Tools </a>
+													<div class="sub-list-group" id="SSM10">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/essentials/miscellaneous-pie-pastry-tools/40/607/855/">Pie & Pastry Tools</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/pie-shields-weights-dividers/40/607/2275/">Pie Shields, Weights & Dividers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/rolling-pins-accessories/40/607/1442/">Rolling Pins & Accessories</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS11">
+													<a href="/shop/essentials/baking-tools/40/771/">General Baking Tools </a>
+													<div class="sub-list-group" id="SSM11">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/essentials/baking-mats-silicone-mats/40/771/1354/">Silicone Mats</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/cooling-racks/40/771/184/">Cooling Racks</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/baking-parchment-paper/40/771/813/">Parchment Paper</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/pan-grease-release-agents/40/771/793/">Pan Grease</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-3">
+												<li class="sub-menu-item" id="SS12">
+													<a href="/shop/essentials/kitchen-tools-gadgets/40/542/">Kitchen Tools &amp; Gadgets </a>
+
+													<div class="sub-list-group" id="SSM12">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/essentials/bench-bowl-scrapers/40/542/169/">Bench & Bowl Scrapers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/bread-making-tools/40/542/2517/">Bread Making Tools</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/knivesslicerspeelers/40/542/1355/">Cutters, Graters & Peelers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/measuring-cups-spoons-scales/40/542/174/">Measuring Tools</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/shakers-sifters/40/542/168/">Shakers & Sifters</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/spatulas/40/542/166/">Spatulas</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/thermometers-timers/40/542/609/">Thermometers & Timers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/utensils-general/40/542/164/">Miscellaneous Utensils</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS13">
+													<a href="/shop/essentials/cake-baking-tools/40/530/">Cake Baking Tools </a>
+													<div class="sub-list-group" id="SSM13">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/essentials/cake-lifters-levelers/40/530/159/">Cake Lifters & Levelers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/cake-testers-heating-cores-insulating/40/530/158/">Cake Testers, Heating Cores & Insulating Strips</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/cupcake-corers/40/530/2274/">Cupcake Corers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/servers/40/530/1318/">Servers</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/turntables/40/530/162/">Turntables</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/miscellaneous-baking-tools/40/530/1339/">Miscellaneous Baking Tools</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="sub-menu-item" id="SS15">
+													<a href="/shop/essentials/cookie-tools/40/772/">Cookie Tools </a>
+													<div class="sub-list-group" id="SSM15">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/essentials/cookie-presses/40/772/293/">Cookie Presses</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/cookie-scoops/40/772/1369/">Cookie Scoops</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/rosette-molds-accessories/40/772/1220/">Rosette Molds & <br />Accessories</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/cookie-molds/40/772/2419/">Cookie Molds</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/cookie-stamps/40/772/1857/">Cookie Stamps</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS69">
+													<a href="/shop/essentials/hot-cocoa/40/841/">Hot Cocoa</a>
+													<div class="sub-list-group" id="SSM69">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/essentials/hot-cocoa-bomb-ingredients/40/841/2475/">Ingredients</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/hot-cocoa-bomb-molds/40/841/2476/">Hot Cocoa Bomb Molds</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/hot-cocoa-bomb-packaging/40/841/2477/">Packaging</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/essentials/hot-cocoa-novelties/40/841/2478/">Novelties</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS50">
+													<a href="/shop/essentials/hosting-supplies/40/864/">Hosting Supplies</a>
+													<div class="sub-list-group" id="SSM56"></div>
+												</li>
+												<li class="sub-menu-item" id="SS14">
+													<a href="/shop/essentials/disposable-gloves-hair-nets-aprons/40/547/173/">Food Safety Supplies</a>
+													<div class="sub-list-group" id="SSM14"></div>
+												</li>
+												<li class="sub-menu-item" id="SS78">
+													<a href="/shop/instructional/books-dvds/54/528/426/">Books</a>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage4"
+														 srcset="/images/menu-essentials.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-essentials.jpg" style="overflow:visible;" alt="Cake decorating essentials">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM5" style="display: none;">
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS17">
+													<a href="/shop/bakeware/cake-bakeware/52/536/">Cake Bakeware </a>
+													<div class="sub-list-group" id="SSM17">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/bakeware/round-cake-pans/52/536/984/">Round</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/sheet-rectangle-cake-pans/52/536/2388/">Sheet Cake (Rectangle)</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/square-cake-pans/52/536/2387/">Square </a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/muffin-cupcake-pans/52/536/1605/">Muffin (Cupcake)</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/occasion-cake-pans/52/536/982/">Shaped </a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/angel-food-cake-pans/52/536/1573/">Angel Food Pans</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/bundt-cake-pans/52/536/1279/">Bundt</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/cheesecake-cake-pans/52/536/992/">Cheesecake (Springform)</a>
+															</li>
+
+
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS18">
+													<a href="/shop/bakeware/bread-bakeware/52/548/">Bread Bakeware </a>
+													<div class="sub-list-group" id="SSM18">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/bakeware/bread-loaf-pans/52/548/279/">Bread & Loaf Pans</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS21">
+													<a href="/shop/bakeware/dessert-bakeware/52/631/">Dessert Bakeware </a>
+													<div class="sub-list-group" id="SSM21">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/bakeware/brownie-pans/52/631/2278/">Brownie Pans</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/macaron-bakeware/52/631/2280/">Macaron Bakeware</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/miscellaneous-bakeware/52/631/1643/">Miscellaneous Bakeware</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/ramekins-souffl-bakeware/52/631/1647/">Ramekins & Souffle Bakeware</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/dessert-bakeware/52/631/">Whoopie Pie Pans</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS19">
+													<a href="/shop/bakeware/pie-tart-quiche-bakeware/52/546/">
+														Pie, Tart &amp; Quiche
+														<br>Bakeware
+													</a>
+													<div class="sub-list-group" id="SSM19">
+														<ul>
+															<li class="list-item">
+																<a href="/shop/bakeware/pie-pans/52/546/867/">Pie Pans</a>
+															</li>
+															<li class="list-item">
+																<a href="/shop/bakeware/tart-quiche-pans/52/546/1408/">Tart & Quiche Pans</a>
+															</li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS20">
+													<a href="/shop/bakeware/cookie-bakeware/52/605/">Cookie Bakeware</a>
+													<div class="sub-list-group" id="SSM20">
+														<ul>
+															<li class="list-item"><a href="/shop/bakeware/cookie-sheets/52/605/320/">Cookie Sheets</a></li>
+															<li class="list-item"><a href="/shop/bakeware/cookie-treat-pans/52/605/977/">Cookie Treat Pans</a></li>
+															<li class="list-item"><a href="/shop/bakeware/jelly-roll-pans/52/605/988/">Jelly Roll Pans</a></li>
+															<li class="list-item"><a href="/shop/bakeware/miscellaneous-cookie-pans/52/605/1644/">Miscellaneous Cookie Pans</a></li>
+															<li class="list-item"><a href="/shop/bakeware/shortbread-cookie-pans/52/605/1292/">Shortbread Cookie Pans</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage5"
+														 srcset="/images/menu-bakeware.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-bakeware.jpg" alt="donuts">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM6" style="display: none;">
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS22">
+													<a href="/shop/cupcake-papers-wraps/cupcake-papers-baking-cups/51/629/">Cupcake Liners</a>
+													<div class="sub-list-group" id="SSM22">
+														<ul>
+															<li class="list-item"><a href="/shop/cupcake-papers-wraps/baking-cups/51/629/2585/">Baking Cups</a></li>
+															<li class="list-item"><a href="/shop/cupcake-papers-wraps/mini-cupcake-liners-papers-baking-cups/51/629/1603/">Mini Cupcake Liners</a></li>
+															<li class="list-item"><a href="/shop/cupcake-papers-wraps/standard-cupcake-liners-papers-baking/51/629/1602/">Standard Cupcake Liners</a></li>
+															<li class="list-item"><a href="/shop/cupcake-papers-wraps/jumbolarge-cupcake-liners-papers-baking/51/629/1604/">Jumbo Cupcake Liners</a></li>
+															<li class="list-item"><a href="/shop/cupcake-papers-wraps/cupcake-kits/51/629/2416/">Cupcake Liner Kits</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-6">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage6"
+														 srcset="/images/menu-cupcake-liners.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-cupcake-liners.jpg" alt="Cupcake Liners">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM7" style="display: none;">
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS26">
+													<a href="/shop/icing-fondant-tools/texture-mats-stencils-imprinters/38/527/">Texture Mats, Stencils, &amp; Imprinters</a>
+													<div class="sub-list-group" id="SSM26">
+														<ul>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/cake-combs/38/527/163/">Cake Combs</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/cake-imprinters/38/527/156/">Cake Imprinters</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/stencils-stencil-accessories/38/527/155/">Stencils</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/icing-templates/38/527/2343/">Icing Pattern Sheets</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/sprinkle-stencils/38/527/2548/">Sprinkle Stencils</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/impression-mats-texture-sheets/38/527/1327/">Texture Mats</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS27">
+													<a href="/shop/icing-fondant-tools/miscellaneous-decorating-tools/38/755/">Miscellaneous Decorating Tools</a>
+													<div class="sub-list-group" id="SSM27">
+														<ul>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/brushes-paint-water-tray/38/755/161/">Brushes & Paint Trays</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/cake-dividers-garland-markers/38/755/154/">Cake Dividers & Garland Markers</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/cake-stamps-supplies/38/755/1849/">Cake Stamps</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/flower-forms-cel-pads/38/755/212/">Flower Forms & Foam Pads</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/miscellaneous-decorating-tools/38/755/">Gelatin Supplies</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/stamens-floral-wire-tape-accessories/38/755/205/">Stamens, Wire, & Flower Parts</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS28">
+													<a href="/shop/icing-fondant-tools/icing-spatulas-smoothers/38/529/">Icing Spatulas &amp;<br>Smoothers</a>
+													<div class="sub-list-group" id="SSM28">
+														<ul>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/icing-smoothers/38/529/2234/">Icing Smoothers</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/icing-spatulas/38/529/1162/">Icing Spatulas</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS24">
+													<a href="/shop/icing-fondant-tools/airbrush-equipment-projectors/38/596/">Airbrush Equipment &amp; Projectors</a>
+
+													<div class="sub-list-group" id="SSM24">
+														<ul>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/airbrush-equipment-compressor-tools-sets/38/596/5/">Airbrush Equipment</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS25">
+													<a href="/shop/icing-fondant-tools/decorating-tips-piping-bags-accessories/38/531/">Decorating Tips &amp; Accessories</a>
+													<div class="sub-list-group" id="SSM25">
+														<ul>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/piping-bags-accessories/38/531/1208/">Icing Bags & Accessories</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/parchment-rolls-triangles/38/531/1207/">Parchment Rolls &amp; Triangles</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/flower-nails-lifters/38/531/130/">Flower Nails &amp; Lifters</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/tip-holders-caddies-tools/38/531/880/">Tip Accessories &amp; Holders</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/piping-tips-couplers/38/531/112/">Tips &amp; Couplers</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/tip-sets/38/531/881/">Tip Sets</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS29">
+													<a href="/shop/icing-fondant-tools/fondant-supplies/38/758/">Fondant Supplies</a>
+													<div class="sub-list-group" id="SSM29">
+														<ul>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/flower-fondant-cutters/38/758/234/">Flower Fondant Cutters</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/fondant-cutters/38/758/1862/">Fondant Cutters</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/gum-paste-fondant-modeling-tools/38/758/222/">Fondant Essentials</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/fondant-molds/38/758/2254/">Fondant Molds</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/fondant-plunger-cutters/38/758/1586/">Fondant Plunger Cutters</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/fondant-smoothers/38/758/2287/">Fondant Smoothers</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/number-letter-cutters/38/758/1711/">Number and Letter Cutters</a></li>
+															<li class="list-item"><a href="/shop/icing-fondant-tools/stamens-floral-wire-tape-accessories/38/755/205/">Stamens, Floral Wire, Tape &amp; Accessories</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage7"
+														 srcset="/images/menu-tools.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-tools.jpg" alt="melted chocolate">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM8" style="display: none;">
+											<ul class="col-xs-4 ">
+												<li class="sub-menu-item" id="SS32">
+													<a href="/shop/cutters-molds/cookie-cutters/44/603/">Cookie Cutters</a>
+													<div class="sub-list-group" id="SSM32">
+														<ul>
+															<li class="list-item"><a href="/shop/cutters-molds/cksa-cutters/44/603/2480/">CKSA Cutters</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/cookie-cutter-kits/44/603/2277/">Cookie Cutter Kits</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/cookie-stamp-cutters/44/603/1867/">Cookie Stamp Cutters</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/everyday-cookie-cutters/44/603/308/">Everyday Cookie Cutters</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/general-shape-cookie-cutters/44/603/302/">General Shape Cutters</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/mini-cookie-cutters/44/603/2606/">Mini Cookie Cutters</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/letter-number-cookie-cutters/44/603/317/">Letter & Number Cutters</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/seasonal-holiday-cookie-cutters/44/603/2483/">Seasonal and Holiday Cookie Cutters </a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/special-occasions-cookie-cutters/44/603/2484/">Special Occasion Cookie </a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS30">
+													<a href="/shop/cutters-molds/chocolate-molds-hard-candy-molds/44/647/">Chocolate Molds & Hard Candy Molds</a>
+													<div class="sub-list-group" id="SSM30">
+														<ul>
+															<li class="list-item"><a href="/shop/cutters-molds/clear-plastic-chocolate-molds/44/647/719/">Clear Plastic Molds</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/three-part-plastic-chocolate-molds/44/647/2437/">Three-Part Plastic Candy Molds</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/heat-resistant-hard-candy-molds/44/647/748/">Heat Resistent Plastic Molds</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/polycarbonate-chocolate-molds/44/647/2396/">Polycarbonate Molds</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/silicone-chocolate-molds/44/647/1808/">Silicone and Rubber Molds</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/cake-pop-molds/44/647/1816/">Cake Pop Molds</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS84">
+													<a href="/shop/cutters-molds/44/">Specialty Molds &amp; Cutters</a>
+
+													<div class="sub-list-group" id="SSM50">
+														<ul>
+															<li class="list-item"><a href="/shop/cutters-molds/specialty-cutters/44/851/2511/">Specialty Cutters</a></li>
+															<li class="list-item"><a href="/shop/cutters-molds/specialty-molds/44/851/2512/">Specialty Molds</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+
+											<ul class="col-sm-2">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage8"
+														 srcset="/images/menu-cutters.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-cutters.jpg" style="overflow:visible;" alt="Cookie Cutters">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM9" style="display: none;">
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS41">
+													<a href="/shop/assembly-display/sucker-sticks-apple-sticks-straws/53/585/">Sucker Sticks, Spoon Handles, & Straws</a>
+													<div class="sub-list-group" id="SSM41">
+														<ul>
+															<li class="list-item"><a href="/shop/assembly-display/push-up-pop-containers/53/585/2281/">Push-Up Pop Containers</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/rose-stems-marzipan-leaves/53/585/632/">Rose Stems & Marzipan Leaves</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/straws/53/585/1636/">Straws</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/cake-pop-sticks-sucker-sticks/53/585/619/">Sucker Sticks</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/wooden-caramel-apple-sticks/53/585/618/">Wooden Caramel Apple Sticks</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS40">
+													<a href="/shop/assembly-display/cake-stands-cupcake-stands-serving/53/612/">Cake Stands &amp; Serving </a>
+													<div class="sub-list-group" id="SSM40">
+														<ul>
+															<li class="list-item"><a href="/shop/assembly-display/cake-pedestals-stands/53/612/1796/">Cake Pedestals & Stands</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/cake-pop-sucker-stands/53/612/1818/">Cake Pop & Sucker Stands</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/cupcake-stands/53/612/1606/">Cupcake Stands</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/serving-trays-hosting-supplies/53/612/1412/">Serving Trays</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS42">
+													<a href="/shop/assembly-display/cake-fountains-stairs/53/599/88/">Fountains &amp; Staircases</a>
+													<div class="sub-list-group" id="SSM42">
+													</div>
+
+												</li>
+											</ul>
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS39">
+													<a href="/shop/assembly-display/cake-boards-doilies-styrofoam-dummies/53/538/">Cake Boards, Doilies, &amp;<br>Cake Dummies</a>
+													<div class="sub-list-group" id="SSM39">
+														<ul>
+															<li class="list-item"><a href="/shop/assembly-display/cake-boards-drums/53/538/73/">Cake Boards</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/cake-forms-styrofoam-dummies/53/538/75/">Styrofoam Dummies</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/colored-foil-for-cake-cardboards/53/538/100/">Colored Foil</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/doilies/53/538/77/">Doilies</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS43">
+													<a href="/shop/assembly-display/cake-plates-pillars-supports-separators/53/537/">Cake Plates, Pillars, &amp; Supports</a>
+													<div class="sub-list-group" id="SSM43">
+														<ul>
+															<li class="list-item"><a href="/shop/assembly-display/bakery-craft-round-square-plates-with/53/537/1170/">Cake Pillars and Columns</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/wilton-decorator-preferred-plates-round/53/537/1168/">Cake Separator Plates</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/supports-dowels-cake-jacks/53/537/1175/">Cake Supports, Dowels, and Jacks</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/ateco-separator-plates-dowels/53/537/2373/">Complete Cake Support Systems</a></li>
+															<li class="list-item"><a href="/shop/assembly-display/flat-plates-for-stacked-cakes/53/537/2282/">Floating Cake Systems</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage9"
+														 srcset="/images/menu-assembly.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-assembly.jpg" style="overflow:visible;" alt="Cake boards of various colors">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM10" style="display: none;">
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS45">
+													<a href="/shop/packaging/boxes-carriers/39/581/">Boxes &amp; Carriers</a>
+													<div class="sub-list-group" id="SSM45">
+														<ul>
+															<li class="list-item"><a href="/shop/packaging/cake-cupcake-boxes-carriers/39/581/1613/">Cake Boxes</a></li>
+															<li class="list-item"><a href="/shop/packaging/cake-cupcake-carriers/39/581/2540/">Cake &amp; Cupcake Carriers</a></li>
+															<li class="list-item"><a href="/shop/packaging/cookie-boxes/39/581/1748/">Cookie Boxes</a></li>
+															<li class="list-item"><a href="/shop/packaging/candy-boxes/39/581/583/">Candy Boxes</a></li>
+															<li class="list-item"><a href="/shop/packaging/cake-pop-sucker-boxes/39/581/2283/">Cake Pop &amp; Sucker Boxes</a></li>
+															<li class="list-item"><a href="/shop/packaging/disposable-plastic-bakery-containers/39/581/2393/">Disposable Plastic Holders/Shells</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS46">
+													<a href="/shop/packaging/box-inserts-candy-cups-accessories/39/601/">Box Inserts/Accessories &amp;<br>Candy Cups</a>
+													<div class="sub-list-group" id="SSM46">
+														<ul>
+															<li class="list-item"><a href="/shop/packaging/candy-box-inserts/39/601/582/">Candy Box Inserts</a></li>
+															<li class="list-item"><a href="/shop/packaging/candy-cups-specialty-cups/39/601/593/">Candy Cups & Specialty Cups</a></li>
+															<li class="list-item"><a href="/shop/packaging/candy-pads/39/601/647/">Candy Pads</a></li>
+															<li class="list-item"><a href="/shop/packaging/cupcake-cookie-box-inserts/39/601/2284/">Cupcake Inserts</a></li>
+															<li class="list-item"><a href="/shop/packaging/fda-approved-tissue-paper/39/601/2268/">FDA Approved Box Liners<br> & Tissue</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS44">
+													<a href="/shop/packaging/bags-candy-wrappers/39/580/">Bag &amp; Candy Wrappers</a>
+													<div class="sub-list-group" id="SSM44">
+														<ul>
+															<li class="list-item"><a href="/shop/packaging/paper-cellophane-plastic-bags/39/580/486/">Bags</a></li>
+															<li class="list-item"><a href="/shop/packaging/foil-waxed-candy-wrappers/39/580/627/">Candy Wrappers</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS47">
+													<a href="/shop/packaging/packaging-closures/39/775/">Packaging Closures</a>
+													<div class="sub-list-group" id="SSM47">
+														<ul>
+															<li class="list-item"><a href="/shop/packaging/bag-sealer-tape/39/775/502/">Bag Sealer & Tape</a></li>
+															<li class="list-item"><a href="/shop/packaging/elastic-stretch-loops/39/775/1061/">Stretch Loops</a></li>
+															<li class="list-item"><a href="/shop/packaging/labels-stickers/39/775/644/">Stickers</a></li>
+															<li class="list-item"><a href="/shop/packaging/ribbon-twine-more/39/775/1062/">Ribbon & Twine</a></li>
+															<li class="list-item"><a href="/shop/packaging/twist-ties/39/775/645/">Twist Ties</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage10"
+														 srcset="/images/menu-packaging.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-packaging.jpg" alt="Homemade chocolates in packaging">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+										<div class="list-group" id="SM11" style="display: none;">
+											<ul class="col-sm-4">
+												<li class="sub-menu-item" id="SS83">
+													<div class="sub-list-group" id="SSM83">
+														<ul>
+															<li class="list-item"><a href="/shop/gifts-apparel/t-shirts/55/801/2370/">Apparel</a></li>
+															<li class="list-item"><a href="/shop/gifts-apparel/aprons-kitchen-linens/55/808/1/">Aprons and Kitchen Linens</a></li>
+															<li class="list-item"><a href="/shop/gifts-apparel/home-dcor/55/823/2434/">Home Decor</a></li>
+															<li class="list-item"><a href="/shop/gifts-apparel/kids-tools/55/809/1429/">Kid's Tools and Gift Sets</a></li>
+															<li class="list-item"><a href="/shop/gifts-apparel/novelties/55/806/2386/">Novelties</a></li>
+															<li class="list-item"><a href="/shop/gifts-apparel/pet-novelties/55/844/2489/">Pet Novelties</a></li>
+															<li class="list-item"><a href="/shop/gifts-apparel/recipe-cards-books-boxes-holders/55/807/186/">Recipe Cards & Holders</a></li>
+															<li class="list-item"><a href="/shop/gifts-apparel/gift-cards/55/635/1771/">Gift Cards</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-6">
+												<li class="list-item">
+													<img class="sideBanner" id="CategorySideImage11"
+														 srcset="/images/menu-gifts.jpg 1500w, /images/black-small.jpg 991w" sizes="100%"
+														 src="/images/menu-gifts.jpg" style="overflow:visible;" alt="Flower sugar butter love T-Shirt">
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+
+
+
+										<div class="list-group" id="SM12" style="display: none;">
+											<ul class="col-sm-2">
+												<li class="sub-menu-item" id="SS48">
+													<div class="sub-list-group" id="SSM48">
+														<ul>
+															<li class="list-item"><a href="/shop/brand-name/albanese/48/803/">Albanese Nuts & Candy</a></li>
+															<li class="list-item"><a href="/shop/brand-name/amco-houseworks/48/663/">Amco Houseworks</a></li>
+															<li class="list-item"><a href="/shop/brand-name/americolor-corporation/48/659/">Americolor Corporation</a></li>
+															<li class="list-item"><a href="/shop/brand-name/ann-clark-ltd/48/657/">Ann Clark Ltd.</a></li>
+															<li class="list-item"><a href="/shop/brand-name/artfully-designed-creations/48/781/">Artfully Designed Creations</a></li>
+															<li class="list-item"><a href="/shop/brand-name/aspen-mulling-company/48/664/">Aspen Mulling </a></li>
+															<li class="list-item"><a href="/shop/brand-name/ateco/48/665/">Ateco</a></li>
+															<li class="list-item"><a href="/shop/brand-name/autumn-carpenter-designs/48/660/">Autumn Carpenter</a></li>
+															<li class="list-item"><a href="/shop/brand-name/badger-air-brush-co/48/736/">Badger Air-Brush Co.</a></li>
+															<li class="list-item"><a href="/shop/brand-name/bakelicious/48/767/">Bakelicious</a></li>
+															<li class="list-item"><a href="/shop/brand-name/bakell/48/840/">Bakell</a></li>
+															<li class="list-item"><a href="/shop/brand-name/bakery-crafts/48/667/">Bakery Crafts</a></li>
+															<li class="list-item"><a href="/shop/brand-name/barry-callebaut/48/697/">Barry Callebout</a></li>
+															<li class="list-item"><a href="/shop/brand-name/bnutty/48/870/">BNutty</a></li>
+															<li class="list-item"><a href="/shop/brand-name/bobs-red-mill/48/860/">Bob’s Red Mill</a></li>
+															<li class="list-item"><a href="/shop/brand-name/burke-candy/48/848/">Burke Candy</a></li>
+															<li class="list-item"><a href="/shop/brand-name/bwb/48/839/">BWB</a></li>
+															<li class="list-item"><a href="/shop/brand-name/cr-gibson/48/676/">C.R. Gibson</a></li>
+															<li class="list-item"><a href="/shop/brand-name/chefmaster/48/746/">Chefmaster</a></li>
+															<li class="list-item"><a href="/shop/brand-name/chua-cookie/48/846/">Chua Cookie</a></li>
+															<li class="list-item"><a href="/shop/brand-name/chicago-metallic/48/662/">Chicago Metallic</a></li>
+															<li class="list-item"><a href="/shop/brand-name/chocomaker/48/674/">ChocoMaker</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="sub-menu-item" id="SS49">
+													<div class="sub-list-group" id="SSM49">
+														<ul>
+															<li class="list-item"><a href="/shop/brand-name/clasen-alpine-quality-coatings/48/786/">Clasen/Alpine</a></li>
+															<li class="list-item"><a href="/shop/brand-name/cooks-flavoring-company/48/853/">Cook’s Flavoring Company</a></li>
+															<li class="list-item"><a href="/shop/brand-name/cookie-nip-llc/48/831/">Cookie Nip, LLC</a></li>
+															<li class="list-item"><a href="/shop/brand-name/colour-mill/48/825/">Colour Mill</a></li>
+															<li class="list-item"><a href="/shop/brand-name/cupcake-creations-by-siege/48/717/">Cupcake Creations</a></li>
+															<li class="list-item"><a href="/shop/brand-name/cutter-sweet-sl/48/814/">Cutter Sweet</a></li>
+															<li class="list-item"><a href="/shop/brand-name/dean-jacobs/48/799/">Dean Jacob</a></li>
+															<li class="list-item"><a href="/shop/brand-name/decopac/48/873/">DecoPac</a></li>
+															<li class="list-item"><a href="/shop/brand-name/demdaco/48/821/">Demdaco</a></li>
+															<li class="list-item"><a href="/shop/brand-name/design-imports/48/835/">Design Imports</a></li>
+															<li class="list-item"><a href="/shop/brand-name/escali-corporation/48/678/">Escali Corporation</a></li>
+															<li class="list-item"><a href="/shop/brand-name/fancypants-baking-co/48/872/">Fancypants Baking Co</a></li>
+															<li class="list-item"><a href="/shop/brand-name/fat-daddios/48/679/">Fat Daddios</a></li>
+															<li class="list-item"><a href="/shop/brand-name/fleur-de-flavor/48/838/">Fleur De Flavor</a></li>
+															<li class="list-item"><a href="/shop/brand-name/fmm/48/745/">FMM</a></li>
+															<li class="list-item"><a href="/shop/brand-name/foodoodler/48/813/">FooDoodler</a></li>
+															<li class="list-item"><a href="/shop/brand-name/fox-run/48/682/">Fox Run</a></li>
+															<li class="list-item"><a href="/shop/brand-name/fred-friends/48/680/">Fred and Friends</a></li>
+															<li class="list-item"><a href="/shop/brand-name/guittard/48/723/">Guittard</a></li>
+															<li class="list-item"><a href="/shop/brand-name/handstand-kitchen/48/830/">Handstand Kitchen</a></li>
+															<li class="list-item"><a href="/shop/brand-name/henry-henry/48/739/">Henry & Henry</a></li>
+															<li class="list-item"><a href="/shop/brand-name/india-tree/48/687/">India Tree</a></li>
+															<li class="list-item"><a href="/shop/brand-name/jenna-rae-cakes/48/854/">Jenna Rae Cakes</a></li>
+															<li class="list-item"><a href="/shop/brand-name/jem-cutters/48/713/">JEM Cutters</a></li>
+															<li class="list-item"><a href="/shop/brand-name/jordans-skinny-mixes/48/856/">Jordan’s Skinny Mixes</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="sub-menu-item" id="SS80">
+													<div class="sub-list-group" id="SSM80">
+														<ul>
+															<li class="list-item"><a href="/shop/brand-name/kaboom-chocolaka/48/847/">Kaboom Chocolaka</a></li>
+															<li class="list-item"><a href="/shop/brand-name/killer-zebras/48/820/">Killer Zebras</a></li>
+															<li class="list-item"><a href="/shop/brand-name/kimmie-candy-company/48/694/">Kimmie Candy</a></li>
+															<li class="list-item"><a href="/shop/brand-name/kitchenart/48/690/">KitchenArt</a></li>
+															<li class="list-item"><a href="/shop/brand-name/kopykake-enterprises/48/733/">Kopykake Enterprises</a></li>
+															<li class="list-item"><a href="/shop/brand-name/lorann-oils-flavors/48/696/">Lorann Oils and Flavors</a></li>
+															<li class="list-item"><a href="/shop/brand-name/lucks-food-decorating-company/48/698/">Lucks</a></li>
+															<li class="list-item"><a href="/shop/brand-name/magic-line-parrish/48/711/">Magic Line, Parrish</a></li>
+															<li class="list-item"><a href="/shop/brand-name/makins-brand-usa/48/700/">Makin's Brand USA</a></li>
+															<li class="list-item"><a href="/shop/brand-name/merckens-candy-coating-chocolates/48/741/">Merckens</a></li>
+															<li class="list-item"><a href="/shop/brand-name/mud-pie/48/858/">Mud Pie</a></li>
+															<li class="list-item"><a href="/shop/brand-name/meri-meri/48/703/">Meri Meri</a></li>
+															<li class="list-item"><a href="/shop/brand-name/my-little-cakepop/48/855/">My Little Cakepop</a></li>
+															<li class="list-item"><a href="/shop/brand-name/nielsen-massey-vanillas-inc/48/708/">Nielsen-Massey</a></li>
+															<li class="list-item"><a href="/shop/brand-name/nordic-ware/48/709/">Nordicware</a></li>
+															<li class="list-item"><a href="/shop/brand-name/norpro/48/705/">Norpro</a></li>
+															<li class="list-item"><a href="/shop/brand-name/now-designs/48/706/">Now Designs</a></li>
+															<li class="list-item"><a href="/shop/brand-name/oringer/48/742/">Oringer</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="sub-menu-item" id="SS81">
+													<div class="sub-list-group" id="SSM81">
+														<ul>
+															<li class="list-item"><a href="/shop/brand-name/pascha-chocolate/48/852/">Pascha Chocolate </a></li>
+															<li class="list-item"><a href="/shop/brand-name/paradise-fruits/48/824/">Paradise Fruits</a></li>
+															<li class="list-item"><a href="/shop/brand-name/peters/48/740/">Peter's</a></li>
+															<li class="list-item"><a href="/shop/brand-name/pme-knightsbridge-ltd/48/712/">PME Knightsbridge, Ltd</a></li>
+															<li class="list-item"><a href="/shop/brand-name/poppy-paint/48/797/">Poppy Paint</a></li>
+															<li class="list-item"><a href="/shop/brand-name/porto-formas/48/828/">Porto Forma</a></li>
+															<li class="list-item"><a href="/shop/brand-name/puppy-cake/48/845/">Puppy Cake</a></li>
+															<li class="list-item"><a href="/shop/brand-name/rm-international/48/766/">R&amp;M International</a></li>
+															<li class="list-item"><a href="/shop/brand-name/rsvp-internationalinc/48/715/">R.S.V.P. International</a></li>
+															<li class="list-item"><a href="/shop/brand-name/royal-langnickel/48/833/">Royal & Langnickel</a></li>
+															<li class="list-item"><a href="/shop/brand-name/santa-barbara-design-studio/48/834/">Santa Barbara Design Studio</a></li>
+															<li class="list-item"><a href="/shop/brand-name/satin-ice/48/730/">Satin Ice</a></li>
+															<li class="list-item"><a href="/shop/brand-name/silver-cloud-estates/48/718/">Silver Cloud Estates</a></li>
+															<li class="list-item"><a href="/shop/brand-name/solo/48/737/">Solo</a></li>
+															<li class="list-item"><a href="/shop/brand-name/sprinkle-king-by-kerry/48/826/">Sprinkle King by Kerry</a></li>
+															<li class="list-item"><a href="/shop/brand-name/squeeze-ums/48/796/">Squeeze-ums</a></li>
+															<li class="list-item"><a href="/shop/brand-name/stencil-genie/48/804/">Stencil Genie</a></li>
+															<li class="list-item"><a href="/shop/brand-name/stonewall-kitchen/48/817/">Stonewall Kitchen</a></li>
+															<li class="list-item"><a href="/shop/brand-name/sugar-crumbs/48/795/">Sugar and Crumbs</a></li>
+															<li class="list-item"><a href="/shop/brand-name/jennifer-dontz-sugar-delites/48/688/">Sugar Delights/Simply Nature</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="sub-menu-item" id="SS82">
+													<div class="sub-list-group" id="SSM82">
+														<ul>
+															<li class="list-item"><a href="/shop/brand-name/sugarpaste-llc/48/777/">Sugarpaste, LLC</a></li>
+															<li class="list-item"><a href="/shop/brand-name/sweet-creations-by-good-cook/48/669/">Sweet Creations</a></li>
+															<li class="list-item"><a href="/shop/brand-name/sweet-elite-tools/48/768/">Sweet Elite Tools</a></li>
+															<li class="list-item"><a href="/shop/brand-name/sweet-sticks/48/822/">Sweet Sticks/Edibleart</a></li>
+															<li class="list-item"><a href="/shop/brand-name/sweet-sugarbelle/48/784/">Sweet Sugarbelle</a></li>
+															<li class="list-item"><a href="/shop/brand-name/the-cookie-countess/48/780/">The Cookie Countess</a></li>
+															<li class="list-item"><a href="/shop/brand-name/the-sugar-art/48/776/">The Sugar Art</a></li>
+															<li class="list-item"><a href="/shop/brand-name/sweetshop/48/850/">Sweetshop</a></li>
+															<li class="list-item"><a href="/shop/brand-name/wabash-valley-farms/48/726/">Wabash Valley Farms</a></li>
+															<li class="list-item"><a href="/shop/brand-name/watkins-products/48/859/">Watkins Products</a></li>
+															<li class="list-item"><a href="/shop/brand-name/wilton/48/654/">Wilton</a></li>
+															<li class="list-item"><a href="/shop/brand-name/wind-willow/48/727/">Wind & Willow</a></li>
+															<li class="list-item"><a href="/shop/brand-name/xcell-international/48/728/">XCELL Interational</a></li>
+															<li class="list-item"><a href="/shop/brand-name/yum-crumbs/48/842/">Yum Crumbs</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+										</div>
+
+										<div class="list-group" id="SM18" style="display: none;">
+											<ul class="col-sm-10">
+												<li class="sub-menu-item" id="SS85">
+													<div class="sub-list-group" id="SSM85">
+														<ul>
+															<li class="list-item"><a href="/shop/wholesale-bulk-baking-supplies/wholesale-cake-decorating-supplies/56/865/">Wholesale Cake Decorating Supplies</a></li>
+															<li class="list-item"><a href="/shop/wholesale-bulk-baking-supplies/wholesale-candy-making-supplies/56/866/">Wholesale Candy Making Supplies</a></li>
+															<li class="list-item"><a href="/shop/wholesale-bulk-baking-supplies/wholesale-cookie-decorating-supplies/56/867/">Wholesale Cookie Decorating Supplies</a></li>
+															<li class="list-item"><a href="/shop/wholesale-bulk-baking-supplies/wholesale-edible-decorations-sprinkles/56/868/">Wholesale Edible Decorations and Sprinkles</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<div class="clearfix"></div>
+										</div>
+
+									</div>
+								</li>
+							</ul>
+						</li>
+
+						<li class="dropdown" id="dropdownThemeHover">
+							<a href="/shop/occasions/42/" class="dropdown-toggle dropdown-hover" data-toggle="dropdown" onclick="window.location.href='/shop/occasions/42/';">Themes</a>
+							<!-- theme nav -->
+							<ul class="dropdown-menu" id="dropdownTheme">
+								<li>
+									<div class="row dropdown-common theme-column" id="themeNav">
+
+										@{
+											// 1. Try to get the pre-rendered HTML from cache
+											string? cachedHtml = CacheHelper.Get<string>(MyCache, "FooterThemesHtml");
+
+											if (cachedHtml == null)
+											{
+												var themeInfo = ThemeHelper.GetThemeInfo();
+												if (themeInfo != null)
+												{
+													var sb = new System.Text.StringBuilder();
+													foreach (var t in themeInfo)
+													{
+														sb.Append("<div>" + t.GetThemeLink() + "</div>");
+													}
+													sb.Append("<div><br><br><a style='padding-top: 15px; font-size: 20px;' href='/shop/occasions/42/'>Shop All Themes <span class='glyphicon glyphicon-chevron-right'></span></a></div>");
+													cachedHtml = sb.ToString();
+													CacheHelper.Save(MyCache,"FooterThemesHtml", cachedHtml);
+												}
+											}
+											@Html.Raw(cachedHtml);
+										}
+									</div>
+								</li>
+							</ul>
+						</li>
+						<li><a href="/catalog/latest.aspx">New</a></li>
+						<li><a href="/catalog/bargains.aspx">Sales</a></li>
+						<li class="dropdown" id="dropdownIdeasHover">
+							<a href="/idea/" class="dropdown-toggle dropdown-hover" data-toggle="dropdown" onclick="window.location.href='/idea/';">Ideas</a>
+							<ul class="dropdown-menu" id="dropdownIdeas" style="display: none;">
+								<li>
+									<div class="row dropdown-common mainNav" id="ideasNav">
+										<ul class="col-sm-2 dropdown-box menuItemList" id="menuIdeasList" style="border-right:0px solid lightgrey;">
+											<li><p class="list-menu-item" id="M13">Basic How Tos</p></li>
+											<li><p class="list-menu-item" id="M14">Recipes</p></li>
+											<li><p class="list-menu-item" id="M15">Inspiration Gallery</p></li>
+											<li><p class="list-menu-item" id="M16"><a style="color:black;" href="/newestideas/">Just Added</a></p></li>
+											<li><p class="list-menu-item" id="M17"><a style="color:black;" href="/idea/4/">Candy Making, Cookie & Cake Decorating Guides</a></p></li>
+											<!--<li><p class="list-menu-item" id="M16">Printables</p></li>
+													<li><p class="list-menu-item" id="M17">Videos</p></li>
+													<li><p class="list-menu-item" id="M18">Blog</p></li> -->
+										</ul>
+										<div id="menuDisplayDivIdeas" class="col-sm-10" style="height:570px;">
+											<a id="ImgBigMenuDisplayLink"><img id="ImgBigMenuDisplayImg" alt="July 4th" style="height:98%;width:100%;padding-top:1%;" src="/images/black-small.jpg" /></a>
+										</div>
+										<div id="SM16" class="list-group" style="display: none;">
+											<ul class="col-sm-10 how-to-menu">
+												<li class="sub-menu-item" id="SSM16">
+													<a id="FunInTheSunLink" href="/newestideas/"><img id="FunInTheSun" alt="July 4th" style="height:98%;width:100%;padding-bottom:4%;" src="/homepageimages/ideas-main.jpg" /></a>
+												</li>
+											</ul>
+										</div>
+										<div class="list-group" id="SM13" style="display: none;">
+											<ul class="col-sm-6 how-to-menu">
+												<li class="sub-menu-item" id="SS51"><a href="/idea/basic-how-tos-for-cake-decorating/baking-cake-preparation-how-tos/53/168/"> Baking & Cake Preparation </a>																					</li>
+												<li class="sub-menu-item" id="SS58"><a href="/idea/basic-how-tos-for-cake-decorating/icing-how-tos/53/170/"> Icing How Tos </a></li>
+												<li class="sub-menu-item" id="SS59"><a href="/idea/basic-how-tos-for-cake-decorating/cupcake-how-tos/53/259/"> Cupcake Baking & Decorating </a></li>
+												<li class="sub-menu-item" id="SS60"><a href="/idea/basic-how-tos-for-cake-decorating/how-to-make-cake-balls/53/282/1230/"> Cake Pops </a></li>
+												<li class="sub-menu-item" id="SS61"><a href="/idea/basic-how-tos-for-cake-decorating/cookie-baking-decorating-how-tos/53/252/"> Cookie Baking & Decorating </a></li>
+												<li class="sub-menu-item" id="SS62"><a href="/idea/basic-how-tos-for-cake-decorating/chocolate-candy-how-tos/53/242/"> Chocolate & Candy Making </a></li>
+												<li class="sub-menu-item" id="SS63"><a href="/idea/basic-how-tos-for-cake-decorating/chocolate-candy-troubleshooting/53/246/"> Candy & Chocolate Troubleshooting </a></li>
+												<li class="sub-menu-item" id="SS64"><a href="/idea/basic-how-tos-for-cake-decorating/chocolate-garnishing-how-tos/53/245/"> Chocolate Garnishes </a></li>
+												<li class="sub-menu-item" id="SS65"><a href="/idea/basic-how-tos-for-cake-decorating/shelf-life-storing-treats/53/321/"> Shelf Life and Storing Treats </a></li>
+											</ul>
+											<ul class="col-sm-4">
+												<li class="list-item"><img class="sideBanner" id="IdeasSideImage1" src="/images/black-small.jpg" alt="Colored cake boards"></li>
+											</ul>
+										</div>
+										<div class="list-group" id="SM14" style="display: none;">
+											<ul class="col-sm-3">
+												<li class="sub-menu-item" id="SS52">
+													<a href="/idea/1/"> Cake & Cupcake Recipes </a>
+													<div class="sub-list-group" id="SSM52">
+														<ul>
+															<li class="list-item"><a href="/idea/cake-cupcake-recipes/cake-cupcake-recipes/48/182/">Cake and Cupcake Recipes</a></li>
+															<li class="list-item"><a href="/idea/icing-filling-recipes/cupcake-cake-filling-recipes/68/323/">Cupcake and Cake Filling Recipes</a></li>
+															<li class="list-item"><a href="/idea/icing-filling-recipes/icing-glaze-gumpaste-recipes/68/204/">Icing, Glaze and Gumpaste Recipes</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS53">
+													<a href="/idea/candy-recipes/49/"> Candy Recipes </a>
+													<div class="sub-list-group" id="SSM53">
+														<ul>
+															<li class="list-item"><a href="/idea/candy-recipes/bark-recipes/49/208/">Bark Recipes</a></li>
+															<li class="list-item"><a href="/idea/candy-recipes/candy-center-recipes/49/209/">Candy Fillings and Centers</a></li>
+															<li class="list-item"><a href="/idea/candy-recipes/chocolate-dipped-treat-recipes/49/207/">Dipped Treat Recipes</a></li>
+															<li class="list-item"><a href="/idea/candy-recipes/chocolate-truffle-recipes/49/210/">Chocolate Truffles Recipes</a></li>
+															<li class="list-item"><a href="/idea/candy-recipes/classic-candy-bar-recipes/49/214/">Classic Candy Bar Recipes</a></li>
+															<li class="list-item"><a href="/idea/candy-recipes/caramel-toffee-brittle-recipes/49/211/">Caramel, Toffee and Brittle Recipes</a></li>
+															<li class="list-item"><a href="/idea/candy-recipes/fudge-recipes/49/212/">Fudge Recipes</a></li>
+															<li class="list-item"><a href="/idea/candy-recipes/gummies-hard-candy-recipes/49/338/">Gummies and Hard Candy Recipes</a></li>
+															<li class="list-item"><a href="/idea/candy-recipes/mint-recipes/49/213/">Mint Recipes</a></li>
+															<li class="list-item"><a href="/idea/candy-recipes/miscellaneous-candy-recipes/49/215/">Miscellaneous Candy Recipes</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-3">
+												<li class="sub-menu-item" id="SS54">
+													<a href="/idea/cookie-bar-brownie-recipes/50/"> Cookies & Brownies </a>
+													<div class="sub-list-group" id="SSM54">
+														<ul>
+															<li class="list-item"><a href="/idea/cookie-bar-brownie-recipes/cut-out-cookie-recipes/50/216/">Cut-Outs</a></li>
+															<li class="list-item"><a href="/idea/cookie-bar-brownie-recipes/bar-drop-cookie-recipes/50/220/">Bar & Drop Cookies</a></li>
+															<li class="list-item"><a href="/idea/cookie-bar-brownie-recipes/brownie-recipes/50/273/">Brownies</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS55">
+													<a href="/idea/dessert-treat-recipes/52/"> Desserts and Treat Recipes </a>
+													<div class="sub-list-group" id="SSM55">
+														<ul>
+															<li class="list-item"><a href="/idea/dessert-treat-recipes/hot-cocoa-bomb-cakesicle-recipes/52/337/">Hot Cocoa Bomb and Cakesicle Recipes</a></li>
+															<li class="list-item"><a href="/idea/dessert-treat-recipes/bread-muffin-donut-recipes/52/227/">Bread, Muffin, and Donut Recipes</a></li>
+															<li class="list-item"><a href="/idea/dessert-treat-recipes/individual-serving-or-bite-size-dessert/52/228/">Individual & Bite Size Desserts</a></li>
+															<li class="list-item"><a href="/idea/dessert-treat-recipes/pie-pastry-recipes/52/225/">Pie & Pastry Recipes</a></li>
+															<li class="list-item"><a href="/idea/dessert-treat-recipes/dessert-recipes/52/229/">Dessert Recipes</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS56">
+													<a href="/classes/recipe_booklet_2017.pdf"> Taste of the Holidays 2017 </a><br />
+													<a href="/classes/recipe_booklet_2018.pdf"> Taste of the Holidays 2018  </a><br />
+													<a href="/classes/2019_tastingevent.pdf"> SweetArt for the Holidays 2019  </a><br />
+													<a href="/classes/2020_sweetart_recipes.pdf"> SweetArt for the Holidays 2020 </a>
+												</li>
+											</ul>
+											<ul class="col-sm-4">
+												<li class="list-item"><img class="sideBanner" id="IdeasSideImage2" src="/images/black-small.jpg" alt="Colored cake boards"></li>
+											</ul>
+										</div>
+										<div class="list-group" id="SM15" style="display: none;">
+											<ul class="col-sm-3">
+												<li class="sub-menu-item" id="SS57">
+													<a href="/idea/seasonal-inspiration/30/"> Seasonal </a>
+													<div class="sub-list-group" id="SSM57">
+														<ul>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/new-years/30/70/">New Year's</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/valentines-day/30/73/">Valentine's Day</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/st-patricks-day/30/196/">St. Patrick's Day</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/easter/30/79/">Easter</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/flowers/30/60/">Mother's Day</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/fathers-day/30/84/">Father's Day</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/fourth-of-july/30/89/">Fourth of July</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/halloween/30/95/">Halloween</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/thanksgiving-fall/30/98/">Fall/Thanksgiving</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/christmas/30/105/">Christmas</a></li>
+															<li class="list-item"><a href="/idea/seasonal-inspiration/winter/30/286/">Winter</a></li>
+														</ul>
+													</div>
+												</li>
+												<li class="sub-menu-item" id="SS66">
+													<a href="/idea/3/"> Special Occasion  </a>
+													<div class="sub-list-group" id="SSM66">
+														<ul>
+															<li class="list-item"><a href="/idea/special-occasion-inspiration/baby/32/63/">Baby</a></li>
+															<li class="list-item"><a href="/idea/birthday/62/">Birthday</a></li>
+															<li class="list-item"><a href="/idea/special-occasion-inspiration/religious/32/120/">Religious Celebrations</a></li>
+															<li class="list-item"><a href="/idea/special-occasion-inspiration/graduation/32/109/">Graduation</a></li>
+															<li class="list-item"><a href="/idea/wedding-bridal/37/">Wedding & Bridal</a></li>
+															<li class="list-item"><a href="/idea/special-occasion-inspiration/anniversary/32/127/">Anniversary</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-3">
+												<li class="sub-menu-item" id="SS67">
+													<a href="/idea/theme-parties-inspiration/31/"> Theme Parties </a>
+													<div class="sub-list-group" id="SSM67">
+														<ul>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/emoji/31/325/">Emoji</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/peace-sign/31/276/">Peace Sign & Retro</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/food-drink/31/315/">Food & Drink</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/flamingo/31/334/">Flamingo</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/beach-luau/31/157/">Beach & Luau</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/mermaid/31/326/">Mermaids</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/unicorn/31/327/">Unicorn</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/llama/31/335/">Llama</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/fiesta/31/332/">Fiesta</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/princess-fairies/31/165/">Princess & Fairies</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/fashion-dress-up/31/308/">Fashion & Dress-up</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/flower-garden/31/156/">Flower & Garden</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/butterflies-birds-insects/31/154/">Butterflies, Birds & Insects</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/jungle-animal-prints/31/313/">Jungle Animals & Prints</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/woodland/31/328/">Woodland Animals</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/farm-western/31/150/">Farm & Western</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/animals-miscellaneous/31/302/">Animals Miscellaneous</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/carnival-circus/31/320/">Carnival & Circus</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/dinosaurs/31/307/">Dinosaurs</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/pirate/31/311/">Pirates</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/space-robots-monsters/31/316/">Space, Robots, & Monsters</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/transportation/31/312/">Transportation</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/music/31/310/">Music</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/sports/31/132/">Sports</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/military/31/309/">Military</a></li>
+															<li class="list-item"><a href="/idea/theme-parties-inspiration/awareness/31/293/">Awareness</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="sub-menu-item" id="SS68">
+													<a href="/idea/general-inspiration/69/"> General</a>
+													<div class="sub-list-group" id="SSM68">
+														<ul>
+															<li class="list-item"><a href="/idea/general-inspiration/general-cookies/69/146/">Cookies</a></li>
+															<li class="list-item"><a href="/idea/general-inspiration/general-cupcakes/69/193/">Cupcakes</a></li>
+															<li class="list-item"><a href="/idea/general-inspiration/general-cakes/69/145/">Cakes</a></li>
+															<li class="list-item"><a href="/idea/general-inspiration/desserts/69/333/">Desserts</a></li>
+														</ul>
+													</div>
+												</li>
+											</ul>
+											<ul class="col-sm-2">
+												<li class="list-item"><img class="sideBanner" id="IdeasSideImage3" src="/images/black-small.jpg" alt="Colored cake boards"></li>
+											</ul>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
+				<div class="col-xs-12 col-md-3">
+					<a href="javascript:searchBtn();" aria-label="Search entered text" title="Search entered text."><i class="glyphicon glyphicon-search" id="searchIco"></i></a>
+					<div id="searchDescription"><input id="searchValue" type="text" class="form-control" placeholder="Search" aria-label="Search Countrykitchen"></div>
+				</div>
+			</div>
+		</div>
+		<!--  desktop nav end -->
+
+	</div>
+</div>

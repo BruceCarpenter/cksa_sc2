@@ -1,0 +1,85 @@
+﻿@using CKSA.Helpers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CKSA</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="/css/countrykitchen.min.css?007">
+    <link rel="preload" href="/css/bigmenu.min.css" as="style" class="async-css">
+    <link rel="preload" href="/css/jquery.sidr.light.min.css" as="style" class="async-css">
+
+    <link rel="stylesheet" href="~/ckTest.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Questrial">
+
+    <script>
+        document.querySelectorAll('link[class="async-css"]').forEach(function (link) {
+            link.rel = 'stylesheet';
+        });
+    </script>
+    <style>
+        .dropdown-menu > li > a:hover {
+            background-color: #54C4B8;
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="mastStrip" class="brandColor4Bg">
+        <div class="container">
+            <div class="headerrow row">
+
+                <div class="col-xs-12 col-sm-6 col-md-8 text-center" style="margin-top:5px;">
+                    <div id="messageMast"></div>
+                </div>
+
+                <div class="col-xs-5 col-sm-6 col-md-2">
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle brandColor4Bg" type="button" data-toggle="dropdown" style="padding:0px;font-size:16px;">
+                            <b>ACCOUNT</b>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu brandColor4Bg">
+                            <li><a style="display:none;" id="acc_login" href="/account/login/">LOGIN</a></li>
+                            <li><a style="display:none;" id="acc_logout" href="/account/logout/">LOG OUT</a></li>
+                            <li><a style="display:none;" id="acc_manage" href="/account/manage/">MANAGE</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="cartWrap" class="clearfix col-xs-5 col-sm-6 col-md-2">
+                    <p><a href="/catalog/viewcart.aspx"><span class="glyphicon glyphicon-shopping-cart"></span><span style="padding-top:5px;">CART</span><sup id="cartId"></sup></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <partial name="_Navigation" />
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer style="margin-top:80px;">
+        <partial name="_Footer" />
+    </footer>
+
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.sidr.min.js"></script>
+    <script src="~/js/jquery.cookie.min.js"></script>
+    <script src="~/js/bigmenu.min.js?001"></script>
+    <script src="~/js/countrykitchen.min.js?002"></script>
+    <script src="~/js/common.min.js?008"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+
+
+</body>
+</html>
