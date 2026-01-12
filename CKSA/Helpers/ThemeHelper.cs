@@ -27,8 +27,8 @@ namespace CKSA.Helpers
 				// on the themepictures.txt file. Rename to json as well.
 				if (themeMenu == null)
 				{
-					themeMenu = LoadCacheData<CustomImages>(cache, "themeMenu", @"thememain.json");
-					var ideas = LoadCacheData<IdeaHelper.IdeaPiece>(cache, "themeMenu", @"themeSeasonal.json");
+					themeMenu = cache.LoadJsonCache<CustomImages>("themeMenu", @"thememain.json");
+					var ideas = cache.LoadJsonCache<IdeaHelper.IdeaPiece>("themeMenu", @"themeSeasonal.json");
 					DateTime today = DateTime.Now;
 
 					// For testing purposes set date here.
@@ -90,35 +90,6 @@ namespace CKSA.Helpers
 			}
 
 			return themeMenu;
-		}
-
-		public static List<T> LoadCacheData<T>(CacheHelper cache, string cacheName, string fileName)
-		{
-			// Try cache first
-			var items = cache.Get<List<T>>(cacheName);
-			if (items != null)
-				return items;
-
-			// Load from JSON if cache miss
-			var path = Path.Combine(AppContext.BaseDirectory, "json", fileName);
-
-			if (File.Exists(path))
-			{
-				var json = File.ReadAllText(path);
-
-				items = JsonSerializer.Deserialize<List<T>>(json, new JsonSerializerOptions
-				{
-					PropertyNameCaseInsensitive = true
-				});
-			}
-
-			// Ensure non-null
-			items ??= new List<T>();
-
-			// Store in cache
-			cache.Save(cacheName, items);
-
-			return items;
 		}
 
 	}

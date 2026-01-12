@@ -1,0 +1,178 @@
+﻿.cks-home-slider {
+    position: relative;
+    margin: 32px 0;
+    padding: 0 10px
+}
+
+.cks-home-slider h2 {
+    font-size: 1.8rem;
+    margin: 0 0 14px
+}
+
+/* cards inside Swiper */
+.cks-home-slider .card {
+    background: #A7DCD2;
+    border: 1px solid #e5e5e5;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    height: auto;
+}
+
+    .cks-home-slider .card img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        display: block
+    }
+
+    .cks-home-slider .card h3 {
+        font-size: 1rem;
+        margin: 10px 0 4px
+    }
+
+    .cks-home-slider .card a {
+        color: #FF7A7A;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-block;
+        margin: 0 0 10px
+    }
+
+        .cks-home-slider .card a:hover {
+            text-decoration: underline
+        }
+
+/* fade edges (wrap the swiper wrapper area) */
+.cks-home-slider .swiper {
+    position: relative
+}
+
+    .cks-home-slider .swiper::before,
+    .cks-home-slider .swiper::after {
+        content: "";
+        position: absolute;
+        top: 34px;
+        bottom: 12px;
+        width: 48px;
+        z-index: 3;
+        pointer-events: none;
+    }
+
+    .cks-home-slider .swiper::before {
+        left: 0;
+        background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+    }
+
+    .cks-home-slider .swiper::after {
+        right: 0;
+        background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+    }
+
+/* arrow buttons theme */
+.swiper-button-prev, .swiper-button-next {
+    color: #333;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06)
+}
+
+    .swiper-button-prev:hover, .swiper-button-next:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,.1)
+    }
+
+.swiper-pagination-bullet {
+    background: #FF7A7A;
+    opacity: .35
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1
+}
+
+/* mobile slide sizing is handled by breakpoints */
+
+.cks-home-slider {
+    margin: 32px 0;
+    padding: 0 10px;
+}
+
+    .cks-home-slider h2 {
+        font-size: 1.8rem;
+        margin-bottom: 14px;
+    }
+
+.scroll-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+}
+
+    .scroll-row::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .scroll-row::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+    }
+
+    .scroll-row .card {
+        flex: 0 0 240px;
+        scroll-snap-align: start;
+        background: #A7DCD2;
+        border: 1px solid #e5e5e5;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+        .scroll-row .card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            display: block;
+        }
+
+        .scroll-row .card h3 {
+            font-size: 1rem;
+            margin: 10px 0 4px;
+        }
+
+        .scroll-row .card a {
+            color: #FF7A7A;
+            font-weight: 700;
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+            .scroll-row .card a:hover {
+                text-decoration: underline;
+            }
+
+@media (max-width:640px) {
+    .scroll-row .card {
+        flex: 0 0 180px;
+    }
+}
+
+a h2 {
+    all: unset; /* Clears default h2 browser styles */
+    all: revert-layer; /* Or use this in modern browsers to revert cascade */
+    display: inline; /* Makes the h2 behave like link text */
+    color: inherit; /* Use same color as <a> */
+    text-decoration: inherit; /* Use same decoration as <a> */
+    font: inherit; /* Inherit font size, family, weight, etc. */
+    cursor: pointer; /* Keeps link cursor */
+    font-family: sans-serif;
+    font-size: 17.6px;
+}
+

@@ -1,10 +1,80 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Country Kitchen SweetArt | Baking, Cake Decorating & Candy Making Supplies";
+    ViewData["Canonical"] = "https://www.countrykitchensa.com/";
+}
+@section Styles {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" asp-append-version="false" />
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container">
+    <h1 class="shopcategory" style="float:left;">Your Destination for Baking & Cake Decorating Supplies</h1>
+    <div style="clear:both;" class="row featProdRow text-center">
+        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/baking-supplies/"><img alt="Baking Supplies" src="/homepageimages/baking-supplies.jpg"></a><a href="/baking-supplies/"><h2>Baking Supplies</h2></a></div>
+        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/cake-decorating-supplies/"><img alt="Cake Decorating Supplies" src="/homepageimages/cake-decorating-supplies.jpg"></a><a href="/cake-decorating-supplies/"><h2>Cake Decorating Supplies</h2></a></div>
+        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/cookie-decorating-supplies/"><img alt="Cookie Decorating Supplies" src="/homepageimages/cookie-decorating-supplies.jpg"></a><a href="/cookie-decorating-supplies/"><h2>Cookie Decorating Supplies</h2></a></div>
+        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/about/candy-making-supplies.aspx"><img alt="Candy Making Supplies" src="/homepageimages/candy-making-supplies.jpg"></a><a href="/about/candy-making-supplies.aspx"><h2>Candy Making Supplies</h2></a></div>
+    </div>
 </div>
+@{
+    // 1. Define your sections using a cleaner list of objects
+    var sliders = new[]
+    {
+        new { Title = "Baking Supplies", Items = Model.BakingSupplies },
+        new { Title = "Candy Making Supplies", Items = Model.CandyMakingSupplies },
+        new { Title = "Cookie Decorating Supplies", Items = Model.CookieDecoratingSupplies },
+        new { Title = "Featured", Items = Model.FeaturedItems }
+    };
+}
+
+<div class="container">
+
+    @foreach (var slide in sliders)
+    {
+        if (slide.Items == null || !slide.Items.Any())
+        {
+            continue; // Skip empty sections
+        }
+
+        <div class="cks-home-slider swiper" aria-label="@slide.Title">
+            <h2>@slide.Title</h2>
+
+            <div class="swiper-wrapper">
+                @foreach (var i in slide.Items)
+                {
+                    <article class="card swiper-slide">
+                        <img loading="lazy" src="@i.Image" alt="@i.AltText">
+                        <a href="@i.Link"><h3>@i.HeadingText</h3></a>
+                        <br />
+                        @i.Description
+                    </article>
+                }
+            </div>
+
+            <div class="swiper-button-prev" aria-label="Previous"></div>
+            <div class="swiper-button-next" aria-label="Next"></div>
+            <div class="swiper-pagination" aria-hidden="true"></div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        const slider = new Swiper('.cks-home-slider.swiper', {
+            slidesPerView: 1.25,
+            spaceBetween: 16,
+            breakpoints: {
+                640: { slidesPerView: 3, spaceBetween: 16 },
+                1024: { slidesPerView: 6, spaceBetween: 18 }
+            },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            a11y: { enabled: true },
+            keyboard: { enabled: true },
+            grabCursor: true
+        });    
+</script>
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "Name": "New Years",
+    "end": "2026-01-02",
+    "URL": "/shop/occasions/new-years/42/558/",
+    "img": "/homepageimages/theme-new-years.jpg"
+  },
+  {
+    "Name": "Mardi Gras",
+    "end": "2026-01-23",
+    "URL": "/shop/occasions/mardi-gras/42/639/",
+    "img": "/homepageimages/theme-mardi-gras.jpg"
+  },
+  {
+    "Name": "Valentine",
+    "end": "2026-02-15",
+    "URL": "/shop/occasions/valentines-day/42/565/",
+    "img": "/homepageimages/theme-valentine.jpg"
+  },
+  {
+    "Name": "winter",
+    "end": "2026-03-01",
+    "img": "/homepageimages/theme-winter.jpg",
+    "URL": "/shop/occasions/winter/42/748/"
+  },
+  {
+    "Name": "Saint Patrick's",
+    "end": "2026-03-17",
+    "URL": "/shop/occasions/st-patricks-day/42/561/",
+    "img": "/homepageimages/theme-st-patrick.jpg"
+  },
+  {
+    "Name": "Easter",
+    "end": "2026-04-08",
+    "URL": "/shop/occasions/easter/42/552/",
+    "img": "/homepageimages/theme-easter.jpg"
+  },
+  {
+    "Name": "Graduation",
+    "end": "2026-05-08",
+    "URL": "/shop/occasions/graduation/42/555/",
+    "img": "/homepageimages/theme-graduation.jpg"
+  },
+  {
+    "Name": "Fourth of July",
+    "end": "2026-07-05",
+    "URL": "/shop/occasions/fourth-of-july-patriotic/42/554/",
+    "img": "/homepageimages/theme-fourth.jpg"
+  },
+  {
+    "Name": "Halloween",
+    "end": "2026-11-01",
+    "URL": "/shop/occasions/halloween/42/556/",
+    "img": "/homepageimages/theme-halloween.jpg"
+  },
+  {
+    "Name": "Thanksgiving/Fall",
+    "end": "2026-11-24",
+    "URL": "/shop/occasions/thanksgivingfall/42/562/",
+    "img": "/homepageimages/theme-thanksgiving.jpg"
+  },
+  {
+    "Name": "Christmas",
+    "end": "2026-12-27",
+    "URL": "/shop/occasions/christmas/42/551/",
+    "img": "/homepageimages/theme-christmas.jpg"
+  }
+]

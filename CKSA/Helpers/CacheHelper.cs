@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using System.Text.Json;
 
 namespace CKSA.Helpers
 {
@@ -30,10 +31,39 @@ namespace CKSA.Helpers
 		{
 			cache.Set(key, value, TimeSpan.FromMinutes(minutes));
 		}
+
 		public static T? Get<T>(IMemoryCache cache, string key)
 		{
 			cache.TryGetValue(key, out T? value);
 			return value;
+		}
+
+		public List<T> LoadJsonCache<T>(string cacheName, string fileName)
+		{
+			// Try cache first
+			var items = _cache.Get<List<T>>(cacheName);
+			if (items != null)
+				return items;
+
+			// Load from JSON if cache miss
+			var path = Path.Combine(AppContext.BaseDirectory, "json", fileName);
+
+			if (File.Exists(path))
+			{
+				var json = File.ReadAllText(path);
+
+				items = JsonSerializer.Deserialize<List<T>>(json, new JsonSerializerOptions
+				{
+					PropertyNameCaseInsensitive = true
+				});
+			}
+
+			// Ensure non-null
+			items ??= new List<T>();
+
+			// Store in cache
+			Save(cacheName, items);
+			return items;
 		}
 	}
 }
