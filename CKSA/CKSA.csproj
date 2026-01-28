@@ -9,11 +9,22 @@
   <ItemGroup>
     <Folder Include="json\" />
     <Folder Include="Helpers\" />
+    <Folder Include="lib\" />
     <Folder Include="ThirdParty\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MySqlConnector" Version="2.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ckLib\ckLib.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>lib\MySql.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

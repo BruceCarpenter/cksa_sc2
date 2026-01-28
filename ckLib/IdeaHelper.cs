@@ -7,32 +7,33 @@ namespace ckLib
 	{
 		public class IdeaPiece
 		{
-			public string Name { get; set; }
-			public DateTime end { get; set; }
-			public string URL { get; set; }
-			public string img { get; set; }
+			public string Name { get; set; } = string.Empty;
+			public DateTime End { get; set; }
+			public string URL { get; set; } = string.Empty;
+			public string img { get; set; } = string.Empty;
 		}
 
 
-		/*
+		
         /// <summary>
         /// Using IdeaPiece class to get the latest blog.
         /// </summary>
         static public IdeaPiece LatestBlog()
         {
-            var latestBlog = new IdeaPiece();
-            var dynamicBlog = BlogHelper.LatestBlog();
+            IdeaPiece ideaPiece = new IdeaPiece();
+			IdeaPiece latestBlog = ideaPiece;
+            //var dynamicBlog = BlogHelper.LatestBlog();
 
-            if (dynamicBlog != null)
-            {
-                latestBlog.Name = "Latest Blog";
-                latestBlog.URL = dynamicBlog.Url;
-                latestBlog.img = dynamicBlog.Mini;
-            }
+            //if (dynamicBlog != null)
+            //{
+            //    latestBlog.Name = "Latest Blog";
+            //    latestBlog.URL = dynamicBlog.Url;
+            //    latestBlog.img = dynamicBlog.Mini;
+            //}
 
             return latestBlog;
         }
-
+/*
         /// <summary>
         /// Get the latest idea added.
         /// </summary>

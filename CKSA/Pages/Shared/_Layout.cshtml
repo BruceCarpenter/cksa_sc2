@@ -4,19 +4,21 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="@ViewData["Canonical"]" />
-
-    <title>@ViewData["Title"] - CKSA</title>
+    @if (ViewData["Description"] != null)
+    {
+        <meta name="description" content="@ViewData["Description"]" />
+    }
+    @if (ViewData["Canonical"] != null)
+    {
+        <link rel="canonical" href="@ViewData["Canonical"]" />
+    }
+    <title>@ViewData["Title"]</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="/css/countrykitchen.min.css?007">
     <link rel="preload" href="/css/bigmenu.min.css" as="style" class="async-css">
     <link rel="preload" href="/css/jquery.sidr.light.min.css" as="style" class="async-css">
-
-    <link rel="stylesheet" href="~/ckTest.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Questrial">
-
     <link rel="stylesheet" href="CKSA.styles.css" asp-append-version="true" />
 
     <script>
@@ -78,8 +80,13 @@
     <script src="~/js/jquery.cookie.min.js"></script>
     <script src="~/js/bigmenu.min.js?001"></script>
     <script src="~/js/countrykitchen.min.js?002"></script>
-    <script src="~/js/common.min.js?008"></script>
+    <script src="~/js/common.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        getCart();
+        setLogin();
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 

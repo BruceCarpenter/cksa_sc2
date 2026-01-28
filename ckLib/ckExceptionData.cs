@@ -19,20 +19,20 @@ namespace ckLib
 		{
 			_Exception = ex;
 			_Location = location;
-		} // ckExceptionData
+		}
 		public ckExceptionData(Exception ex, string location, string SQL)
 		{
 			_Exception = ex;
 			_Location = location;
 			_SQL = SQL;
-		} // ckExceptionData
+		} 
 		public ckExceptionData(Exception ex, string location, string SQL, string orderNo)
 		{
 			_Exception = ex;
 			_Location = location;
 			_OrderNo = orderNo;
 			_SQL = SQL;
-		} // ckExceptionData
+		} 
 
 		protected string BuildBodyMsg()
 		{

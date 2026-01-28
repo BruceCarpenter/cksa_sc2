@@ -21,6 +21,9 @@ namespace CKSA.Pages
 		}
 		private readonly IMemoryCache _cache;
 		private readonly ILogger<IndexModel> _logger;
+
+		public IdeaHelper.IdeaPiece? TheLatestBlog { get; set; }
+
 		public List<SliderContentItem>? FeaturedItems;
 		public List<SliderContentItem>? BakingSupplies;
 		public List<SliderContentItem>? CandyMakingSupplies;
@@ -31,7 +34,7 @@ namespace CKSA.Pages
             _logger = logger;
 			_cache = cache;
 
-			// Load the  SliderContentItems...
+			LatestBlog();
 			LoadSliderContent();
 		}
 
@@ -39,6 +42,21 @@ namespace CKSA.Pages
         {
 
         }
+
+		private void LatestBlog()
+		{
+			try
+			{
+				if (TheLatestBlog == null)
+				{
+					TheLatestBlog = IdeaHelper.LatestBlog();
+				}
+			}
+			catch (Exception ex)
+			{
+
+			}
+		}
 
 		private void LoadSliderContent()
 		{

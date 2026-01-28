@@ -1,0 +1,41 @@
+﻿@page
+@model CKSA.Pages.Catalog.ShopModel
+@{
+    ViewData["Canonical"] = "https://www.countrykitchensa.com/shops/";
+    ViewData["Title"] = "Shop Thousands of Cake, Candy, Cookie Supplies";
+    ViewData["Description"] = "Shop thousands of supplies for cake decorating, candy making and cupcake decorating. Country Kitchen SweetArt has everything you need to create the perfect cake.";
+}
+<div class="bgWrap" style="margin-top:0;">
+    <div id="subMast" class="container">
+        <div class="row">
+            <nav id="breadCrumb" class="col-xs-12">
+                <ul>
+                    <li><a href='/'>Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row titleRow">
+            <div class="col-xs-12 col-md-12">
+                <h1>@Model.H1Tag</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container category-list">
+        @foreach (var c in Model.Shops)
+        {
+            <div class="col-xs-12 col-sm-4 card">
+                <a href="@c.Url">
+                    <img alt="@c.Category" title="@c.Category" src="@c.Img" />
+                </a>
+                <a href="@c.Url">
+                    <h2>@c.Category</h2>
+                </a>
+            </div>
+        }
+    </div>
+</div>

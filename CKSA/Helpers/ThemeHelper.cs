@@ -41,7 +41,7 @@ namespace CKSA.Helpers
 					// 1. Find the first item where the end date has NOT passed
 					for (int i = 0; i < ideas.Count; i++)
 					{
-						DateTime endDate = ideas[i].end;
+						DateTime endDate = ideas[i].End;
 						DateTime normalizedEnd = new DateTime(2000, endDate.Month, endDate.Day);
 						if (normalizedEnd >= normalizedToday)
 						{

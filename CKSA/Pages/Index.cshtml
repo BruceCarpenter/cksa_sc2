@@ -11,10 +11,10 @@
 <div class="container">
     <h1 class="shopcategory" style="float:left;">Your Destination for Baking & Cake Decorating Supplies</h1>
     <div style="clear:both;" class="row featProdRow text-center">
-        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/baking-supplies/"><img alt="Baking Supplies" src="/homepageimages/baking-supplies.jpg"></a><a href="/baking-supplies/"><h2>Baking Supplies</h2></a></div>
-        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/cake-decorating-supplies/"><img alt="Cake Decorating Supplies" src="/homepageimages/cake-decorating-supplies.jpg"></a><a href="/cake-decorating-supplies/"><h2>Cake Decorating Supplies</h2></a></div>
-        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/cookie-decorating-supplies/"><img alt="Cookie Decorating Supplies" src="/homepageimages/cookie-decorating-supplies.jpg"></a><a href="/cookie-decorating-supplies/"><h2>Cookie Decorating Supplies</h2></a></div>
-        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/about/candy-making-supplies.aspx"><img alt="Candy Making Supplies" src="/homepageimages/candy-making-supplies.jpg"></a><a href="/about/candy-making-supplies.aspx"><h2>Candy Making Supplies</h2></a></div>
+        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/baking-supplies/"><img alt="Baking Supplies" src="https://www.countrykitchensa.com/homepageimages/baking-supplies.jpg"></a><a href="/baking-supplies/"><h2>Baking Supplies</h2></a></div>
+        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/cake-decorating-supplies/"><img alt="Cake Decorating Supplies" src="https://www.countrykitchensa.com/homepageimages/cake-decorating-supplies.jpg"></a><a href="/cake-decorating-supplies/"><h2>Cake Decorating Supplies</h2></a></div>
+        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/cookie-decorating-supplies/"><img alt="Cookie Decorating Supplies" src="https://www.countrykitchensa.com/homepageimages/cookie-decorating-supplies.jpg"></a><a href="/cookie-decorating-supplies/"><h2>Cookie Decorating Supplies</h2></a></div>
+        <div style="height:250px;" class="col-xs-6 col-sm-6 col-md-3"><a href="/about/candy-making-supplies.aspx"><img alt="Candy Making Supplies" src="https://www.countrykitchensa.com/homepageimages/candy-making-supplies.jpg"></a><a href="/about/candy-making-supplies.aspx"><h2>Candy Making Supplies</h2></a></div>
     </div>
 </div>
 @{
@@ -44,7 +44,7 @@
                 @foreach (var i in slide.Items)
                 {
                     <article class="card swiper-slide">
-                        <img loading="lazy" src="@i.Image" alt="@i.AltText">
+                        <img loading="lazy" src="https://www.countrykitchensa.com/@i.Image" alt="@i.AltText">
                         <a href="@i.Link"><h3>@i.HeadingText</h3></a>
                         <br />
                         @i.Description
@@ -58,7 +58,28 @@
         </div>
     }
 
-</div>
+</div
+
+@* <div class="container">
+    <!-- main content -->
+    <h2 class="shopcategory">Shop Popular Categories</h2>
+    <div class="row featProdRow">
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/ingredients-icing-colors-flavors/food-color/46/535/"><img alt="Food Coloring" src="/homepageimages/food-color.jpg"></a><a href="/shop/ingredients-icing-colors-flavors/food-color/46/535/"><h3 class="featHd">Food Color</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/sprinkles-decorations-toppers/sugars-sprinkles-edible-glitters-dragees/50/624/"><img alt="sprinkles" src="/homepageimages/sprinkles3.jpg"></a><a href="/shop/sprinkles-decorations-toppers/sugars-sprinkles-edible-glitters-dragees/50/624/"><h3 class="featHd">Sprinkles</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/cutters-molds/cookie-cutters/44/603/"><img alt="Cookie Cutters" src="/homepageimages/cookie-cutter.jpg"></a><a href="/shop/cutters-molds/cookie-cutters/44/603/"><h3 class="featHd">Cookie Cutters</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/cupcake-papers-wraps/cupcake-papers-baking-cups/51/629/"><img alt="Cupcake Liners" src="/homepageimages/baking-cups2.jpg"></a><a href="/shop/cupcake-papers-wraps/cupcake-papers-baking-cups/51/629/"><h3 class="featHd">Cupcake Liners</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/icing-fondant-tools/decorating-tips-piping-bags-accessories/38/531/"><img alt="Pastry Decorating Tips" src="/homepageimages/pastry-tips.jpg"></a><a href="/shop/icing-fondant-tools/decorating-tips-accessories/38/531/"><h3 class="featHd">Piping Tips</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/ingredients-icing-colors-flavors/flavorings-extracts-emulsions/46/589/"><img alt="Flavorings for confectionary creations" src="/homepageimages/flavorings.jpg"></a><a href="/shop/ingredients-icing-colors-flavors/flavorings-extracts-emulsions/46/589/"><h3 class="featHd">Flavorings</h3></a></div>
+    </div>
+    <div class="row featProdRow">
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/chocolate/chocolate-wafers-candy-melts/49/588/564/"><img alt="Chocolate Melts" src="/homepageimages/chocolatemelts.jpg"></a><a href="/shop/chocolate/chocolate-wafers-candy-melts/49/588/564/"><h3 class="featHd">Chocolate Melts</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/cutters-molds/chocolate-molds-hard-candy-molds/44/647/"><img alt="Chocolate Molds" src="/homepageimages/chocolatemolds.jpg"></a><a href="/shop/cutters-molds/chocolate-molds-hard-candy-molds/44/647/"><h3 class="featHd">Chocolate Molds</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/ingredients-icing-colors-flavors/royal-icing/46/532/1014/"><img alt="Royal Icing" src="/homepageimages/royalicing.jpg"></a><a href="/shop/ingredients-icing-colors-flavors/royal-icing/46/532/1014/"><h3 class="featHd">Royal Icing</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/ingredients-icing-colors-flavors/meringue-powder/46/593/2270/"><img alt="Meringue Powder" src="/homepageimages/meringuepowder.jpg"></a><a href="/shop/ingredients-icing-colors-flavors/meringue-powder/46/593/2270/"><h3 class="featHd">Meringue Powder</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href="/shop/packaging/boxes-carriers/39/581/"><img alt="Cake and Candy Boxes" src="/homepageimages/cakeandcandyboxes.jpg"></a><a href="/shop/packaging/boxes-carriers/39/581/"><h3 class="featHd">Cake & Candy Boxes</h3></a></div>
+        <div class="col-xs-5 col-sm-4 col-md-2"><a href=<%=TheLatestBlog.URL %>><img alt="<%=TheLatestBlog.Name %>" src="<%=TheLatestBlog.img %>"></a><a href=<%=TheLatestBlog.URL %>><h3 class="featHd"><%=TheLatestBlog.Name %></h3></a></div>
+    </div>
+</div> *@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

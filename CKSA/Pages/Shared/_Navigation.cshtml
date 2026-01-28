@@ -14,7 +14,7 @@
 				<a id="mobile-menu" aria-label="Mobile Menu" class="menu-button" href="#sidr" title="Menu"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
 			</div>
 			<div class="hidden-md hidden-lg">
-				<a href="/" style="float: right;"><img src="/img/country-kitchen-logo1.jpg" alt="Country Kitchen Sweetart" itemscope itemtype="http://schema.org/Organization"></a>
+				<a href="/" style="float: right;"><img src="https://www.countrykitchensa.com/img/country-kitchen-logo1.jpg" alt="Country Kitchen Sweetart" itemscope itemtype="http://schema.org/Organization"></a>
 			</div>
 		</div>
 
@@ -1163,7 +1163,7 @@
 
 										@{
 											// 1. Try to get the pre-rendered HTML from cache
-											string? cachedHtml = CacheHelper.Get<string>(MyCache, "FooterThemesHtml");
+											string? cachedHtml = CacheHelper.Get<string>(MyCache, "ThemesHtml");
 
 											if (cachedHtml == null)
 											{
@@ -1177,7 +1177,7 @@
 													}
 													sb.Append("<div><br><br><a style='padding-top: 15px; font-size: 20px;' href='/shop/occasions/42/'>Shop All Themes <span class='glyphicon glyphicon-chevron-right'></span></a></div>");
 													cachedHtml = sb.ToString();
-													CacheHelper.Save(MyCache,"FooterThemesHtml", cachedHtml);
+													CacheHelper.Save(MyCache, "ThemesHtml", cachedHtml);
 												}
 											}
 											@Html.Raw(cachedHtml);

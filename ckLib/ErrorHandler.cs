@@ -17,7 +17,7 @@ namespace ckLib
         static public void Handle(ckExceptionData error)
         {
             error.Send();
-        } // Handle
+        }
 
         static public void Handle(Exception ex, string location)
         {
@@ -49,52 +49,50 @@ namespace ckLib
             }
             catch
             {
-                //				HttpContext.Current.Response.Write( ex.Message );
-                //				HttpContext.Current.Response.Write( e.Message );
             }
         } // end Handle
 
         static public void Handle(Exception ex, string location, string orderNo)
-        {
-            string newStr = string.Format("OrderNo: {0}\n{1}", orderNo, location);
+		{
+			string newStr = string.Format("OrderNo: {0}\n{1}", orderNo, location);
             Handle(ex, newStr);
-        } // end Handle
+        }
 
         static public void Handle(Exception ex, string location, string orderNo, string url)
         {
             string newStr = string.Format("OrderNo: {0}\n{1}\n\nUrl:{2}", orderNo, location, url);
             Handle(ex, newStr);
-        } // end Handle
+        }
 
-        static public void URLError(string URL, string number)
-        {
-            using (MailMessage mailMsg = new MailMessage())
-            {
-                mailMsg.Body = string.Format("URL not found: {0}", URL);
-                mailMsg.Subject = string.Format("CK Error: {0}", number);
-                EMailHelper.SendMail(mailMsg, "brucec@countrykitchensa.com", "Bruce Carpenter");
-            }
-        } // end URLError
+        //static public void URLError(string URL, string number)
+        //{
+        //    using (MailMessage mailMsg = new MailMessage())
+        //    {
+        //        mailMsg.Body = string.Format("URL not found: {0}", URL);
+        //        mailMsg.Subject = string.Format("CK Error: {0}", number);
+        //        EMailHelper.SendMail(mailMsg, "brucec@countrykitchensa.com", "Bruce Carpenter");
+        //    }
+        //} // end URLError
 
-        static public void BadURL(string URL)
-        {
-            using (MailMessage mailMsg = new MailMessage())
-            {
-                mailMsg.Body = string.Format("URL not found: {0}", URL);
-                mailMsg.Subject = "CK Missing File";
-                EMailHelper.SendMail(mailMsg, "brucec@countrykitchensa.com", "Bruce Carpenter");
-            }
-        } // end BadURL
+        //static public void BadURL(string URL)
+        //{
+        //    using (MailMessage mailMsg = new MailMessage())
+        //    {
+        //        mailMsg.Body = string.Format("URL not found: {0}", URL);
+        //        mailMsg.Subject = "CK Missing File";
+        //        EMailHelper.SendMail(mailMsg, "brucec@countrykitchensa.com", "Bruce Carpenter");
+        //    }
+        //} // end BadURL
 
-        static public void UnknownError(string URL)
-        {
-            using (MailMessage mailMsg = new MailMessage())
-            {
-                mailMsg.Body = string.Format("Unknown error {0}", URL);
-                mailMsg.Subject = "Unknown web site error";
-                EMailHelper.SendMail(mailMsg, "brucec@countrykitchensa.com", "Bruce Carpenter");
-            }
-        } // end UnknownError
+        //static public void UnknownError(string URL)
+        //{
+        //    using (MailMessage mailMsg = new MailMessage())
+        //    {
+        //        mailMsg.Body = string.Format("Unknown error {0}", URL);
+        //        mailMsg.Subject = "Unknown web site error";
+        //        EMailHelper.SendMail(mailMsg, "brucec@countrykitchensa.com", "Bruce Carpenter");
+        //    }
+        //} // end UnknownError
 
     } // end class ErrorHandler
 }
