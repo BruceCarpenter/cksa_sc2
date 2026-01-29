@@ -1,5 +1,6 @@
 ﻿using MySqlConnector;
 using System.Data.Common;
+using System.Diagnostics;
 
 namespace ckLib
 {
@@ -13,6 +14,9 @@ namespace ckLib
 			{
 				var mySql = new MySqlConnection(_connectionString);
 				mySql.Open();
+
+				Debug.WriteLine("Opening DB");
+
 				return mySql;
 			}
 			catch(Exception ex)

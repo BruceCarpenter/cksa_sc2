@@ -18,73 +18,65 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+	app.UseExceptionHandler("/Error");
 }
 app.UseStaticFiles();
 
-// Redirect uppercase URLs to lowercase
 app.Use(async (context, next) =>
 {
 	var path = context.Request.Path.Value;
 
-	if (path != null && path.Any(char.IsUpper))
+	// Fast exit: null or empty
+	if (string.IsNullOrEmpty(path))
 	{
-		var lowerPath = path.ToLowerInvariant();
-		var query = context.Request.QueryString.Value;
-
-		context.Response.Redirect($"{lowerPath}{query}", permanent: true);
+		await next();
 		return;
 	}
-
-	await next();
-});
-
-// Force trailing slash on directory URLs
-app.Use(async (context, next) =>
-{
-	var path = context.Request.Path.Value;
 
 	// Ignore files (css, js, images, etc.)
-	if (!string.IsNullOrEmpty(path) &&
-		!path.EndsWith("/") &&
-		!Path.HasExtension(path))
+	if (Path.HasExtension(path))
 	{
-		var query = context.Request.QueryString.Value;
-		context.Response.Redirect($"{path}/{query}", permanent: true);
+		await next();
 		return;
 	}
 
-	await next();
-});
+	bool needsLowercase = false;
+	bool needsTrailingSlash = !path.EndsWith('/');
 
-// URL normalization (lowercase + trailing slash)
-app.Use(async (context, next) =>
-{
-	var path = context.Request.Path.Value;
-
-	if (path != null && path.Any(char.IsUpper))
+	// Single scan of the path
+	for (int i = 0; i < path.Length; i++)
 	{
-		context.Response.Redirect(
-			$"{path.ToLowerInvariant()}{context.Request.QueryString}",
-			permanent: true);
+		char c = path[i];
+		if (c >= 'A' && c <= 'Z')
+		{
+			needsLowercase = true;
+			break;
+		}
+	}
+
+	// Nothing to do continue pipeline
+	if (!needsLowercase && !needsTrailingSlash)
+	{
+		await next();
 		return;
 	}
 
-	if (!string.IsNullOrEmpty(path) &&
-		!path.EndsWith("/") &&
-		!Path.HasExtension(path))
+	// Build canonical path once
+	var normalizedPath = needsLowercase
+		? path.ToLowerInvariant()
+		: path;
+
+	if (needsTrailingSlash)
 	{
-		context.Response.Redirect(
-			$"{path}/{context.Request.QueryString}",
-			permanent: true);
-		return;
+		normalizedPath += "/";
 	}
 
-	await next();
+	context.Response.Redirect(
+		normalizedPath + context.Request.QueryString,
+		permanent: true);
 });
 
 app.UseRouting();
-
 
 app.UseRouting();
 

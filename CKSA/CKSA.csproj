@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="json\" />
-    <Folder Include="Helpers\" />
     <Folder Include="lib\" />
     <Folder Include="ThirdParty\" />
   </ItemGroup>

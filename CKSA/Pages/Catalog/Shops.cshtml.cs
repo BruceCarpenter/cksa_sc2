@@ -1,10 +1,9 @@
 using ckLib;
-using CKSA.Helpers;
 using CKSA.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
 using System.Data;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace CKSA.Pages.Catalog
 {
@@ -13,7 +12,10 @@ namespace CKSA.Pages.Catalog
 		public string H1Tag { get; set; } = "Cake decorating and candy making supplies";
 		public List<ShopItem> Shops { get; set; } = new List<ShopItem>();
 		private readonly IMemoryCache _cache;
-		
+
+		[BindProperty(SupportsGet = true)] 
+		public string? i { get; set; }
+
 		public ShopModel(IMemoryCache cache)
 		{
 			_cache = cache;
@@ -23,13 +25,20 @@ namespace CKSA.Pages.Catalog
 		{
 			try
 			{
-				Shops = CacheHelper.Get<List<ShopItem>>(_cache, "Shops");
+				var cacher = new PageCacher<List<ShopItem>>();
+				Shops = cacher.Retrieve(cacher.ShopKey);
+
+				if(!string.IsNullOrEmpty(i))
+				{
+					H1Tag = "Whoops! We can’t find that page. Perhaps you would like to browse another area.";
+				}
+
 				if (Shops == null)
 				{
 					GetDataItem();
 					ResortData();
 					if(Shops != null)
-						CacheHelper.Save(_cache, "Shops", Shops);
+						cacher.Store(cacher.ShopKey, Shops);
 				}
 			}
 			catch (Exception ex)

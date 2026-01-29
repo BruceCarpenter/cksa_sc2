@@ -8,7 +8,7 @@ namespace ckLib
 		public class IdeaPiece
 		{
 			public string Name { get; set; } = string.Empty;
-			public DateTime End { get; set; }
+			public DateTime end { get; set; }
 			public string URL { get; set; } = string.Empty;
 			public string img { get; set; } = string.Empty;
 		}

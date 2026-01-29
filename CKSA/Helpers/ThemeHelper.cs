@@ -27,8 +27,9 @@ namespace CKSA.Helpers
 				// on the themepictures.txt file. Rename to json as well.
 				if (themeMenu == null)
 				{
-					themeMenu = cache.LoadJsonCache<CustomImages>("themeMenu", @"thememain.json");
-					var ideas = cache.LoadJsonCache<IdeaHelper.IdeaPiece>("themeMenu", @"themeSeasonal.json");
+					// TODO: This is finally cached in the _Navication.cshtml file so this should not be needed to save in cache here.
+					themeMenu = cache.LoadJsonCache<CustomImages>("themeMenu", "thememain.json");
+					var ideas = cache.LoadJsonCache<IdeaHelper.IdeaPiece>("themeMenuSeasonal", "themeSeasonal.json");
 					DateTime today = DateTime.Now;
 
 					// For testing purposes set date here.
@@ -41,7 +42,7 @@ namespace CKSA.Helpers
 					// 1. Find the first item where the end date has NOT passed
 					for (int i = 0; i < ideas.Count; i++)
 					{
-						DateTime endDate = ideas[i].End;
+						DateTime endDate = ideas[i].end;
 						DateTime normalizedEnd = new DateTime(2000, endDate.Month, endDate.Day);
 						if (normalizedEnd >= normalizedToday)
 						{

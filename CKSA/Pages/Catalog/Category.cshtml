@@ -1,0 +1,49 @@
+﻿@page "/shop/{ShopName}/{ShopId:int}"
+@using CKSA.Models
+@model CKSA.Pages.Catalog.CategoryModel
+@{
+    ViewData["Canonical"] = "https://www.countrykitchensa.com/shops/";
+}
+
+<div id="subMast" class="container">
+    <div class="row">
+        <nav id="breadCrumb" class="col-xs-12">
+            <ul>
+                @foreach (var c in Model.Breadcrumbs)
+                {
+                    <li>
+                        <a href="@c.Value">@c.Key</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row titleRow">
+        <div class="col-xs-12 col-md-12" style="padding-left:0;">
+            <h1>@Model.H1Tag</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row col-xs-12">
+        <p>@Model.GeneralDescription</p>
+    </div>
+</div>
+
+<div class="container category-list">
+    @foreach (var c in Model.Cats ?? Enumerable.Empty<CategoryItem>())
+    {
+        <div class="col-12 col-sm-4">
+            <div class="card">
+                @Html.Raw(c.Img)
+                <a href="@c.Url">
+                    <h2>@c.C</h2>
+                </a>
+            </div>
+        </div>
+    }
+</div>

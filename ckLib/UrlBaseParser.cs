@@ -51,8 +51,8 @@ namespace ckLib
 
 			try
 			{
-				using var MySql = DbDriver.OpenConnection();
-				using (var command = new MySqlCommand())
+				using var conn = DbDriver.OpenConnection();
+				using (var command = conn.CreateCommand())
 				{
 					command.CommandType = CommandType.Text;
 					command.CommandText = sql;
