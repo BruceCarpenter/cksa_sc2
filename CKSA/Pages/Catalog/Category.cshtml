@@ -9,7 +9,7 @@
     <div class="row">
         <nav id="breadCrumb" class="col-xs-12">
             <ul>
-                @foreach (var c in Model.Breadcrumbs)
+                @foreach (var c in Model.CatModel.Breadcrumbs)
                 {
                     <li>
                         <a href="@c.Value">@c.Key</a>
@@ -23,19 +23,19 @@
 <div class="container">
     <div class="row titleRow">
         <div class="col-xs-12 col-md-12" style="padding-left:0;">
-            <h1>@Model.H1Tag</h1>
+            <h1>@Model.CatModel.H1Tag</h1>
         </div>
     </div>
 </div>
 
 <div class="container">
     <div class="row col-xs-12">
-        <p>@Model.GeneralDescription</p>
+        <p>@Model.CatModel.GeneralDescription</p>
     </div>
 </div>
 
 <div class="container category-list">
-    @foreach (var c in Model.Cats ?? Enumerable.Empty<CategoryItem>())
+    @foreach (var c in Model.CatModel.Cats ?? Enumerable.Empty<CategoryItem>())
     {
         <div class="col-12 col-sm-4">
             <div class="card">

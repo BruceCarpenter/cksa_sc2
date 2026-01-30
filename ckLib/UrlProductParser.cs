@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Routing;
 using System.Net;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ckLib
 {
@@ -22,11 +23,13 @@ namespace ckLib
 
 		public Step CurrentStep { get; set; }
 		public bool ValidRoute { get; set; }
-		
+
 		/// <summary>
 		/// There were a couple RouteData namespaces and I picked this one.
 		/// </summary>
-		public Microsoft.AspNetCore.Routing.RouteData RouteData { get; set; }
+		/// 
+		[JsonIgnore]
+		public Microsoft.AspNetCore.Routing.RouteData? RouteData { get; set; }
 
 		#endregion Properties
 
@@ -51,9 +54,9 @@ namespace ckLib
 		}
 
 
-		//public UrlProductParser() : base()
-		//{
-		//}
+		public UrlProductParser() : base()
+		{
+		}
 
 		/// <summary>
 		/// Determine if the url is valid. Depending on the step depends on 

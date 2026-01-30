@@ -1,6 +1,7 @@
 using ckLib;
 using CKSA.Helpers;
 using CKSA.Models;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Caching.Memory;
@@ -14,22 +15,16 @@ namespace CKSA.Pages.Catalog
 {
 	public class CategoryModel : PageModel
 	{
-		public List<CategoryItem>? Cats { get; set; }
 		private readonly IMemoryCache _cache;
-		private UrlProductParser? Parser { get; set; }
 		public string _ShopName { get; private set; } = string.Empty;
 		public int _ShopId { get; private set; }
-		public Dictionary<string, string> Breadcrumbs { get; set; }
-		public string H1Tag { get; set; }
-		public string GeneralDescription { get; set; }
-		public string HtmlTitle { get; set; }
-		public string HtmlDescription { get; set; }
+
+		public CategoryData? CatModel { get; set; }
 
 		public CategoryModel(IMemoryCache cache)
 		{
 			_cache = cache;
-			Cats = null;
-			Parser = null;
+			CatModel = null;
 		}
 
 		public IActionResult OnGet(string ShopName, int ShopId)
@@ -39,26 +34,35 @@ namespace CKSA.Pages.Catalog
 				_ShopName = ShopName;
 				_ShopId = ShopId;
 
-				Parser = new UrlProductParser(UrlProductParser.Step.Shop, RouteData);
-				Breadcrumbs = Parser.GenerateListBreadcrumb(UrlProductParser.Step.Shop);
-				LoadHtmlInfo(Parser.ShopId);
-				H1Tag = Parser.ShopName;
-
 				var key = $"Cat{ShopId}";
-				var cacher = new PageCacher<List<CategoryItem>>();
-				Cats = cacher.Retrieve(key);
+				var cacher = new PageCacher<CategoryData>();
 
-				if (Cats == null)
+				CatModel = cacher.Retrieve(key);
+
+				if (CatModel == null)
 				{
+					CatModel = new CategoryData();
+
+					CatModel.Parser = new UrlProductParser(UrlProductParser.Step.Shop, RouteData);
+					CatModel.Breadcrumbs = CatModel.Parser.GenerateListBreadcrumb(UrlProductParser.Step.Shop);
+					LoadHtmlInfo(CatModel.Parser.ShopId);
+					CatModel.H1Tag = CatModel.Parser.ShopName;
+
 					GetDataItem();
-					if (Cats == null || Cats.Count == 0)
+					if (CatModel.Cats == null || CatModel.Cats.Count == 0)
 					{
 						return RedirectToPage("/catalog/shops", new { i = "1" });
 					}
 
 					CreateImages();
-					cacher.Store(Cats, key);
+
+					CatModel.Canonical = CreateCanonical();
+
+					cacher.Store(CatModel, key);
 				}
+
+				ViewData["Title"] = HtmlHelper.CreateTitle(CatModel.HtmlTitle);
+				ViewData["Description"] = CatModel.HtmlDescription;
 
 				return Page();
 			}
@@ -67,12 +71,12 @@ namespace CKSA.Pages.Catalog
 				ErrorHandler.Handle(ex, "catalog/category");
 			}
 
-			return RedirectToPage("/catalog/shops", new { i="1"});
+			return RedirectToPage("/catalog/shops", new { i = "1" });
 		}
 
 		private void GetDataItem()
 		{
-			Cats = new List<CategoryItem>();
+			CatModel.Cats = new List<CategoryItem>();
 
 			using var conn = DbDriver.OpenConnection();
 			using (var command = conn.CreateCommand())
@@ -88,7 +92,7 @@ namespace CKSA.Pages.Catalog
 						d.Id = reader.ReadInt32(0);
 						d.C = reader.ReadString(1);
 						d.Url = reader.ReadString(3);
-						Cats.Add(d);
+						CatModel.Cats.Add(d);
 					}
 				}
 			}
@@ -97,7 +101,7 @@ namespace CKSA.Pages.Catalog
 		private void CreateImages()
 		{
 			var invalidCats = new List<CategoryItem>();
-			var useHardCodeImages = Parser?.ShopId == "42";
+			var useHardCodeImages = CatModel.Parser?.ShopId == "42";
 			Dictionary<int, string>? imageDictionary = null;
 
 			// Hard code these for occasions.
@@ -128,7 +132,7 @@ namespace CKSA.Pages.Catalog
 			};
 			}
 
-			foreach (var c in Cats)
+			foreach (var c in CatModel.Cats)
 			{
 				try
 				{
@@ -147,7 +151,7 @@ namespace CKSA.Pages.Catalog
 
 			foreach (var c in invalidCats)
 			{
-				Cats.Remove(c);
+				CatModel.Cats.Remove(c);
 			}
 		}
 
@@ -270,19 +274,53 @@ namespace CKSA.Pages.Catalog
 					{
 						if (reader.Read())
 						{
-							HtmlTitle = reader.GetString(0);
-							HtmlDescription = reader.GetString(1);
-							GeneralDescription = reader.GetString(2);
+							CatModel.HtmlTitle = reader.GetString(0);
+							CatModel.HtmlDescription = reader.GetString(1);
+							CatModel.GeneralDescription = reader.GetString(2);
 						}
 					}
 				}
-				ViewData["Title"] = HtmlHelper.CreateTitle(HtmlTitle);
-				ViewData["Description"] = HtmlDescription;
 			}
 			catch (Exception ex)
 			{
 				ErrorHandler.Handle(ex, string.Format("Catalog_category.LoadHtmlInfo: shopId = {0}", shopId));
 			}
 		}
+		/// <summary>
+		/// This should always be the same but someone could change the text in the url. This will force it to
+		/// match what is in the database.
+		/// </summary>
+		private string CreateCanonical()
+		{
+			var canonical = Request.GetDisplayUrl();
+
+			try
+			{
+				using var mySql = DbDriver.OpenConnection();
+				using (var command = mySql.CreateCommand())
+				{
+					command.CommandType = CommandType.Text;
+					command.CommandText = @"SELECT Url FROM  category where Cat1id = @c0";
+					command.Parameters.AddWithValue("@c0", _ShopId);
+
+					using (var reader = command.ExecuteReader())
+					{
+						if (reader.Read())
+						{
+							var url = reader.ReadString(0);
+
+							canonical = "https://www.countrykitchensa.com" + url;
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ErrorHandler.Handle(new ckExceptionData(ex, "category::CreateCanonical", "", canonical));
+			}
+
+			return canonical;
+		}
 	}
+
 }
