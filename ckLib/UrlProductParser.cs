@@ -75,16 +75,16 @@ namespace ckLib
 			{
 				case Step.Product:
 					if (
-						string.IsNullOrEmpty(CategoryId) ||
+						CategoryId == 0 ||
 						string.IsNullOrEmpty(CategoryName) ||
 						string.IsNullOrEmpty(CategoryUrl) ||
-						string.IsNullOrEmpty(ProductId) ||
+						ProductId == 0 ||
 						string.IsNullOrEmpty(ProductName) ||
 						string.IsNullOrEmpty(ProductUrl) ||
-						string.IsNullOrEmpty(ShopId) ||
+						ShopId == 0 ||
 						string.IsNullOrEmpty(ShopName) ||
 						string.IsNullOrEmpty(ShopUrl) ||
-						string.IsNullOrEmpty(SubCategoryId) ||
+						SubCategoryId == 0 ||
 						string.IsNullOrEmpty(SubCategoryName) ||
 						string.IsNullOrEmpty(SubCategoryUrl))
 						return false;
@@ -243,10 +243,6 @@ namespace ckLib
 			}
 			catch (Exception ex)
 			{
-				if (string.IsNullOrEmpty(ProductId))
-				{
-					ProductId = string.Empty;
-				}
 				ErrorHandler.Handle(ex, "GenerateJsonBreadcrumb", string.Format("product Id:{0}", ProductId));
 			}
 
@@ -331,7 +327,7 @@ namespace ckLib
 				return false;
 			}
 
-			return ShopId != "0";
+			return ShopId != 0;
 		}
 
 		protected void Parse(Step step)
@@ -339,14 +335,13 @@ namespace ckLib
 			try
 			{
 				ShopUrl = GetIfContains("ShopName");
-				ShopId = GetIfContains("ShopId");
-				ShopId = CheckIfDigit(ShopId);
+				ShopId = GetIfContainsInt("ShopId");
 
-				CategoryId = GetIfContains("CategoryId");
+				CategoryId = GetIfContainsInt("CategoryId");
 				CategoryUrl = GetIfContains("CategoryName");
-				SubCategoryId = GetIfContains("SubCategoryId");
+				SubCategoryId = GetIfContainsInt("SubCategoryId");
 				SubCategoryUrl = GetIfContains("SubCategoryName");
-				ProductId = GetIfContains("ProductId");
+				ProductId = GetIfContainsInt("ProductId");
 				ProductUrl = GetIfContains("ProductName");
 
 				ValidRoute = IsValidRoute();
@@ -368,6 +363,19 @@ namespace ckLib
 			return string.Empty;
 		}
 
+		protected int GetIfContainsInt(string key)
+		{
+			if (RouteData?.Values.TryGetValue(key, out var value) == true && value != null)
+			{
+				if (int.TryParse(value.ToString(), out int result))
+				{
+					return result;
+				}
+			}
+
+			return 0;
+		}
+
 		public string GetShopName()
 		{
 			var shopName = "Unknown Shop";
@@ -375,7 +383,7 @@ namespace ckLib
 
 			try
 			{
-				if (string.IsNullOrEmpty(ShopId) == false)
+				if (ShopId != 0)
 				{
 					sql = "Select `category 1` from category where Cat1ID=@c0";
 					using var MySql = DbDriver.OpenConnection();

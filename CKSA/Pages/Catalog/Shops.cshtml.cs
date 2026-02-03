@@ -26,7 +26,7 @@ namespace CKSA.Pages.Catalog
 			try
 			{
 				var cacher = new PageCacher<List<ShopItem>>();
-				Shops = cacher.Retrieve(cacher.ShopKey);
+				Shops = cacher.Retrieve(CacheKeys.ShopKey);
 
 				if(!string.IsNullOrEmpty(i))
 				{
@@ -38,7 +38,7 @@ namespace CKSA.Pages.Catalog
 					GetDataItem();
 					ResortData();
 					if(Shops != null)
-						cacher.Store(cacher.ShopKey, Shops);
+						cacher.Store(CacheKeys.ShopKey, Shops);
 				}
 			}
 			catch (Exception ex)

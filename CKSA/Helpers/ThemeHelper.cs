@@ -16,7 +16,7 @@ namespace CKSA.Helpers
 				// This data is the final menu that is made up of 2 json files.
 				// One file has the main menu info and the other is the seasonal info.
 				var cache = new CacheHelper(new MemoryCache(new MemoryCacheOptions()));
-				themeMenu = cache.Get<List<CustomImages>>("finalThemeMenu");
+				themeMenu = cache.Get<List<CustomImages>>(CacheKeys.FinalThemeMenu);
 
 				if (Debugger.IsAttached) themeMenu = null;
 
@@ -28,8 +28,8 @@ namespace CKSA.Helpers
 				if (themeMenu == null)
 				{
 					// TODO: This is finally cached in the _Navication.cshtml file so this should not be needed to save in cache here.
-					themeMenu = cache.LoadJsonCache<CustomImages>("themeMenu", "thememain.json");
-					var ideas = cache.LoadJsonCache<IdeaHelper.IdeaPiece>("themeMenuSeasonal", "themeSeasonal.json");
+					themeMenu = cache.LoadJsonCache<CustomImages>(CacheKeys.ThemeMenu, "thememain.json");
+					var ideas = cache.LoadJsonCache<IdeaHelper.IdeaPiece>(CacheKeys.ThemeMenuSeasonal, "themeSeasonal.json");
 					DateTime today = DateTime.Now;
 
 					// For testing purposes set date here.
@@ -77,7 +77,7 @@ namespace CKSA.Helpers
 						themeMenu = themeMenu.Take(8).ToList();
 					}
 
-					cache.Save("finalThemeMenu", themeMenu);
+					cache.Save(CacheKeys.FinalThemeMenu, themeMenu);
 				}
 			}
 			catch (Exception ex)

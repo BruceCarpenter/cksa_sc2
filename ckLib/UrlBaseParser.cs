@@ -45,6 +45,17 @@ namespace ckLib
 			return getParam;
 		}
 
+		protected int GetValueInt(string sql, string whereParam, string field)
+		{
+			var convertToInt = GetValue(sql, whereParam, field);
+			if (int.TryParse(convertToInt, out int result))
+			{
+				return result;
+			}
+
+			return 0;
+		}
+
 		protected string GetValue(string sql, string whereParam, string field)
 		{
 			var id = string.Empty;

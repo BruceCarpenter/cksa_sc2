@@ -1,0 +1,71 @@
+﻿@page "/shop/{ShopName}/{SubCategoryName}/{ShopId:int}/{CategoryId:int}"
+@model CKSA.Pages.Catalog.SubCategoryModel
+@{
+}
+<div id="subMast" class="container">
+    <div class="row">
+        <nav id="breadCrumb" class="col-xs-12">
+            <ul>
+                @foreach (var c in Model.SubCatModel.Breadcrumbs)
+                {
+                    <li>
+                        <a href="@c.Value">@c.Key</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="bgWrap" style="margin-top:0;">
+
+    <div class="container">
+        <div class="row titleRow">
+            <div class="col-xs-12 col-md-12" style="padding-left:0;">
+                <h1>@Model.SubCatModel.H1Tag</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12" style="padding-bottom:20px;">
+                @Model.SubCatModel.GeneralDescription
+            </div>
+            <p>
+                <strong>Shop all baking &amp; decorating essentials:</strong><br>
+                <a href="/baking-supplies/">Baking Supplies</a> |
+                <a href="/cake-decorating-supplies/">Cake Decorating Supplies</a> |
+                <a href="/cookie-decorating-supplies/">Cookie Decorating Supplies</a> |
+                <a href="/about/candy-making-supplies.aspx">Candy Making Supplies</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="container category-list">
+        @if (Model.SubCatModel.Cats != null)
+        {
+            @foreach (var c in Model.SubCatModel.Cats)
+            {
+                <div class="col-12 col-sm-4 card">
+                    @Html.Raw(c.Img)
+                    <a href="@c.Url">
+                        <h2>@c.C</h2>
+                    </a>
+                </div>
+            }
+        }
+    </div><!-- end container -->
+</div><!-- end bgWrap -->
+@if (!string.IsNullOrEmpty(Model.SubCatModel.QuickLinks))
+{
+    <div class="container">
+        <div class="row">
+            @Html.Raw(Model.GetQuickLinks())
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" style="height: 12px; background-color: #54c4b8; margin-top: 10px; margin-bottom: 80px;"></div>
+    </div>
+}

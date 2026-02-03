@@ -11,17 +11,27 @@ using System.Text.Json;
 
 namespace ckLib
 {
+	public static class CacheKeys
+	{
+		// These are saved in memory using CacheHelper
+		public const string ThemeMenu = "themeMenu"; // Base theme menu.
+		public const string ThemeMenuSeasonal = "themeMenuSeasonal"; // Use the date to load the most current themes and add to themeMenu
+		public const string FinalThemeMenu = "finalThemeMenu"; // The final merge of themeMenu and themeMenuSeasonal saved here.
+		public const string ThemesHtml = "ThemesHtml"; // The final theme html is saved here. This is all that really needs to be cached.
+
+
+		// These are saved in the database
+		public const string ShopKey = "Shop";
+		public const string CatKey = "Cat";
+		public const string SubCatKey = "SubCat";
+		public const string MiniFilterKey = "MF";
+		public const string IdeaDefaultKey = "ID";
+		public const string IdeaTypeKey = "IT";
+		public const string IdeaMiniKey = "IM";
+	}
+
 	public class PageCacher<T>
 	{
-		// These need to be statics or constants
-		public string ShopKey { get { return "Shop"; } }
-		public string CatKey { get { return "Cat{0}"; } }
-		public string SubCatKey { get { return "SubCat{0}"; } }
-		public string MiniFilterKey { get { return "MF{0}"; } }
-		public string IdeaDefaultKey { get { return "ID{0}"; } }
-		public string IdeaTypeKey { get { return "IT{0}"; } }
-		public string IdeaMiniKey { get { return "IM{0}"; } }
-
 		/// <summary>
 		/// Easy way to turn off the caching.
 		/// </summary>

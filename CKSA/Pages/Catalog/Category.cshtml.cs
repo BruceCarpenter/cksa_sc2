@@ -4,10 +4,7 @@ using CKSA.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Caching.Memory;
-using MySqlConnector;
 using System.Data;
-using System.Diagnostics;
 using System.Net;
 using System.Text;
 
@@ -15,15 +12,13 @@ namespace CKSA.Pages.Catalog
 {
 	public class CategoryModel : PageModel
 	{
-		private readonly IMemoryCache _cache;
 		public string _ShopName { get; private set; } = string.Empty;
 		public int _ShopId { get; private set; }
 
 		public CategoryData? CatModel { get; set; }
 
-		public CategoryModel(IMemoryCache cache)
+		public CategoryModel()
 		{
-			_cache = cache;
 			CatModel = null;
 		}
 
@@ -34,7 +29,7 @@ namespace CKSA.Pages.Catalog
 				_ShopName = ShopName;
 				_ShopId = ShopId;
 
-				var key = $"Cat{ShopId}";
+				var key = $"{CacheKeys.CatKey}{ShopId}";
 				var cacher = new PageCacher<CategoryData>();
 
 				CatModel = cacher.Retrieve(key);
@@ -61,8 +56,9 @@ namespace CKSA.Pages.Catalog
 					cacher.Store(CatModel, key);
 				}
 
-				ViewData["Title"] = HtmlHelper.CreateTitle(CatModel.HtmlTitle);
+				ViewData["Title"] = CkHtmlHelper.CreateTitle(CatModel.HtmlTitle);
 				ViewData["Description"] = CatModel.HtmlDescription;
+				ViewData["Canonical"] = CatModel.Canonical;
 
 				return Page();
 			}
@@ -101,7 +97,7 @@ namespace CKSA.Pages.Catalog
 		private void CreateImages()
 		{
 			var invalidCats = new List<CategoryItem>();
-			var useHardCodeImages = CatModel.Parser?.ShopId == "42";
+			var useHardCodeImages = CatModel.Parser?.ShopId == 42;
 			Dictionary<int, string>? imageDictionary = null;
 
 			// Hard code these for occasions.
@@ -257,10 +253,10 @@ namespace CKSA.Pages.Catalog
 		/// <summary>
 		/// Load information to place in the html file for search engines.
 		/// </summary>
-		private void LoadHtmlInfo(string shopId)
+		private void LoadHtmlInfo(int shopId)
 		{
 			// TODO: 56 has no html stuff in db as of yet.
-			if (shopId == "56") return;
+			if (shopId == 56) return;
 
 			try
 			{

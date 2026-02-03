@@ -164,9 +164,9 @@ namespace ckLib
 					}
 				} // end if
 			}
-			catch (Exception ex)
+			catch
 			{
-				throw (ex);
+				throw;
 			}
 		}
 
@@ -218,8 +218,8 @@ namespace ckLib
 		/// </summary>
 		static public SmtpClient Client()
 		{
-			var SMTP_USERNAME = "AKIAJFBGM6HZWHCGXYBA";
-			var SMTP_PASSWORD = "Ao0lh/Bq229V7OFbUp7SxrZj6VkDUayWJkFqroG0LvgE";
+			var SMTP_USERNAME = "AKIAQEZZ73CMNENRNXPX";
+			var SMTP_PASSWORD = "BCF+hfvAb3Pgm7+0lrwmSmODLyI4FGsLOgszrFn/Ox6K";
 			var HOST = "email-smtp.us-east-1.amazonaws.com";
 			var PORT = 587;
 

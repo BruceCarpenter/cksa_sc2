@@ -1,4 +1,5 @@
 ﻿@using CKSA.Helpers
+@using ckLib
 @inject Microsoft.Extensions.Caching.Memory.IMemoryCache MyCache
 
 @*
@@ -1163,7 +1164,7 @@
 
 										@{
 											// 1. Try to get the pre-rendered HTML from cache
-											string? cachedHtml = CacheHelper.Get<string>(MyCache, "ThemesHtml");
+											string? cachedHtml = CacheHelper.Get<string>(MyCache, CacheKeys.ThemesHtml);
 
 											if (cachedHtml == null)
 											{
@@ -1177,7 +1178,7 @@
 													}
 													sb.Append("<div><br><br><a style='padding-top: 15px; font-size: 20px;' href='/shop/occasions/42/'>Shop All Themes <span class='glyphicon glyphicon-chevron-right'></span></a></div>");
 													cachedHtml = sb.ToString();
-													CacheHelper.Save(MyCache, "ThemesHtml", cachedHtml);
+													CacheHelper.Save(MyCache, CacheKeys.ThemesHtml, cachedHtml);
 												}
 											}
 											@Html.Raw(cachedHtml);
