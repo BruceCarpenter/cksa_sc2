@@ -58,7 +58,7 @@ namespace CKSA.Helpers
 		/// <param name="sItemId"></param>
 		/// <param name="description"></param>
 		/// <returns></returns>
-		public string CreateUrl(string sItemId, string description)
+		public string CreateUrl(int sItemId, string description)
 		{
 			//
 			// We have full path info use it.

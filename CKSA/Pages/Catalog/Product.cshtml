@@ -1,4 +1,181 @@
 ﻿@page "/shop/{ShopName}/{ProductName}/{ShopId:int}/{CategoryId:int}/{SubCategoryId:int}/{ProductId:int}"
+@using ckLib
 @model CKSA.Pages.Catalog.ProductModel
+@section Head {
+    @if (ViewData["Robots"] != null)
+    {
+        <meta name="robots" content="@ViewData["Robots"]" />
+    }
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <meta property="og:image" content="@Model.ProductDataModel.TheProduct.ImageUrl" />
+    <meta property="og:url" content="@Model.ProductDataModel.CurrentUrl" />
+    <meta property="og:title" content="@Model.ProductDataModel.FbTitle" />
+    <meta property="og:type" content="product" />
+    <link rel="stylesheet" media="print" title="Printer-Friendly Style" type="text/css" href="/print.css" />
+    <script type="application/ld+json">
+        @Html.Raw(Model.CreateProductSchema())
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src='~/js/product.js'></script>
+}
 @{
 }
+
+<div id="subMast" class="container">
+    <div class="row">
+        <nav id="breadCrumb" class="col-xs-12">
+            <ul>
+                @foreach (var c in Model.ProductDataModel.Breadcrumbs)
+                {
+                    <li>
+                        <a href="@c.Value">@c.Key</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+@if (Model.ProductDataModel.TheProduct.SalePrice > 0.0m)
+{
+    <div id="SaleDiv" class="container">
+        <div style="text-align: center; border: 1px solid black; margin-top: 5px;">
+            <div id="SaleST" style="font-size: x-large; color: Red;">
+                @Model.ProductDataModel.TheProduct.SpecialTitle
+            </div>
+            <div id="SaleEL">
+                @Model.ProductDataModel.TheProduct.ExpirationLabel
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container" style="margin-top: 2em;">
+    <div class="row">
+
+        @if (Model.ProductDataModel.TheProduct.AlternativeImages.Count > 0)
+        {
+            <div class="hidden-xs col-sm-1 verticalThumbs" style="border: 1px solid #54C4B8; padding-top: 13px;">
+                @{
+                    var maxImages = Math.Min(Model.ProductDataModel.TheProduct.AlternativeImages.Count, 7);
+                    int ii = 0;
+                    for (ii = 0; ii < maxImages; ii++)
+                    {
+                        var alt = Model.ProductDataModel.TheProduct.AlternativeImages[ii];
+                        var smallAlt = Model.ProductDataModel.TheProduct.MiniAlternativeImages[ii];
+                    }
+                }
+                @for (ii = 0; ii < maxImages; ii++)
+                {
+                    <img class="altImage"
+                         alt="View @(ii + 1) for item @Model.ProductDataModel.TheProduct.ItemNumber"
+                         src="@Model.ProductDataModel.TheProduct.MiniAlternativeImages[ii]"
+                         data-large="@Model.ProductDataModel.TheProduct.AlternativeImages[ii]" />
+                }
+            </div>
+
+            <div class="hidden-sm hidden-md hidden-lg verticalThumbs">
+                @{
+                    var maxImages2 = Math.Min(Model.ProductDataModel.TheProduct.AlternativeImages.Count, 7);
+                }
+                @for (ii = 0; ii < maxImages2; ii++)
+                {
+                    <div class="col-xs-6" style="border: 1px solid #54C4B8;">
+                        <img class="altImage noPrint"
+                             alt="alternative image"
+                             src="@Model.ProductDataModel.TheProduct.AlternativeImages[ii]"
+                             data-large="@Model.ProductDataModel.TheProduct.AlternativeImages[ii]" />
+                    </div>
+                }
+            </div>
+        }
+
+        <div class="col-xs-11 col-sm-5 noPrint">
+            <div class="col-xs-12">
+                <img id="pImage"
+                     src="@Model.ProductDataModel.TheProduct.ImageUrl"
+                     alt="@Model.ProductDataModel.TheProduct.ImageAltText"
+                     title="@Model.ProductDataModel.TheProduct.ImageAltText" />
+            </div>
+
+            <div class="col-xs-2">
+                <a href="javascript:FacebookShare();">
+                    <img class="blogSocialShare" alt="Facebook" src="/assets/social/66/facebook1.jpg" />
+                </a>
+            </div>
+
+            <div class="col-xs-2">
+                <a data-pin-do="buttonBookmark" data-pin-custom="true"
+                   href="https://www.pinterest.com/pin/create/button/">
+                    <img class="blogSocialShare" alt="Pinterest" src="/assets/social/66/pinterest2.jpg" />
+                </a>
+            </div>
+
+            <div class="col-xs-2">
+                <a href="https://twitter.com/intent/tweet?url=@Model.ProductDataModel.CurrentUrl&text=@Model.ProductDataModel.TheProduct.ItemNumber">
+                    <img class="blogSocialShare" alt="Twitter" src="/assets/social/66/twitter3.jpg" />
+                </a>
+            </div>
+
+            <div class="col-xs-2">
+                <a href="mailto:?subject=@Model.EmailSubject()&body=@Model.EmailBodyText()">
+                    <img class="blogSocialShare" alt="Email" src="/assets/social/66/email4.jpg" />
+                </a>
+            </div>
+
+            <div class="col-xs-2">
+                <a href="javascript:window.print();">
+                    <img class="blogSocialShare" alt="Print" src="/assets/social/66/print1.jpg" />
+                </a>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 productInfo" style="line-height: 1.4em;">
+            <h1>@Model.ProductDataModel.lblDescription</h1>
+
+            @if (!string.IsNullOrEmpty(Model.ProductDataModel.TheProduct.Brand))
+            {
+                <h2 id="company">
+                    Brand:
+                    <a href="@Model.ProductDataModel.BrandUrl">@Model.ProductDataModel.TheProduct.Brand</a>
+                </h2>
+            }
+
+            <div id="changeProduct">
+                <span id="itemNum">@Model.ProductDataModel.TheProduct.ItemNumber</span>
+            </div>
+
+            @if (Model.ProductDataModel.AllProducts.Count() == 1)
+            {
+                <span id="units">
+                    Units: @Html.Raw(CkDefines.UnitsConversion(Model.ProductDataModel.TheProduct.Units, Model.ProductDataModel.TheProduct.ProductExpiration))
+                </span>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.ProductDataModel.TheProduct.Dimensions))
+            {
+                <span id="dimensions">Dimensions: @Model.ProductDataModel.TheProduct.Dimensions</span>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.ProductDataModel.TheProduct.HeatWarning))
+            {
+                <a href="#hwP" style="color:red">Heat Warning See Below</a>
+            }
+
+            <div id="detail">@Html.Raw(Model.ProductDataModel.TheProduct.Details)</div>
+        </div>
+    </div>
+
+    <div class="row MProductPadding">
+        @{
+            var i = 0;
+            foreach (var p in Model.ProductDataModel.AllProducts)
+            {
+                @Html.Raw(Model.CreateMultiDiscountRadioOption(i++))
+            }
+        }
+    </div>
+</div>

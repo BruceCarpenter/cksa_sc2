@@ -30,7 +30,7 @@ namespace ckLib
 
 		#region Properties
 
-		public const Int64 InvalidItemId = -1;
+		public const int InvalidItemId = -1;
 
 		public ShipOptions Ship { get; set; }
 		public ShipType.Options ShipMinimum { get; set; }
@@ -38,7 +38,7 @@ namespace ckLib
 
 		public string ItemNumber { get; set; }
 		public string MasterItemNumber { get; set; }
-		public Int64 ItemId { get; set; }
+		public int ItemId { get; set; }
 		public decimal Price { get; set; }
 		public decimal WholeSalePriceA { get; set; }
 		               
@@ -89,7 +89,7 @@ namespace ckLib
 		public string FriendlyUrlLink { get; set; }
 		public List<string> PdfLink { get; set; }
 		public string Brand { get; set; }
-		public string Cat2Id { get; set; } // Used to create brand link.
+		public int Cat2Id { get; set; } // Used to create brand link.
 		public string CountryOfOrigin { get; set; }
 		public string Harminization { get; set; }
 		public int Length { get; set; }
@@ -435,7 +435,7 @@ namespace ckLib
 
 		#endregion Fields
 
-		public Product(Int64 itemId, int wholeSaleCustomer)
+		public Product(int itemId, int wholeSaleCustomer)
 		{
 			Valid = false;
 
@@ -570,9 +570,9 @@ namespace ckLib
 			DW = reader.ReadDouble("DW");
 			CountryOfOrigin = reader.ReadString("CountryCode");
 			Harminization = reader.ReadString("CountryOfOrigin2");
-			Length = reader.ReadInt16("L");
-			Width = reader.ReadInt16("W");
-			Height = reader.ReadInt16("H");
+			Length = Convert.ToInt32(reader.ReadDouble("L"));
+			Width = Convert.ToInt32(reader.ReadDouble("W"));
+			Height = Convert.ToInt32(reader.ReadDouble("H"));
 
 			Description = reader.ReadString("Description");
 			Units = reader.ReadString("Units");
@@ -919,7 +919,7 @@ namespace ckLib
 					if (reader != null && reader.HasRows && reader.Read())
 					{
 						Brand = reader.ReadString(0);
-						Cat2Id = reader.ReadString(4);
+						Cat2Id = reader.ReadInt32(4);
 					}
 				}
 			}
@@ -1467,6 +1467,7 @@ namespace ckLib
 		}
 
 		#endregion static
+
 	}
 
 	public class FavoriteProduct : Product

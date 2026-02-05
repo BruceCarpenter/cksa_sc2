@@ -195,7 +195,7 @@ namespace CKSA.Pages.Catalog
 
 			var html = @"<a href={0} class='button moreUnitBt disabled' ><i class='glyphicon glyphicon-shopping-cart'></i> {1} </a> ";
 			var btnText = "Available Options";
-			var url = CkMini1.CreateUrl(product.ItemId.ToString(), product.Description);
+			var url = CkMini1.CreateUrl(product.ItemId, product.Description);
 
 			return string.Format(html, url, btnText);
 

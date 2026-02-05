@@ -411,7 +411,8 @@ namespace ckLib
 		}
 		public string SafeString(string input)
 		{
-			return WebUtility.HtmlEncode(input);
+			return input;
+			//return WebUtility.HtmlEncode(input);
 		}
 
 	}

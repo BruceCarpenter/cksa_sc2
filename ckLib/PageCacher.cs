@@ -28,6 +28,7 @@ namespace ckLib
 		public const string IdeaDefaultKey = "ID";
 		public const string IdeaTypeKey = "IT";
 		public const string IdeaMiniKey = "IM";
+		public const string ProductKey = "PR";
 	}
 
 	public class PageCacher<T>

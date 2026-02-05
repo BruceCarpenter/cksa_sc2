@@ -31,27 +31,27 @@ namespace ckLib
 		}
 		public static MySqlDataReader ExecuteReader(string sql)
 		{
+			// Remove the 'using' from the connection here!
+			var connection = DbDriver.OpenConnection();
 			try
 			{
-				using (var connection = DbDriver.OpenConnection())
 				using (var mySqlCommand = connection.CreateCommand())
 				{
 					mySqlCommand.CommandText = sql;
-					return mySqlCommand.ExecuteReader();
+
+					// This magic flag tells the reader: 
+					// "When the user closes the reader, kill the connection too."
+					return mySqlCommand.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
 				}
-			}
-			catch (MySqlException ex)
-			{
-				ErrorHandler.Handle(new ckExceptionData(ex, "MySQLHealer::ExecuteReader(sql)", sql, ""));
-				//throw;
 			}
 			catch (Exception ex)
 			{
+				// If an error happens before the reader is even created, 
+				// we must close the connection manually or we get a 'Leak'.
+				connection.Close();
 				ErrorHandler.Handle(new ckExceptionData(ex, "MySQLHealer::ExecuteReader(sql)", sql, ""));
-				//throw;
+				return null;
 			}
-
-			return null;
 		}
 	}
 
@@ -186,18 +186,13 @@ namespace ckLib
 		}
 		static public bool ReadBool(this DbDataReader reader, int column)
 		{
-			bool result = false;
-
 			if (reader.IsDBNull(column) == false)
 			{
-				var str = reader.GetString(column);
-				if (str == "1")
-				{
-					result = true;
-				}
+				var str = reader.GetByte(column);
+				return (str == 1);
 			}
 
-			return result;
+			return false;
 		}
 
 		static public bool ReadBool(this DbDataReader reader, string columnName)

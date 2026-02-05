@@ -11,6 +11,37 @@ namespace ckLib
 	public class CkDefines
 	{
 		/// <summary>
+		/// Convert the passed in units to units that contain html <abbr title="What does this mean">abv</abbr>.
+		/// </summary>
+		static public string UnitsConversion(string units, DateTime expirationDate)
+		{
+			var conversion = units;
+			var abbrToConvert = new Dictionary<string, string>()
+		{
+			{ "pcs","pieces" },
+			{ "pkg","package" }
+		};
+
+			foreach (var abr in abbrToConvert)
+			{
+				var index = units.IndexOf(abr.Key);
+				if (index != -1)
+				{
+					var abbrHtml = string.Format("<abbr title='{0}'>", abr.Value);
+					conversion = conversion.Insert(index + abr.Key.Length, "</abbr>");
+					conversion = conversion.Insert(index, abbrHtml);
+				}
+			}
+
+			if (!(expirationDate == DateTime.MaxValue || expirationDate == DateTime.MinValue))
+			{
+				conversion = string.Format("{0} (BB: {1})", conversion, expirationDate.ToString("M/d/yyyy"));
+			}
+
+			return conversion;
+		}
+
+		/// <summary>
 		/// Generate the url to the category image.
 		/// </summary>
 		/// <param name="itemNumber">This should be the main unit and indicates the folder.</param>
@@ -108,7 +139,7 @@ namespace ckLib
 				{
 					finalPriceString = string.Format("<div'></div>");
 				}
-				else if (dSalePrice != 0 && dSalePrice < dPrice)
+				else if (dSalePrice != decimal.MinValue && dSalePrice < dPrice)
 				{
 					finalPriceString = string.Format("<span style='text-decoration: line-through;'>{0}</span> " +
 						"<span class='pSalePrice'>${1} ({2}% Off)</span>",
@@ -136,7 +167,7 @@ namespace ckLib
 
 			try
 			{
-				if (dSalePrice != 0 && dSalePrice < dPrice)
+				if (dSalePrice != decimal.MinValue && dSalePrice < dPrice)
 				{
 					finalPriceString = string.Format("<span style='text-decoration: line-through;'>{0}</span> <span>Sale ${1} ({2}% Off)</span>",
 						CkDefines.FormatPrice(dPrice.ToString()),
@@ -210,6 +241,33 @@ namespace ckLib
 		{
 			return "This product is prepared and packaged using machines that may come into contact with Wheat/Gluten, Eggs, Dairy or Dairy Products, Peanuts, Tree Nuts and Soy.";
 		}
+		/// <summary>
+		/// According to standard 1-2 sentence description.
+		/// http://ogp.me/
+		/// </summary>
+		/// <param name="description"></param>
+		/// <returns></returns>
+		static public string OgDescription(string description)
+		{
+			//int index = description.IndexOf(".");
+			string final = description;
+			//if (index > 0)
+			//{
+			//    final = description.Substring(0, index + 1);
+			//}
 
+			final = final.Replace('"', ' ');
+			final = final.Replace('\'', ' ');
+			final = final.Replace('<', ' ');
+			final = final.Replace('=', ' ');
+
+			return final;
+		}
+
+		static public string CreatePinIt(string url, string imageUrl)
+		{
+			return string.Format("//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.countrykitchensa.com{0}&media={1}",
+				url, imageUrl);
+		}
 	}
 }

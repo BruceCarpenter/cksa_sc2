@@ -315,7 +315,7 @@ namespace ckLib
 								var p = new FilterProduct();
 								try
 								{
-									p.ItemId = dataReader.GetInt64(columnCounter);
+									p.ItemId = dataReader.GetInt32(columnCounter);
 									p.MasterItemNumber = dataReader.GetString("MasterItemNumber");
 									p.ItemNumber = dataReader.GetString(columnCounter + 1);
 									p.Description = dataReader.GetString(columnCounter + 2);
