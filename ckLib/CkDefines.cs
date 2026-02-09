@@ -80,6 +80,13 @@ namespace ckLib
 
 			return string.Empty;
 		}
+
+		public static string IdeaImagePath(int ideaId)
+		{
+			string miniPathLoc = FileLocations.GetIdeaBigImagePath();
+			return $"{miniPathLoc}{ideaId}.jpg";
+		}
+
 		public static bool ProductValidWholesale(string itemNumber)
 		{
 			string[] invalidPrefixes = { "ACR-", "TCC-", "TSA" };

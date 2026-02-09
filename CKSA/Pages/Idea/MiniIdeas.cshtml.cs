@@ -1,12 +1,7 @@
 using ckLib;
 using CKSA.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MySqlConnector;
-using System;
 using System.Data;
-using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CKSA.Pages.Idea
 {
