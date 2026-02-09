@@ -1,4 +1,4 @@
-﻿@page "/shop/{ShopName}/{ShopId:int}"
+﻿@page "/shop/{ShopName}/{ShopId}"
 @using CKSA.Models
 @model CKSA.Pages.Catalog.CategoryModel
 @{
@@ -6,7 +6,7 @@
 
 <div id="subMast" class="container">
     <div class="row">
-        <nav id="breadCrumb" class="col-xs-12">
+        <nav id="breadCrumb" class="col-xs-12" aria-label="breadcrumb">
             <ul>
                 @foreach (var c in Model.CatModel.Breadcrumbs)
                 {

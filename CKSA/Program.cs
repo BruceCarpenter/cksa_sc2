@@ -1,3 +1,4 @@
+using ckLib;
 using CKSA.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,11 +9,18 @@ builder.Services.AddHttpContextAccessor();
 // Add services to the container.
 builder.Services.AddRazorPages();
 
+builder.Services.AddScoped<CookieHelper>();
 builder.Services.AddSingleton<CacheHelper>();
 builder.Services.AddRouting(options =>
 {
 	options.LowercaseUrls = true;
 });
+
+builder.Services.AddControllersWithViews() // or .AddRazorPages()
+	.AddJsonOptions(options =>
+	{
+		options.JsonSerializerOptions.PropertyNamingPolicy = null;
+	});
 
 var app = builder.Build();
 

@@ -40,8 +40,8 @@ namespace ckLib
 
 		public PageCacher()
 		{
-			//Disable = System.Diagnostics.Debugger.IsAttached;
-			Disable = false;
+			Disable = System.Diagnostics.Debugger.IsAttached;
+			//Disable = false;
 		}
 
 		public void Store(string key, T store)

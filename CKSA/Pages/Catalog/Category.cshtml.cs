@@ -22,12 +22,27 @@ namespace CKSA.Pages.Catalog
 			CatModel = null;
 		}
 
-		public IActionResult OnGet(string ShopName, int ShopId)
+		private bool CheckParameters(string ShopId)
+		{
+			bool isValid = int.TryParse(ShopId, out int cId);
+
+			if (isValid)
+			{
+				_ShopId = cId;
+			}
+
+			return isValid;
+		}
+		public IActionResult OnGet(string ShopName, string ShopId)
 		{
 			try
 			{
 				_ShopName = ShopName;
-				_ShopId = ShopId;
+				
+				if (!CheckParameters(ShopId))
+				{
+					return RedirectToPage("/catalog/shops", new { i = "1" });
+				}
 
 				var key = $"{CacheKeys.CatKey}{ShopId}";
 				var cacher = new PageCacher<CategoryData>();

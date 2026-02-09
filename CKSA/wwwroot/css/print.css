@@ -1,0 +1,34 @@
+.noPrint, #mastStrip, #mastWrap, #sidr, #mainMenu, #subMast
+{
+    display:none;
+}
+a {
+    display:none;
+}
+.verticalThumbs, .qtyBox, .glyphicon, .button, .addCartBt, .bgWrap, .pin-it-button
+{
+    display:none;
+}
+
+#imgMainIdea
+{
+    width: 40%; 
+}
+
+#pImage
+{
+    width: 50%;
+}
+
+.col-print-12 img {
+    display:none;
+}
+
+.imgBlogPrint {
+    width: 50%; 
+    height: auto;
+}
+
+#recipeId img {
+   display:none;
+}

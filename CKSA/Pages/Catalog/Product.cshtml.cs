@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySqlConnector;
+using System;
 using System.Diagnostics;
 using System.Net;
 using System.Reflection.PortableExecutable;
@@ -24,23 +25,53 @@ namespace CKSA.Pages.Catalog
 		public int _ProductId { get; private set; }
 
 		public ProductData? ProductDataModel { get; set; }
+		private readonly CookieHelper _cookies;
+
 
 		public int WholeSaleId { get; set; }
 		public const string Kosher = "<a href=\"javascript:kosherLink('{0}')\">Kosher</a>";
 
-		public IActionResult OnGet(string ShopName, string ProductName, int ShopId, int CategoryId, int SubCategoryId, int ProductId)
+		public ProductModel(CookieHelper cookies)
+		{
+			_cookies = cookies;
+		}
+
+		private bool CheckParameters(string ShopId, string CategoryId, string SubCategoryId, string ProductId)
+		{
+			int sId = 0;
+			int mId = 0;
+			int pId = 0;
+
+			bool isValid = int.TryParse(ShopId, out int cId) &&
+				   int.TryParse(CategoryId, out sId) &&
+				   int.TryParse(SubCategoryId, out mId) &&
+				   int.TryParse(ProductId, out pId);
+
+			if(isValid)
+			{
+				_ShopId = cId;
+				_CategoryId = sId;
+				_SubCategoryId = mId;
+				_ProductId = pId;
+			}
+
+			return isValid;
+		}
+
+		public IActionResult OnGet(string ShopName, string ProductName, string ShopId, string CategoryId, string SubCategoryId, string ProductId)
 		{
 			_ShopName = ShopName;
 			_ProductName = ProductName;
-			_ShopId = ShopId;
-			_CategoryId = CategoryId;
-			_SubCategoryId = SubCategoryId;
-			_ProductId = ProductId;
 
 			try
 			{
+				if(!CheckParameters(ShopId, CategoryId, SubCategoryId, ProductId))
+				{
+					return RedirectToPage("/catalog/shops", new { i = "1" });
+				}
+
 				// Can't save the product because the cost depends on wholesale or not.
-				WholeSaleId = CookieHelper.GetWholesaleValue(Request.Cookies);
+				WholeSaleId = _cookies.GetWholesaleValue();
 
 				var key = $"{CacheKeys.ProductKey}{ProductId}";
 				var cacher = new PageCacher<UrlProductParser>();
@@ -90,6 +121,29 @@ namespace CKSA.Pages.Catalog
 						ProductDataModel.NoDiscounts = (ProductDataModel.TheProduct.Discounts.Count == 0);
 						ProductDataModel.AllProducts = new List<Product> { ProductDataModel.TheProduct };
 					}
+
+					// Check if valid product has been loaded.
+					#region No Item Number
+					if (ProductDataModel.TheProduct.ItemNumber == null)
+					{
+						// I do not have the correct subcategory name here. I only have the product name and I
+						// have been using that as the subcategory name. Maybe parser has it?
+						string url = CkDefines.AlternativeRoute(ProductDataModel.TheProduct.ItemId);
+						if (string.IsNullOrEmpty(url))
+						{
+							return RedirectToPage("Mini", new
+							{
+								ShopName = _ShopName,
+								SubCategoryName = ProductDataModel.Parser.SubCategoryUrl,
+								ShopId = _ShopId,
+								CategoryId = _CategoryId,
+								SubCategoryId = _SubCategoryId
+							});
+						}
+
+						return Redirect(url);
+					}
+					#endregion No Item Number
 
 					ProductDataModel.TheProduct.LoadSimiliarItems(ProductDataModel.AllProducts);
 

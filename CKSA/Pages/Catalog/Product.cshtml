@@ -1,4 +1,4 @@
-﻿@page "/shop/{ShopName}/{ProductName}/{ShopId:int}/{CategoryId:int}/{SubCategoryId:int}/{ProductId:int}"
+﻿@page "/shop/{ShopName}/{ProductName}/{ShopId}/{CategoryId}/{SubCategoryId}/{ProductId}"
 @using ckLib
 @model CKSA.Pages.Catalog.ProductModel
 @section Head {
@@ -11,7 +11,7 @@
     <meta property="og:url" content="@Model.ProductDataModel.CurrentUrl" />
     <meta property="og:title" content="@Model.ProductDataModel.FbTitle" />
     <meta property="og:type" content="product" />
-    <link rel="stylesheet" media="print" title="Printer-Friendly Style" type="text/css" href="/print.css" />
+    <link rel="stylesheet" media="print" title="Printer-Friendly Style" type="text/css" href="~/css/print.css" />
     <script type="application/ld+json">
         @Html.Raw(Model.CreateProductSchema())
     </script>
@@ -178,4 +178,231 @@
             }
         }
     </div>
+
+    <div class="container" style="line-height: 1.4em;">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <div style="font-size: 30px; margin-bottom: .75em; margin-top: 20px; font-family: 'Questrial', sans-serif;">Additional Details</div>
+                <p class="col-sm-12">@Model.ProductDataModel.TheProduct.Ingredients</p>
+
+                <div id="scP" class="col-sm-12" style="display:none;">
+                    <img alt="Special Care Instructions" style="width: 33px; height: 33px;" src="/graphics/p-exclamation.jpg" />
+                    <span id="sp">@Model.ProductDataModel.TheProduct.SpecialCare</span>
+                </div>
+
+
+                <div id="ksP" class="col-sm-12">
+                    <img class="noPrint" alt="Kosher" style="width: 56px; height: 13px;" src="/graphics/p-kosher.jpg" />
+                    <span id="ks">@Model.ProductDataModel.TheProduct.Kosher</span>
+                </div>
+
+                <div id="awP" class="col-sm-12">
+                    <img alt="allergy warning" style="width: 33px; height: 33px;" src="/graphics/p-exclamation.jpg" />
+                    <span id="aw">@Model.ProductDataModel.TheProduct.AllergyWarning</span>
+                </div>
+
+                <div id="nonEd" class="col-sm-12" style="display:none;">
+                    <img alt="Non edible item" style="width: 33px; height: 33px;" src="/graphics/p-exclamation.jpg" />
+                    If using as decoration on a real cake, pieces should be removed before serving.
+                </div>
+
+                <div id="hwP" class="col-sm-12">
+                    <img alt="heat warning" style="width: 33px; height: 33px;" src="/graphics/p-heat-warning.jpg" />
+                    <span id="hw" style="color:red">@Model.ProductDataModel.TheProduct.HeatWarning</span>
+                </div>
+
+                <div id="smpt" class="col-sm-12" style="display:none;">
+                    <img alt="Product contains small parts" style="width: 33px; height: 33px;" src="/graphics/p-exclamation.jpg" />
+                    <span>This product contains small parts.</span>
+                </div>
+
+                <div id="txble" class="col-sm-12" style="display:none;">
+                    <img alt="Non Returnable Product" style="width: 33px; height: 33px;" src="/graphics/p-exclamation.jpg" />
+                    This item is non-returnable. <a class="noPrint" href="/customerservice/customerservice2.aspx#returnPolicy">More Information.</a>
+                </div>
+                <div id="isusa" class="col-sm-12" style="display:none;">
+                    <img alt="Made in United States Of America" style="width: 33px; height: 17px;" src="/graphics/usa-flag.jpg" />
+                    Made in USA
+                </div>
+
+                <div id="spcitm" class="col-sm-12" style="display:none;">
+                    <img alt="Special Order Item" style="width: 33px; height: 33px;" src="/graphics/p-exclamation.jpg" />
+                    <span id="spcitmtxt">@Model.ProductDataModel.TheProduct.SpecialOrderItemText</span>
+                </div>
+
+                @if (Model.ProductDataModel.TheProduct.IsIn1416)
+                {
+                    <div class="col-sm-12">
+                        <img alt="Discontinued Item" style="width: 33px; height: 33px;" src="/graphics/p-exclamation.jpg" />
+                        Discontinued item, limited quantities available.
+                    </div>
+                }
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                @if (Model.WholeSaleId == 0)
+                {
+                    if (Model.ProductDataModel.TheProduct.Price >= CkDefines.FreeWeShipCost)
+                    {
+                        <a href="/customerservice/shippingfaqs.aspx">
+                            <img id="imgSS" style="width: 150px; height: 60px;" alt="free shipping" src="/graphics/free-shipping-graphic.png" />
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/customerservice/shippingfaqs.aspx">
+                            <img id="imgSS" style="width: 150px; height: 60px;" alt="flat rate" src="/graphics/flat-rate-shipping-graphic6.png" />
+                        </a>
+                        <span>Free Shipping on orders $@CkDefines.FreeWeShipCost and over.</span>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+
 </div>
+
+@section Scripts {
+    <script src='/js/jquery.elevatezoom-3.0.8.min.js'></script>
+    <script>
+        var theP = @Html.Raw(Json.Serialize(Model.ProductDataModel.AllProducts))
+
+        var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '2375110472676556',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v16.0'
+            });
+        };
+        function FacebookShare() {
+            var i = findProductByItemNumber($('input[name="unit"]:checked').val());
+            var url = "https://www.countrykitchensa.com" + i.FriendlyUrlLink.slice(1, -1);
+            FB.ui({
+                display: 'popup',
+                method: 'share',
+                href: url,
+                }, function (response) { });
+        }
+
+        $(document).ready(function () {
+
+            var defaultItem = findProductByItemNumber($('input[name="unit"]:checked').val());
+
+            setUIBasedOnSelectedItem(defaultItem);
+
+            $(".navbar img").attr("data-pin-nopin", "true");
+
+            $('input[type=radio][name=unit]').change(function() {
+                setUIBasedOnSelectedItem(findProductByItemNumber(this.defaultValue));
+            });
+
+            $('.altImage').click(function(){
+                $('#pImage').prop('src', $(this).data().large);
+
+                setZoom();
+            }
+            );
+
+            $('.altImage').each(function(i,obj) {
+                var img=new Image();
+                img.src=$(this).data().large;
+            });
+
+            setZoom();
+
+        });
+
+        function setZoom() {
+            if (!isMobile) {
+                $('#pImage').elevateZoom({
+                    zoomType: "inner",
+                    cursor: "crosshair",
+                    zoomWindowFadeIn: 500,
+                    zoomWindowFadeOut: 750
+                });
+            }
+        }
+
+        function kosherLink(itemId) {
+            $('#ksP').show();
+            window.location.hash = "#ksP";
+            var radioButton = document.getElementById(itemId);
+            if (radioButton) {
+                radioButton.checked = true;
+            }
+            // Scroll to the anchor
+            var element = document.getElementById("#ksP".substr(1));
+            if (element) {
+                element.scrollIntoView();
+            }
+        }
+
+        function findProductByItemNumber(itemNumber) {
+            return theP.find(obj => obj.ItemNumber === itemNumber);
+        }
+
+        function setUIBasedOnSelectedItem(p) {
+            if (p) {
+                $("#itemNum").text(p.ItemNumber);
+                if (p.ImageUrl) $("#pImage").prop('src', p.ImageUrl);
+                if(p.Kosher) {
+                    $('#ksP').show();
+                    $('#ks').text(p.Kosher);
+                } else $('#ksP').hide();
+                if(p.AllergyWarning) {
+                    $('#awP').show();
+                    $('#aw').text(p.AllergyWarning);
+                } else $('#awP').hide();
+                if(p.SpecialCare) {
+                    $('#scP').show();
+                    $('#sp').text(p.SpecialCare);
+                } else $('#scP').hide();
+                if(p.HeatWarning) {
+                    $('#hwP').show();
+                    $('#hw').text(p.HeatWarning);
+                } else $('#hwP').hide();
+                if (p.NonEdible) {
+                    $('#nonEd').show();
+                } else $('#nonEd').hide();
+                if (p.SmallParts) {
+                    $('#smpt').show();
+                } else $('#smpt').hide();
+                if (!p.Taxable) {
+                    $('#txble').show();
+                } else $('#txble').hide();
+                //if (p.CountryOfOrigin == "US") {
+                //    $('#isusa').show();
+                //} else $('#isusa').hide();
+                if (p.SpecialOrderItemText) {
+                    $('#spcitm').show();
+                    $('#spcitmtxt').text(p.SpecialOrderItemText);
+                } else $('#spcitm').hide();
+                if (p.Price >= @CkDefines.FreeWeShipCost) {
+                    $('#imgSS').attr("src", "/graphics/free-shipping-graphic.png");
+                } else {
+                    $('#imgSS').attr("src", "/graphics/flat-rate-shipping-graphic6.png");
+                }
+                if (p.SalePrice == 0) {
+                    $('#SaleDiv').hide();
+                } else {
+
+                    $('#SaleDiv').show();
+                    $('#SaleST').html(p.SpecialTitle);
+                    $('#SaleEL').html(p.ExpirationLabel);
+                }
+            }
+        }
+
+        function multiToAddCart(itemId, itemNumber, row) {
+            var unitId = "#quantity" + row;
+            var quantity = $(unitId).val();
+            if (quantity == "" || quantity == undefined) {
+                quantity = 1;
+            }
+            addToCart2(itemId, itemNumber, quantity);
+        }
+
+    </script>
+}

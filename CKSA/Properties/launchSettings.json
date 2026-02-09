@@ -13,7 +13,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "Shops/",
+      "launchUrl": "idea/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,0 +1,51 @@
+﻿@page "/idea/{name}/{typename}/{id}/{typeid}"
+@model CKSA.Pages.Idea.MiniIdeasModel
+@{
+}
+
+<div id="subMast" class="container">
+    <div class="row">
+        <nav id="breadCrumb" class="col-xs-12">
+            <ul>
+                @foreach (var c in Model.MiniDataModel.Breadcrumbs)
+                {
+                    <li>
+                        <a href="@c.Value">@c.Key</a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+    <div class="container">
+        <div class="row titleRow">
+            <div class="col-xs-12 col-md-12" style="padding-left:0;">
+                <h1>@Model.MiniDataModel.H1Tag</h1>
+            </div>
+        </div>
+    </div>
+
+<div class="container category-list">
+    <div class="row">
+        @* Bootstrap columns should always be inside a row *@
+        @foreach (var c in Model.MiniDataModel.Data)
+        {
+            <div class="col-xs-12 col-sm-4">
+                <div class="card">
+                    @Html.Raw(c.Img)
+                    <a href=@Html.Raw(c.Url)><h2>@c.C</h2></a>
+                    <p>@c.Desc</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <p>@Model.MiniDataModel.GenDescription</p>
+        </div>
+    </div>
+</div>

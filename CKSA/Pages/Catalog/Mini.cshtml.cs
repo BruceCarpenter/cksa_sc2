@@ -20,23 +20,50 @@ namespace CKSA.Pages.Catalog
 		public Filter F { get; set; }
 
 		public MiniHelper CkMini1 = new MiniHelper();
+		private readonly CookieHelper _cookies;
 
 
 		// Get parameters
 		[BindProperty(SupportsGet = true)]
 		public string? sort { get; set; }
 
-		public IActionResult OnGet(string ShopName, string SubCategoryName, int ShopId, int CategoryId, int SubCategoryId)
+		public MiniModel(CookieHelper cookies)
+		{
+			_cookies = cookies;
+		}
+
+		private bool CheckParameters(string ShopId, string CategoryId, string SubCategoryId)
+		{
+			int sId = 0;
+			int mId = 0;
+
+			bool isValid = int.TryParse(ShopId, out int cId) &&
+				   int.TryParse(CategoryId, out sId) &&
+				   int.TryParse(SubCategoryId, out mId);
+
+			if (isValid)
+			{
+				_ShopId = cId;
+				_CategoryId = sId;
+				_SubCategoryId = mId;
+			}
+
+			return isValid;
+		}
+
+		public IActionResult OnGet(string ShopName, string SubCategoryName, string ShopId, string CategoryId, string SubCategoryId)
 		{
 			_ShopName = ShopName;
-			_ShopId = ShopId;
 			_SubCategoryName = SubCategoryName;
-			_CategoryId = CategoryId;
-			_SubCategoryId = SubCategoryId;
 
 			bool promotional = false;
 			try
 			{
+				if (!CheckParameters(ShopId, CategoryId, SubCategoryId))
+				{
+					return RedirectToPage("/catalog/shops", new { i = "1" });
+				}
+
 				MiniDataModel = new MiniData();
 
 				// Currently no caching here due to the various options. Might cache just the base option and then render all
@@ -103,7 +130,7 @@ namespace CKSA.Pages.Catalog
 
 				if (F == null)
 				{
-					F = new Filter(CookieHelper.GetWholesaleValue(HttpContext.Request.Cookies));
+					F = new Filter(_cookies.GetWholesaleValue());
 					F.SetOrderBy(sort);
 					F.PageToGet = -1;
 					F.Mode = filterMode;

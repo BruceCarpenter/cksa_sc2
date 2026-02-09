@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ckLib
 {
 	public class CkDefines
 	{
+		// If these two change need to update common.js
+		public static decimal FlatRateShippingCost = 6.95m;
+		public static decimal FreeWeShipCost = 60;
+		public static decimal WholesaleMinOrder = 250;
+
 		/// <summary>
 		/// Convert the passed in units to units that contain html <abbr title="What does this mean">abv</abbr>.
 		/// </summary>
@@ -268,6 +268,40 @@ namespace ckLib
 		{
 			return string.Format("//www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.countrykitchensa.com{0}&media={1}",
 				url, imageUrl);
+		}
+
+		/// <summary>
+		/// Check if an alternative route is available for this value.
+		/// </summary>
+		static public string AlternativeRoute(int id)
+		{
+			var altRoute = string.Empty;
+
+			try
+			{
+				using (var mySql = DbDriver.OpenConnection())
+				{
+					using (var command = mySql.CreateCommand())
+					{
+						command.CommandType = System.Data.CommandType.Text;
+						command.CommandText = "select ToUrl from AutoRedirect where FromKey = @c1";
+						command.Parameters.AddWithValue("@c1", id);
+						using (var reader = command.ExecuteReader())
+						{
+							if (reader.Read())
+							{
+								altRoute = reader.ReadString(0);
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ErrorHandler.Handle(ex, "CKDefines/AlternativeRoute", id.ToString());
+			}
+
+			return altRoute;
 		}
 	}
 }

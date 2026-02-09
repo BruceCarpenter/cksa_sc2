@@ -1,0 +1,46 @@
+﻿@page "/idea/"
+@model CKSA.Pages.Idea.IndexModel
+@{
+}
+
+<div id="subMast" class="container">
+    <div class="row">
+        <nav id="breadCrumb" class="col-12" aria-label="breadcrumb">
+            <ul>
+                @if (Model.DefaultIdeaModel.Breadcrumbs != null)
+                {
+                    foreach (var crumb in Model.DefaultIdeaModel.Breadcrumbs)
+                    {
+                        <li>
+                            <a href="@crumb.Value">@crumb.Key</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="bgWrap" style="margin-top:0;">
+    <div class="container">
+        <div class="row titleRow">
+            <div class="col-12" style="padding-left:0;">
+                <h1>@Model.DefaultIdeaModel.H1Tag</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container category-list">
+        <div class="row">
+            @foreach (var item in Model.DefaultIdeaModel.Data)
+            {
+                <div class="col-12 col-sm-4">
+                    <div class="card">
+                        @Html.Raw(item.Img)
+                        <a href=@Html.Raw(item.Url)><h2>@item.C</h2></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

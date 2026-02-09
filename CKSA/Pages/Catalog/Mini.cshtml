@@ -1,7 +1,14 @@
-﻿@page "/shop/{ShopName}/{SubCategoryName}/{ShopId:int}/{CategoryId:int}/{SubCategoryId:int}"
+﻿@page "/shop/{ShopName}/{SubCategoryName}/{ShopId}/{CategoryId}/{SubCategoryId}"
 @using CKSA.Helpers
 @model CKSA.Pages.Catalog.MiniModel
 @{
+}
+
+@if (Response.StatusCode == 410)
+{
+    <div>
+        This product is no longer available. Here are similar items you may like.
+    </div>
 }
 
 <div id="subMast" class="container">

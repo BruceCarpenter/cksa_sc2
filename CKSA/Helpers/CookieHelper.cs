@@ -1,4 +1,11 @@
-﻿namespace ckLib
+﻿using Microsoft.AspNetCore.Http;
+
+///
+/// I should not use the Get/Set functions in this class directly. I should use the GetCookieValue/SetCookieValue functions which will handle encryption and other things.
+/// 
+
+
+namespace ckLib
 {
 	public class CookieHelper
 	{
@@ -10,61 +17,123 @@
 		const bool DoNotEncryptDebugging = false;
 
 		private readonly IHttpContextAccessor _httpContextAccessor;
+		private HttpContext HttpContext => _httpContextAccessor.HttpContext ?? throw new InvalidOperationException("No active HttpContext.");
 
 		public CookieHelper(IHttpContextAccessor httpContextAccessor)
 		{
 			_httpContextAccessor = httpContextAccessor;
 		}
 
-		public static void Set(IResponseCookies cookies, string key, string value, bool encrypt, int? expireDays= ExpireDaysDefault)
+		public bool Exists(string name)
 		{
-			if (DoNotEncryptDebugging)
-			{
-				encrypt = false;
-			}
+			return HttpContext.Request.Cookies.ContainsKey(name);
+		}
 
-			// Keep a cookie around if an order is running, that is not encrypted.
-			if (key == CookieHelper.ORDER_NAME)
-			{
-				CookieHelper.Set(cookies,CookieHelper.OrderStarted, "1", false);
-			}
+		public string? Get(string name)
+		{
+			HttpContext.Request.Cookies.TryGetValue(name, out var value);
+			return value;
+		}
 
-			if (encrypt)
+		public void Set(string name, string value, CookieOptions? options = null)
+		{
+			options ??= new CookieOptions
 			{
-				EncryptHelper eh = new EncryptHelper();
-				key = eh.Encrypt(key);
-				value = eh.Encrypt(value);
-			}
-
-			var options = new CookieOptions
-			{
-				Expires = expireDays.HasValue ? DateTime.Now.AddDays(expireDays.Value) : DateTime.MaxValue,
-				HttpOnly = true, // Prevents JavaScript from reading the cookie (Security!)
-				Secure = true,   // Only send over HTTPS
-				SameSite = SameSiteMode.Strict // Prevents CSRF attacks
+				Expires = DateTimeOffset.UtcNow.AddDays(365),
+				HttpOnly = true,
+				Secure = HttpContext.Request.IsHttps,
+				SameSite = SameSiteMode.Lax,
+				Path = "/"
 			};
 
-			cookies.Append(key, value, options);
+			HttpContext.Response.Cookies.Append(name, value, options);
 		}
 
-		public static string Get(IRequestCookieCollection cookies, string key, bool encrypt)
+		public void Delete(string name)
 		{
-			return cookies[key] ?? string.Empty;
+			HttpContext.Response.Cookies.Delete(name);
 		}
 
+		// These are my functions. Above are Chat generated functions. 
+		public void SetCookieValue(string cookieName, string cookieValue, bool encrypt)
+		{
+			try
+			{
+				if (DoNotEncryptDebugging)
+				{
+					encrypt = false;
+				}
+
+				// Keep a cookie around if an order is running, that is not encrypted.
+				if (cookieName == CookieHelper.ORDER_NAME)
+				{
+					Set(CookieHelper.OrderStarted, "1");
+				}
+
+				if (encrypt)
+				{
+					EncryptHelper eh = new EncryptHelper();
+					cookieName = eh.Encrypt(cookieName);
+					cookieValue = eh.Encrypt(cookieValue);
+				}
+
+				Set(cookieName, cookieValue);
+			}
+			catch (Exception)
+			{
+			}
+
+		}
+		public string? GetCookieValue(string cookieName, bool encrypted)
+		{
+			string originalCookieName = cookieName;
+			string? cookieValue = null;
+
+			if (DoNotEncryptDebugging)
+			{
+				encrypted = false;
+			}
+
+			try
+			{
+				EncryptHelper eh = new EncryptHelper();
+				if (encrypted)
+				{
+					cookieName = eh.Encrypt(cookieName);
+				}
+
+				cookieValue = Get(cookieName);
+
+				if (cookieValue == null)
+				{
+					return null;
+				}
+
+				if (encrypted)
+				{
+					cookieValue = eh.Decrypt(cookieValue);
+				}
+			}
+			catch
+			{
+				throw;
+			}
+
+			return cookieValue;
+		}
 
 		/// <summary>
 		/// For ease of testing get cookie here so I can get it unencrypted.
 		/// </summary>
-		public static int GetWholesaleValue(IRequestCookieCollection cookies)
+		public int GetWholesaleValue()
 		{
 			int wholesale = 0;
 
 			try
 			{
-				var isWholeSale = CookieHelper.Get(cookies, CookieHelper.WholeSale, true);
-				if(!string.IsNullOrEmpty(isWholeSale))
-					wholesale = Convert.ToInt32(isWholeSale);
+				var cookieValue = GetCookieValue(CookieHelper.WholeSale, true);
+				if(cookieValue != null)
+					wholesale = Convert.ToInt32(cookieValue);
 			}
 			catch
 			{
@@ -74,4 +143,5 @@
 			return wholesale;
 		}
 	}
+
 }

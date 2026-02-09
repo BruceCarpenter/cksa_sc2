@@ -1,0 +1,61 @@
+﻿@page "/idea/{name}/{id}"
+@model CKSA.Pages.Idea.TypeModel
+@{
+}
+<div id="subMast" class="container">
+    <div class="row">
+        <nav id="breadCrumb" class="col-12" aria-label="breadcrumb">
+            <ul>
+                @if (Model.TypeDataModel.Breadcrumbs != null)
+                {
+                    foreach (var crumb in Model.TypeDataModel.Breadcrumbs)
+                    {
+                        <li>
+                            <a href="@crumb.Value">@crumb.Key</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="bgWrap" style="margin-top:0;">
+
+    <div class="container">
+        <div class="row titleRow">
+            <div class="col-xs-12 col-md-12" style="padding-left:0;">
+                <h1>@Model.TypeDataModel.H1Tag</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container category-list">
+        <div class="row">
+            @* Added a row wrapper for Bootstrap best practices *@
+            @foreach (var c in Model.TypeDataModel.Data)
+            {
+                <div class="col-xs-12 col-sm-4">
+                    <div class="card">
+                        @* Use Html.Raw if Img contains a full <img> tag from your DB *@
+                        @Html.Raw(c.Img)
+
+                        <a href=@Html.Raw(c.Url)>
+                            <h2>@c.C</h2>
+                        </a>
+
+                        <p>@c.Desc</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <p>@Model.TypeDataModel.GenDescription</p>
+        </div>
+    </div>
+</div>

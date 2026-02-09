@@ -2,7 +2,6 @@ using ckLib;
 using CKSA.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Caching.Memory;
 using System.Data;
 
 namespace CKSA.Pages.Catalog
@@ -11,14 +10,12 @@ namespace CKSA.Pages.Catalog
 	{
 		public string H1Tag { get; set; } = "Cake decorating and candy making supplies";
 		public List<ShopItem> Shops { get; set; } = new List<ShopItem>();
-		private readonly IMemoryCache _cache;
 
 		[BindProperty(SupportsGet = true)] 
 		public string? i { get; set; }
 
-		public ShopModel(IMemoryCache cache)
+		public ShopModel()
 		{
-			_cache = cache;
 		}
 
 		public void OnGet()

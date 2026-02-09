@@ -266,7 +266,7 @@ namespace ckLib
 			{
 				discountPrice = Discounts[columnNum].Price;
 			}
-			cheapeastRegularPrice = Math.Min(discountPrice, SalePrice == 0 ? discountPrice : SalePrice);
+			cheapeastRegularPrice = Math.Min(discountPrice, SalePrice == decimal.MinValue ? discountPrice : SalePrice);
 
 
 			// Check if any other costs are less
@@ -570,9 +570,9 @@ namespace ckLib
 			DW = reader.ReadDouble("DW");
 			CountryOfOrigin = reader.ReadString("CountryCode");
 			Harminization = reader.ReadString("CountryOfOrigin2");
-			Length = Convert.ToInt32(reader.ReadDouble("L"));
-			Width = Convert.ToInt32(reader.ReadDouble("W"));
-			Height = Convert.ToInt32(reader.ReadDouble("H"));
+			Length = MeasurmentHelper(reader,"L");
+			Width = MeasurmentHelper(reader,"W");
+			Height = MeasurmentHelper(reader,"H");
 
 			Description = reader.ReadString("Description");
 			Units = reader.ReadString("Units");
@@ -645,6 +645,21 @@ namespace ckLib
 			PdfLink = PdfStringParser(reader.ReadString("PdfLink"));
 			PriceSnippet = CkDefines.CreatePriceHtmlSnippet(Price, SalePrice);
 			OptionPriceSnippet = CkDefines.CreateOptionPriceHtmlSnippet(Price, SalePrice);
+		}
+
+		/// <summary>
+		/// The database is storing L/W/H as double but I need them as int. If the value 
+		/// </summary>
+		/// <returns></returns>
+		private int MeasurmentHelper(MySqlDataReader reader, string columnName)
+		{
+			var value = reader.ReadDouble("L");
+
+			if (value != double.MinValue)
+			{
+				return Convert.ToInt32(value);
+			}
+			return 0;
 		}
 
 		public void LoadVideos()
