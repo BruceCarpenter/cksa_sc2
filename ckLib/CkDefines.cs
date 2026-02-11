@@ -203,7 +203,7 @@ namespace ckLib
 				if (dPrice < 0)
 				{
 				}
-				else if (dSalePrice != 0 && dSalePrice < dPrice)
+				else if (dSalePrice != decimal.MinValue && dSalePrice < dPrice)
 				{
 					finalPriceString = string.Format("<span style='text-decoration: line-through;'>{0}</span> " +
 						"<span style='color:#FF0000'>{1} ({2}% Off)</span>",

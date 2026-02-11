@@ -1,0 +1,23 @@
+﻿@using CKSA.Models
+@model MiniImageModel
+
+<div class="container category-list">
+    <div class="row">
+        @foreach (var i in Model.Products)
+        {
+            <div class="col-xs-12 col-sm-4 col-md-3">
+                <div class="card">
+                    <p>
+                        @Html.Raw(Model.MiniLoad(i.ItemNumber, i.ItemId, i.Description, i.FriendlyUrlLink, false, i.MasterItemNumber, i.ImageUrlBase))
+                        <b><a href=@Html.Raw(i.FriendlyUrlLink)>@i.Description</a></b><br />
+                        @i.Units<br />
+                        @Model.FormatPrice(i.Price, i.SalePrice, i.SaleExpiration)<br />
+                        @i.ItemNumber
+                    </p>
+                    <a href=@i.FriendlyUrlLink title="@i.Description" class="button moreBt">More Info</a>
+                    @Html.Raw(Model.AddItemButton(i.ItemNumber, i.TempOutOfStock, i.Special, i.ProductExpiration, i.SaleExpiration, i.Quantity, i.Price, i.FriendlyUrlLink))
+                </div>
+            </div>
+        }
+    </div>
+</div>

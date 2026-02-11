@@ -16,6 +16,13 @@ namespace CKSA.Pages.Idea
 		public int _OccasionId { get; set; }
 		public int _TypeId { get; set; }
 		public int _IdeaId { get; set; }
+		public MiniImageModel _MiniImageModel { get; set; }
+		private readonly CookieHelper _cookieHelper;
+
+		public ckIdeaModel(CookieHelper cookieHelper)
+		{
+			_cookieHelper = cookieHelper;
+		}
 
 		private bool CheckParameters(string occasionId, string typeid, string ideaIs)
 		{
@@ -45,7 +52,7 @@ namespace CKSA.Pages.Idea
 			if(!CheckParameters(id, typeId, ideaId))
 			{
 
-			}
+			}	
 
 			IdeaModel = new ckIdeaData();
 			IdeaModel.Parser = new UrlIdeaParser(UrlIdeaParser.Step.Idea, RouteData);
@@ -71,18 +78,25 @@ namespace CKSA.Pages.Idea
 
 				ViewData["MetaDescription"] = "Learn how to make " + IdeaModel.TitleTxt;
 
-				IdeaModel.Canonical = IdeaHelper.CreateUrl(IdeaModel.Parser.IdeaId);
 				CreateCanonicalLink(IdeaHelper.CreateUrl(IdeaModel.Parser.IdeaId));
 			}
 			else
 			{
 				// No idea found - redirect to previous page
 			}
+
+			_MiniImageModel = new MiniImageModel
+			{
+				RunAs = 2,
+				Id = IdeaModel.Parser.IdeaId,
+				WholeSaleCustomer = _cookieHelper.GetWholesaleValue()
+			};
+			_MiniImageModel.LoadProduct();
 		}
 
 		private void CreateCanonicalLink(string url)
 		{
-			ViewData["Canonical"] = $"https://www.countrykitchensa.com{url}";
+			ViewData["Canonical"] = $"https://www.countrykitchensa.com{url[1..^1]}";
 		}
 
 		private void SocialMediaContent(UrlIdeaParser parser)
