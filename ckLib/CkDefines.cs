@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace ckLib
 {
@@ -9,6 +10,29 @@ namespace ckLib
 		public static decimal FlatRateShippingCost = 6.95m;
 		public static decimal FreeWeShipCost = 60;
 		public static decimal WholesaleMinOrder = 250;
+
+		static public string StripHTML(string input)
+		{
+			return Regex.Replace(input, "<.*?>", String.Empty);
+		}
+
+		static public string TruncateString(string input, int maxLength)
+		{
+			if (input.Length <= maxLength)
+			{
+				return input;
+			}
+
+			int lastSpaceIndex = input.LastIndexOf(' ', maxLength);
+			if (lastSpaceIndex != -1)
+			{
+				return input.Substring(0, lastSpaceIndex) + "...";
+			}
+			else
+			{
+				return input.Substring(0, maxLength) + "...";
+			}
+		}
 
 		/// <summary>
 		/// Convert the passed in units to units that contain html <abbr title="What does this mean">abv</abbr>.

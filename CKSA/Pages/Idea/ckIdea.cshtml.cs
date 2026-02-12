@@ -1,12 +1,9 @@
 using ckLib;
 using CKSA.Models;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MySqlConnector;
 using System.Data;
 using System.Net;
-using System.Reflection.PortableExecutable;
 
 namespace CKSA.Pages.Idea
 {
@@ -94,6 +91,25 @@ namespace CKSA.Pages.Idea
 			_MiniImageModel.LoadProduct();
 		}
 
+		public string JsonRecipe()
+		{
+			var json = string.Empty;
+
+			//if (TheBlog != null)
+			//{
+			//	foreach (var secton in TheBlog.BlogSections)
+			//	{
+			//		if (secton.BlogType == Blogger.BlogPartsOrdinal.RecipeId)
+			//		{
+			//			var recipeSection = (BlogRecipe)secton;
+			//			json = recipeSection.Json();
+			//			break;
+			//		}
+			//	}
+			//}
+
+			return json;
+		}
 		private void CreateCanonicalLink(string url)
 		{
 			ViewData["Canonical"] = $"https://www.countrykitchensa.com{url[1..^1]}";

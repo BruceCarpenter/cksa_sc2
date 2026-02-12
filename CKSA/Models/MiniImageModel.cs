@@ -1,9 +1,6 @@
 ﻿using ckLib;
 using CKSA.Helpers;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using MySqlConnector;
 using System.Data;
-using System.Data.Common;
 using System.Web;
 
 namespace CKSA.Models
@@ -124,7 +121,7 @@ namespace CKSA.Models
 			string sItemId = itemId.ToString();
 			string sItemNumber = itemNumber.ToString();
 			string imageLinkStart = string.Empty;
-			if (ShopId != 0)
+			if (ShopId == 0)
 			{
 				UrlProductParser parser = new UrlProductParser();
 				parser.ProductId = itemId;

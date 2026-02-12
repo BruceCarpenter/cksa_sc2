@@ -1,0 +1,119 @@
+@media (max-width: 767px) {
+	.top-buffer {
+		margin-bottom: 15px;
+	}
+	.imageList {
+	}
+}
+@media (min-width: 768px) {
+	.imageList {
+		height: 150px;
+	}
+}
+
+.blog {
+	/* color: black; */
+	line-height: 1.5;
+}
+
+.blog.container {}
+
+.blog img {
+	margin-bottom: 10px;
+}
+
+.blogSocial {
+	max-width: 45px;
+	padding-top: 5px;
+	margin-bottom: -10px;
+}
+.linkNoUnderline {
+	text-decoration: none;
+}
+
+.linkNoUnderline:hover {
+	text-decoration: none;
+}
+
+
+.title {
+	/* font-size: 2em; */
+	font-weight: bold;
+	text-align: left;
+	color: black;
+}
+
+.bheadTxt {
+	padding-bottom:10px;
+	padding-top: 10px;
+}
+
+.sectionHeader {
+	text-align: left;
+	font-size: 2.0em;
+	font-weight: bold;
+	color: #492408;
+}
+
+
+.bImgS {
+
+}
+
+.bDesc {
+	padding-top: 10px;
+}
+.blogBold {
+	font-weight:bold;
+}
+.blogItalic {
+	font-style: italic;
+}
+
+.blogCardDetails {
+	/* background-color: white; */
+	/* font-family: sans-serif; */
+}
+
+.blogCardDescription {
+	padding-top: 5px;
+	height: 100px;
+}
+
+#blogSearch {
+	margin-right: -1.5em;
+}
+
+/* Scope styles to this block */
+.bwb-blog figure {
+	max-width: 480px;
+	margin: 1.25rem auto;
+}
+
+.bwb-blog img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+/* Two-per-row layout for consecutive images */
+.bwb-blog .img-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+	margin: 1.25rem auto;
+	max-width: 1000px;
+}
+
+	.bwb-blog .img-grid figure {
+		flex: 1 1 220px;
+		max-width: 320px;
+		margin: 0;
+	}
+
+/* Optional: tighten spacing under headings if needed */
+.bwb-blog h2,
+.bwb-blog h3 {
+	margin-top: 2rem;
+}

@@ -1,7 +1,6 @@
-﻿using ckLib;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace CKSA.Helpers
+namespace ckLib
 {
 	public class CkHtmlHelper
 	{

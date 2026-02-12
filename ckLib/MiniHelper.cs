@@ -6,7 +6,7 @@ using System.Web;
 /// Summary description for MiniHelper
 /// </summary>
 /// 
-namespace CKSA.Helpers
+namespace ckLib
 {
 	public class MiniHelper
 	{
@@ -25,7 +25,7 @@ namespace CKSA.Helpers
 		{
 		}
 
-		public static string MiniLoad(object itemNumber, object itemId, object description, object friendlyUrl, object masterItemNumber = null, object imageUrl = null)
+		public static string MiniLoad(string itemNumber, int itemId, string description, string friendlyUrl, string? masterItemNumber = null, string? imageUrl = null)
 		{
 			var sItemId = itemId.ToString();
 			var sItemNumber = itemNumber.ToString();

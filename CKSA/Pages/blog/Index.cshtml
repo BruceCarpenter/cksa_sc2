@@ -1,0 +1,71 @@
+﻿@page "/blog/index.aspx"
+@model CKSA.Pages.blog.IndexModel
+@section Head {
+    <link rel="stylesheet" media="screen" type="text/css" href="~/css/blog.css" />
+    <link rel="canonical" href="https://www.countrykitchensa.com/blog/" />
+}
+@{
+}
+
+<div class="container">
+    <div class="row">
+        <a asp-page="/Blog/Index">Blog</a>
+        <h1 style="text-align:left;">Country Kitchen SweetArt Blog</h1>
+
+        <div class="col-lg-9 col-xs-12">
+            <div class="row">
+                @* Added a row here to contain the grid *@
+                @foreach (var blog in Model.Blogs)
+                {
+                    <div class="col-lg-6 col-md-6 top-buffer">
+                        <a href="@blog.Url">
+                            <img src="@blog.Mini" alt="@blog.MiniAlt">
+                        </a>
+                        <div class="blogCardDetails">
+                            <div class="blogCardDescription">
+                                @Html.Raw(blog.Description)
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-12">
+            <div>
+                @* Bound the value directly to the SearchTerm property *@
+                <input id="blogSearch" type="text" placeholder="Blog Search"
+                       aria-label="Blog Search" value="@Model.search" />
+
+                <a href="javascript:blogSearch();" aria-label="Search entered text" title="Search blog">
+                    <i class="glyphicon glyphicon-search" id="blogSearchIco"></i>
+                </a>
+            </div>
+
+            @* Social Icons *@
+            <a href="https://www.youtube.com/user/shopcountrykitchen" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt YouTube" src="/assets/social/66/youtube1.jpg" /></a>
+            <a href="https://www.facebook.com/countrykitchensweetart/" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt Facebook" src="/assets/social/66/facebook1.jpg" /></a>
+            <a href="https://www.instagram.com/countrykitchensweetart/" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt Instagram" src="/assets/social/66/instagram1.jpg" /></a>
+            <a href="https://www.pinterest.com/countrykitchen/" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt Pinterest" src="/assets/social/66/pinterest1.jpg" /></a>
+            <a href="https://www.tiktok.com/@@countrykitchensweetart" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt TikTok" src="/assets/social/66/tiktok1.jpg" /></a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        function blogSearch() {
+            var searchFor = document.getElementById('blogSearch').value;
+            if (searchFor != '')
+                window.location.href = "/blog/index.aspx?search=" + encodeURIComponent(searchFor);
+        }
+
+        document.getElementById("blogSearch").addEventListener("keydown", function (event) {
+            if (event.keyCode === 13) {
+                blogSearch();
+            }
+        });
+
+    </script>
+}
