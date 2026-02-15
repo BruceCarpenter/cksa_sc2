@@ -1,26 +1,28 @@
 using ckLib;
 using CKSA.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Diagnostics;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace CKSA.Pages.Idea
 {
 	/// <summary>
 	/// This page circles back to itself if a value is passed in. Might need to change.
 	/// </summary>
-    public class IndexModel : PageModel
-    {
-        public IdeaModel DefaultIdeaModel { get; set; }    
+	public class IndexModel : PageModel
+	{
+		public IdeaModel DefaultIdeaModel { get; set; }
 
 		public void OnGet()
-        {
+		{
 			try
 			{
 				var key = $"{CacheKeys.IdeaDefaultKey}0";
 
 				var cacher = new PageCacher<IdeaModel>();
 				DefaultIdeaModel = cacher.Retrieve(key);
-				
+
 				if (DefaultIdeaModel == null)
 				{
 					DefaultIdeaModel = new IdeaModel();
@@ -30,14 +32,17 @@ namespace CKSA.Pages.Idea
 					DefaultIdeaModel.MetaDescription = "Country Kitchen SweetArt library of ideas and recipes for all occasions and events.";
 					DefaultIdeaModel.Parser = new UrlIdeaParser(UrlIdeaParser.Step.Type, RouteData);
 					DefaultIdeaModel.Breadcrumbs = DefaultIdeaModel.Parser.GenerateListBreadcrumb(UrlIdeaParser.Step.Occasion);
-					ViewData["Canonical"] = "https://www.countrykitchensa.com/idea/";
+
+					ViewData[ViewDataKeys.Title] = "Candy Making, Cookie & Cake Decorating Tips, Guides, Recipes";
+					ViewData[ViewDataKeys.Canonical] = "https://www.countrykitchensa.com/idea/";
+					ViewData[ViewDataKeys.Description] = DefaultIdeaModel.MetaDescription;
 
 					cacher.Store(DefaultIdeaModel, key);
 				}
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
-				ErrorHandler.Handle(ex,"idea/index");
+				ErrorHandler.Handle(ex, "idea/index");
 			}
 		}
 
@@ -110,6 +115,14 @@ namespace CKSA.Pages.Idea
 					WebUtility.HtmlEncode(d.C));
 				d.Desc = "";
 				DefaultIdeaModel.Data.Add(d);
+			}
+
+			if (Debugger.IsAttached)
+			{
+				foreach (var item in DefaultIdeaModel.Data)
+				{
+					item.Img = Regex.Replace(item.Img, @"src='(/[^']+)'", "src='https://www.countrykitchensa.com$1'");
+				}
 			}
 		}
 	}

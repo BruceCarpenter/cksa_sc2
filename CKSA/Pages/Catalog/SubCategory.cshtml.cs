@@ -51,9 +51,9 @@ namespace CKSA.Pages.Catalog
 					cacher.Store(SubCatModel, key);
 				}
 
-				ViewData["Title"] = CkHtmlHelper.CreateTitle(SubCatModel.H1Tag);
-				ViewData["Description"] = SubCatModel.H1Tag;
-				ViewData["Canonical"] = SubCatModel.Canonical;
+				ViewData[ViewDataKeys.Title] = CkHtmlHelper.CreateTitle(SubCatModel.HtmlTitle);
+				ViewData[ViewDataKeys.Description] = SubCatModel.HtmlDescription;
+				ViewData[ViewDataKeys.Canonical] = SubCatModel.Canonical;
 
 				return Page();
 			}

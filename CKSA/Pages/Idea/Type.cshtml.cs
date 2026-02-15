@@ -42,15 +42,16 @@ namespace CKSA.Pages.Idea
 
 					GetData();
 
-					TypeDataModel.Canonical = CreateCanonical(TypeDataModel.Parser.OccasionId);
+					ViewData[ViewDataKeys.Title] = TypeDataModel.H1Tag;
+					ViewData[ViewDataKeys.Canonical] = CreateCanonical(TypeDataModel.Parser.OccasionId);
+					ViewData[ViewDataKeys.Description] = TypeDataModel.MetaDescription;
 
 					TypeDataModel.Breadcrumbs = TypeDataModel.Parser.GenerateListBreadcrumb(UrlIdeaParser.Step.Occasion);					
 				}
 			}
-			catch (System.Exception ex)
+			catch (Exception ex)
 			{
 				ErrorHandler.Handle(ex, "ckideas_type.Page_Load");
-				//Server.Transfer("~/catalog/shops.aspx");
 			}
 
 		}
@@ -128,11 +129,10 @@ WHERE rn = 1 ORDER BY Type2ID DESC;";
 							{
 								htmlTitle = TypeDataModel.Parser.OccasionName;
 							}
-							ViewData["Title"] = htmlTitle;
 							TypeDataModel.H1Tag = htmlTitle;
 
 							TypeDataModel.GenDescription = reader.ReadString(5);
-							ViewData["MetaDescription"] = reader.ReadString(4);
+							TypeDataModel.MetaDescription = reader.ReadString(4);
 						}
 						var d = new IdeaData();
 						var ideaId = reader.ReadInt32(0);

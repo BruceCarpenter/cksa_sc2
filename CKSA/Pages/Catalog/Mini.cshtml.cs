@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data;
+using System.Diagnostics;
+using System.Net;
 
 namespace CKSA.Pages.Catalog
 {
@@ -76,11 +78,12 @@ namespace CKSA.Pages.Catalog
 
 				if (promotional)
 				{
+					Debugger.Break();
 					MiniDataModel.Parser = new UrlProductParser();
 					MiniDataModel.Breadcrumbs = new Dictionary<string, string>();
 					MiniDataModel.Breadcrumbs.Add("Home", "\\");
 					MiniDataModel.Breadcrumbs.Add("Shops", "\\shops");
-					ViewData["Title"] = "Country Kitchen SweetArt Promotion: " + RouteData.Values["promotion"];
+					ViewData[ViewDataKeys.Title] = "Country Kitchen SweetArt Promotion: " + RouteData.Values["promotion"];
 					MiniDataModel.H1Tag = "Promotional Items";
 					MiniDataModel.Canonical = "https://www.countrykitchensa.com" + Request.GetDisplayUrl();
 				}
@@ -153,6 +156,9 @@ namespace CKSA.Pages.Catalog
 
 				GetDescription();
 
+				ViewData[ViewDataKeys.Title] = CkHtmlHelper.CreateTitle(MiniDataModel.HtmlTitle);
+				ViewData[ViewDataKeys.Description] = MiniDataModel.HtmlDescription;
+				ViewData[ViewDataKeys.Canonical] = MiniDataModel.Canonical;
 
 				return Page();
 			}
@@ -256,8 +262,6 @@ namespace CKSA.Pages.Catalog
 								{
 									MiniDataModel.HtmlTitle = cat3Text;
 								}
-								ViewData["Title"] = MiniDataModel.HtmlTitle;
-								ViewData["MetaDescription"] = MiniDataModel.HtmlDescription;
 							}
 						}
 					}

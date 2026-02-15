@@ -5,6 +5,7 @@ namespace ckLib
 	public class CkHtmlHelper
 	{
 		const string Title = " | Country Kitchen SweetArt";
+		const string IdeaTitle = " | Country Kitchen SweetArt";
 
 		static public string CreatePriceHtml(decimal dPrice, decimal dSalePrice)
 		{
@@ -155,6 +156,9 @@ namespace ckLib
 		{
 			return CreateTitle(title, Title);
 		}
-
+		static public string CreateIdeaTitle(string title)
+		{
+			return CreateTitle(title, IdeaTitle);
+		}
 	}
 }

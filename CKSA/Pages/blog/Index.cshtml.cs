@@ -1,6 +1,7 @@
 using ckLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
@@ -70,6 +71,11 @@ namespace CKSA.Pages.blog
 
 								stripHtmlDescription = CkDefines.TruncateString(stripHtmlDescription, 200);
 								stripHtmlDescription += string.Format("<a href={0}>Read More</a>", blogUrl + url);
+
+								if (Debugger.IsAttached)
+								{
+									url = Uri.TryCreate(url, UriKind.Absolute, out var uri) ? uri.PathAndQuery : url;
+								}
 
 								var aBlog = new
 								{

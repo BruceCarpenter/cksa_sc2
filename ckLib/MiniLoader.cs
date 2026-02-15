@@ -61,7 +61,7 @@ namespace ckLib
 								p.TempOutOfStock = reader.ReadInt16( "ItemTempOOS");
 								p.Special = reader.ReadInt16( "CKPSpecial");
 								p.ProductExpiration = reader.ReadDateTime( "DateExpCKPS");
-								p.SaleExpiration = reader.ReadDateTime( "SaleEndCKPS");
+								p.SaleExpiration = reader.ReadDateTimeAsString( "SaleEndCKPS");
 								p.Quantity = reader.ReadInt16( "QuantityCKPS");
 								p.ImageUrlBase = reader.ReadString("ImageUrl");
 								p.ImageUrl = CkDefines.ImageCategoryUrl(p.MasterItemNumber, p.ImageUrlBase);

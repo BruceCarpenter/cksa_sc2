@@ -2,9 +2,9 @@
 @using ckLib
 @model CKSA.Pages.Catalog.ProductModel
 @section Head {
-    @if (ViewData["Robots"] != null)
+    @if (Model.ProductDataModel.TheProduct.DoNotIndex)
     {
-        <meta name="robots" content="@ViewData["Robots"]" />
+        <meta name="robots" content="noindex, nofollow" />
     }
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <meta property="og:image" content="@Model.ProductDataModel.TheProduct.ImageUrl" />

@@ -1,4 +1,92 @@
-﻿@page "/blog/{name}"
+﻿@page "/blog/{name}/"
 @model CKSA.Pages.blog.BlogModel
+@section Head {
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+    <link rel="stylesheet" media="screen" type="text/css" href="~/css/blog.css" />
+    <link rel="stylesheet" media="print" title="Printer-Friendly Style" type="text/css" href="~/css/print.css" />
+    <link rel="canonical" href="@Model.Canonical" />
+    <meta property="og:url" content="@ViewData["Canonical"]">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="@Model.TheBlog?.Name" />
+    <meta property="og:description" content="@Model.TheBlog?.Title" />
+    <meta property="og:image" content="@Model.TheBlog?.Image" />
+    <style>
+        @@media print {
+            iframe {
+            display: none;
+        }
+        }
+    </style>
+}
 @{
 }
+
+<div class="blog container">
+    <a href="/blog/">Blog / </a><a href="@Model.Url">@Model.TheBlog?.Name</a>
+</div>
+
+@* 1. The Blog Name/Title *@
+<div>@Html.Raw(Model.TheBlog.NameHtml())</div>
+
+<div class="noPrint">
+    Share with your friends.
+
+    @* Facebook Share *@
+    <a class="linkNoUnderline" href="javascript:FacebookShare();">
+        <img class="blogSocialShare" alt="Country Kitchen SweetArt Facebook" src="/assets/social/66/facebook1.jpg" />
+    </a>
+
+    @* Pinterest Share *@
+    <a class="linkNoUnderline" data-pin-do="buttonBookmark" data-pin-custom="true" href="https://www.pinterest.com/pin/create/button/">
+        <img style="cursor: pointer;" class="blogSocialShare" alt="Share via Pinterest" src="/assets/social/66/pinterest2.jpg" />
+    </a>
+
+    @* Twitter Share - Using clean @ variables *@
+    <a class="linkNoUnderline" href="https://twitter.com/intent/tweet?url=@Model.Canonical&text=@Model.TheBlog.Name&media=@Model.TheBlog.Image">
+        <img class="blogSocialShare" alt="Country Kitchen SweetArt Twitter Share" src="/assets/social/66/twitter3.jpg" />
+    </a>
+
+    @* Email Share *@
+    <a class="linkNoUnderline" href="mailto:?subject=@Model.TheBlog.Title&body=@Model.EmailBodyText()" title="Share by Email">
+        <img class="blogSocialShare" alt="Share via email" src="/assets/social/66/email4.jpg">
+    </a>
+
+    @* Print Page *@
+    <a class="linkNoUnderline" href="javascript:window.print();">
+        <img class="blogSocialShare" alt="print page" src="/assets/social/66/print1.jpg" />
+    </a>
+</div>
+
+<div class="row">
+    <div class="col-sm-9 col-xs-12">
+        @* Render the Head HTML *@
+        <div class="col-xs-12">@Html.Raw(Model.TheBlog.Head())</div>
+
+        <div class="col-print-12">
+            @* 2. The Blog Sections Loop (No more Response.Write) *@
+            @foreach (var section in Model.TheBlog?.BlogSections)
+            {
+                <div class="col-xs-12">
+                    @Html.Raw(section.Html())
+                </div>
+            }
+        </div>
+    </div>
+
+    @* Sidebar *@
+    <div class="col-sm-3 hidden-xs noPrint">
+        <div>
+            <input id="blogSearch" type="text" placeholder="Blog Search" aria-label="Blog Search" />
+            <a href="javascript:blogSearch();" aria-label="Search entered text" title="Search blog">
+                <i class="glyphicon glyphicon-search" id="blogSearchIco"></i>
+            </a>
+        </div>
+        Stay Connected<br />
+        <a href="https://www.youtube.com/user/shopcountrykitchen" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt YouTube" src="/assets/social/66/youtube1.jpg" /></a>
+        <a href="https://www.facebook.com/countrykitchensweetart/" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt Facebook" src="/assets/social/66/facebook1.jpg" /></a>
+        <a href="https://www.instagram.com/countrykitchensweetart/" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt Instagram" src="/assets/social/66/instagram1.jpg" /></a>
+        <a href="https://www.pinterest.com/countrykitchen/" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt Pinterest" src="/assets/social/66/pinterest1.jpg" /></a>
+        <a href="https://www.tiktok.com/@@countrykitchensweetart" target="_blank"><img class="blogSocial" alt="Country Kitchen SweetArt TikTok" src="/assets/social/66/tiktok1.jpg" /></a>
+    </div>
+</div>

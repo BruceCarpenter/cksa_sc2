@@ -1,9 +1,10 @@
 ﻿@using CKSA.Models
+@using ckLib
 @model MiniImageModel
 
 <div class="container category-list">
     <div class="row">
-        @foreach (var i in Model.Products)
+        @foreach (var i in (Model?.Products ?? new List<Product>()))
         {
             <div class="col-xs-12 col-sm-4 col-md-3">
                 <div class="card">

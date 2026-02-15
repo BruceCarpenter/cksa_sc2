@@ -261,7 +261,7 @@ namespace ckLib
 							while (reader.Read())
 							{
 								var json = reader.ReadString(0);
-								var jsonType = (BlogPartsOrdinal)Enum.Parse(typeof(BlogPartsOrdinal), reader.ReadString(1));
+								var jsonType = (BlogPartsOrdinal)Enum.Parse(typeof(BlogPartsOrdinal), reader.ReadInt32(1).ToString());
 
 								BlogSection blogSection = null;
 

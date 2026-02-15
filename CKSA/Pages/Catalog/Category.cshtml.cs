@@ -71,9 +71,9 @@ namespace CKSA.Pages.Catalog
 					cacher.Store(CatModel, key);
 				}
 
-				ViewData["Title"] = CkHtmlHelper.CreateTitle(CatModel.HtmlTitle);
-				ViewData["Description"] = CatModel.HtmlDescription;
-				ViewData["Canonical"] = CatModel.Canonical;
+				ViewData[ViewDataKeys.Title] = CkHtmlHelper.CreateTitle(CatModel.HtmlTitle);
+				ViewData[ViewDataKeys.Description] = CatModel.HtmlDescription;
+				ViewData[ViewDataKeys.Canonical] = CatModel.Canonical;
 
 				return Page();
 			}

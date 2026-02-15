@@ -1,7 +1,10 @@
 using ckLib;
 using CKSA.Models;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MySqlConnector;
 using System.Data;
+using System.Diagnostics;
 
 namespace CKSA.Pages.Idea
 {
@@ -40,7 +43,9 @@ namespace CKSA.Pages.Idea
 
 			if (doNewest)
 			{
+				Debugger.Break();
 				MiniDataModel.H1Tag = "Latest Ideas";
+				MiniDataModel.Canonical = "https://www.countrykitchensa.com/newestideas/";
 			}
 			else
 			{
@@ -48,8 +53,57 @@ namespace CKSA.Pages.Idea
 				MiniDataModel.Parser = new UrlIdeaParser(UrlIdeaParser.Step.Mini, RouteData);
 				MiniDataModel.Breadcrumbs = MiniDataModel.Parser.GenerateListBreadcrumb(UrlIdeaParser.Step.Mini);
 				GetData();
+				MiniDataModel.Canonical = CreateCanonical(MiniDataModel.Parser.TypeId);
+				ViewData[ViewDataKeys.Title] = CkHtmlHelper.CreateIdeaTitle(MiniDataModel.H1Tag);
+				ViewData[ViewDataKeys.Description] = MiniDataModel.MetaDescription;
+				ViewData[ViewDataKeys.Canonical] = MiniDataModel.Canonical;
 			}
 		}
+
+		private string CreateCanonical(int typeId)
+		{
+			var canonical = Request.GetDisplayUrl();
+
+			try
+			{
+				using(var mySql = DbDriver.OpenConnection())
+				using (var command = mySql.CreateCommand())
+				{
+					command.CommandType = CommandType.Text;
+					command.CommandText = @"select  c.Type, type2id, d.Occasion, d.occ1id from `ideas and types` as a
+					inner join 2Types as c on a.TypeID = c.Type2ID
+					inner join 1occasion as d on d.occ1id = c.Occ1ID
+					where type2id = @c0
+					order by type2id  limit 1";
+
+					command.Parameters.AddWithValue("@c0", typeId);
+					using (var reader = command.ExecuteReader())
+					{
+						if (reader.Read())
+						{
+							var parser = new UrlIdeaParser();
+
+							parser.OccasionId = reader.GetInt32(3);
+							parser.OccasionName = reader.GetString(2);
+							parser.OccasionUrl = UrlBaseParser.MakeUrlFriendly(parser.OccasionName);
+
+							parser.TypeId = typeId;
+							parser.TypeName = reader.GetString(0);
+							parser.TypeUrl = UrlBaseParser.MakeUrlFriendly(parser.TypeName);
+
+							canonical = "https://www.countrykitchensa.com" + parser.CreateUrl(string.Empty);
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ErrorHandler.Handle(new ckExceptionData(ex, "ckideas::CreateCanonical", "", canonical));
+			}
+
+			return canonical;
+		}
+
 
 
 		private void GetData()
@@ -82,10 +136,7 @@ Order By A.IdeaID DESC";
 							{
 								htmlTitle = MiniDataModel.Parser.TypeName;
 							}
-							ViewData["Title"] = htmlTitle;
 							MiniDataModel.H1Tag = htmlTitle;
-							//Page.Title = ControlChecker.CreateIdeaTitle(HtmlTitle);
-
 							MiniDataModel.GenDescription = reader.ReadString(4);
 							MiniDataModel.MetaDescription = reader.ReadString(3);
 						}

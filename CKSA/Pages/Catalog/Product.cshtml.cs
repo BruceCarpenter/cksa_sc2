@@ -27,6 +27,8 @@ namespace CKSA.Pages.Catalog
 		public ProductData? ProductDataModel { get; set; }
 		private readonly CookieHelper _cookies;
 
+		public bool DoNotIndex { get; set; }
+
 
 		public int WholeSaleId { get; set; }
 		public const string Kosher = "<a href=\"javascript:kosherLink('{0}')\">Kosher</a>";
@@ -159,8 +161,6 @@ namespace CKSA.Pages.Catalog
 						ProductDataModel.TheProduct.Ingredients = "Ingredients: " + ProductDataModel.TheProduct.Ingredients;
 					}
 
-					ViewData["Title"] = ProductDataModel.TheProduct.CreateHtmlTitle();
-
 					ProductDataModel.Breadcrumbs = ProductDataModel.Parser.GenerateListBreadcrumb(UrlProductParser.Step.Product);
 
 					SocialMediaContent(ProductDataModel.Parser);
@@ -173,18 +173,17 @@ namespace CKSA.Pages.Catalog
 						string.IsNullOrEmpty(ProductDataModel.TheProduct.Kosher) == false ||
 						string.IsNullOrEmpty(ProductDataModel.TheProduct.UpcCode) == false;
 
-					CheckCanonicalLink(ProductDataModel.TheProduct.FriendlyUrlLink);
+
+					ViewData[ViewDataKeys.Canonical] = $"https://www.countrykitchensa.com{ProductDataModel.TheProduct.FriendlyUrlLink[1..^1]}";
+					ViewData[ViewDataKeys.Title] = ProductDataModel.TheProduct.CreateHtmlTitle();
+					ViewData[ViewDataKeys.Description] = ProductDataModel.TheProduct.CreateHtmlMetaDescription();
+
 
 					if (!string.IsNullOrEmpty(ProductDataModel.TheProduct.Brand))
 					{
 						ProductDataModel.BrandUrl = string.Format("/shop/brand-name/{0}/48/{1}/",
 							UrlBaseParser.MakeUrlFriendly(ProductDataModel.TheProduct.Brand),
 							ProductDataModel.TheProduct.Cat2Id);
-					}
-
-					if (ProductDataModel.TheProduct.DoNotIndex)
-					{
-						ViewData["Robots"] = true;
 					}
 				}
 				if(saveCached)
@@ -337,25 +336,12 @@ namespace CKSA.Pages.Catalog
 			return newUi;
 		}
 
-		/// <summary>
-		/// Tell crawlers to index only one product page.
-		/// </summary>
-		private void CheckCanonicalLink(string url)
-		{
-			//ViewData["Canonical"] = 
-			//link.Attributes.Add("rel", "canonical");
-			//var linkToPointTo = url.Trim(new char[] { '"' });
-			//link.Attributes.Add("href", string.Format("https://www.countrykitchensa.com{0}", linkToPointTo));
-			//Header.Controls.Add(link);
-		}
-
 		private void SocialMediaContent(UrlProductParser parser)
 		{
 			// Facebook
 			string productUrl = parser.CreateUrl(string.Empty);
 			ProductDataModel.FbTitle = CkDefines.OgDescription(HtmlRemoval.StripTagsRegex(ProductDataModel.TheProduct.Description));
 			ProductDataModel.Description = CkDefines.OgDescription(HtmlRemoval.StripTagsRegex(ProductDataModel.TheProduct.Details));
-			ViewData["Description"] = ProductDataModel.TheProduct.CreateHtmlMetaDescription();
 
 			//
 			string pinUrl = WebUtility.UrlEncode(productUrl);

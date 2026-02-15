@@ -72,7 +72,10 @@ namespace CKSA.Pages.Idea
 
 					DefaultIdeaModel.Breadcrumbs = DefaultIdeaModel.Parser.GenerateListBreadcrumb(UrlIdeaParser.Step.Occasion);
 					DefaultIdeaModel.Breadcrumbs[crumbName] = DefaultIdeaModel.Breadcrumbs["Ideas"] + id + "/";
-					ViewData["Canonical"] = $"https://www.countrykitchensa.com/idea/{_IdeaId}/";
+
+					ViewData[ViewDataKeys.Title] = DefaultIdeaModel.H1Tag;
+					ViewData[ViewDataKeys.Description] = DefaultIdeaModel.H1Tag;
+					ViewData[ViewDataKeys.Canonical] = $"https://www.countrykitchensa.com/idea/{_IdeaId}/";
 					CreateDbPage();
 				}
 			}

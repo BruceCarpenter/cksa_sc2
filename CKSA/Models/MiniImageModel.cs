@@ -13,7 +13,7 @@ namespace CKSA.Models
 		public int RunAs { get; set; }
 		public int WholeSaleCustomer { get; set; }
 		public int Id { get; set; }
-		public List<Product> Products { get; set; }
+		public List<Product>? Products { get; set; }
 		public bool HasResults { get; set; }
 
 		public int ShopId { get; set; } = 0;
@@ -59,7 +59,9 @@ namespace CKSA.Models
 							p.TempOutOfStock = reader.ReadInt16("ItemTempOOS");
 							p.Special = reader.ReadInt16("CKPSpecial");
 							p.ProductExpiration = reader.ReadDateTime("DateExpCKPS");
-							p.SaleExpiration = reader.ReadDateTime("SaleEndCKPS");
+
+							// I have converted this from ReadDateTime to ReadString - 2/12/2026
+							p.SaleExpiration = reader.ReadDateTimeAsString("SaleEndCKPS");
 							p.Quantity = reader.ReadInt16("QuantityCKPS");
 							p.ImageUrlBase = reader.ReadString("ImageUrl");
 							p.ImageUrl = CkDefines.ImageCategoryUrl(p.MasterItemNumber, p.ImageUrl);

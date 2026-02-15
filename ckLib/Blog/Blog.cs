@@ -30,7 +30,7 @@ namespace ckLib
 		public BlogType BlogTypeValue { get; set; }
 
 		public BlogMain MainSection { get; set; }
-		public List<BlogSection> BlogSections { get; set; }
+		public List<BlogSection>? BlogSections { get; set; }
 
 		/// <summary>
 		/// Needed when updating a blog via webservice.
