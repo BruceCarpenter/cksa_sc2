@@ -101,29 +101,29 @@
 			{
 				if (GetFirstParamValue(IdeaName, IdeaId.ToString()))
 				{
-					IdeaName = GetValue("Select Idea from 3idea where IdeaID=@c0", IdeaId.ToString(), "Idea");
+					IdeaName = GetValue("Select Idea from 3idea where IdeaID=@c0", IdeaId, "Idea");
 					IdeaUrl = MakeUrlFriendly(IdeaName);
 				}
 
 				if (GetFirstParamValue(TypeId.ToString(), IdeaId.ToString()))
 				{
-					TypeId = GetValueInt("Select TypeID from `ideas and types` where IdeaID=@c0 order by typeid", IdeaId.ToString(), "TypeID");
+					TypeId = GetValueInt("Select TypeID from `ideas and types` where IdeaID=@c0 order by typeid", IdeaId, "TypeID");
 				}
 
 				if (GetFirstParamValue(TypeName, TypeId.ToString()))
 				{
-					TypeName = GetValue("Select Type from 2types where Type2ID=@c0", TypeId.ToString(), "Type");
+					TypeName = GetValue("Select Type from 2types where Type2ID=@c0", TypeId, "Type");
 					TypeUrl = MakeUrlFriendly(TypeName);
 				}
 
 				if (GetFirstParamValue(OccasionId.ToString(), TypeId.ToString()))
 				{
-					OccasionId = GetValueInt("Select Occ1ID from `2types` where Type2ID=@c0 order by Occ1ID", TypeId.ToString(), "Occ1ID");
+					OccasionId = GetValueInt("Select Occ1ID from `2types` where Type2ID=@c0 order by Occ1ID", TypeId, "Occ1ID");
 				}
 
 				if (GetFirstParamValue(OccasionName, OccasionId.ToString()))
 				{
-					OccasionName = GetValue("Select Occasion from 1occasion where Occ1ID=@c0", OccasionId.ToString(), "Occasion");
+					OccasionName = GetValue("Select Occasion from 1occasion where Occ1ID=@c0", OccasionId, "Occasion");
 					OccasionUrl = MakeUrlFriendly(OccasionName);
 				}
 			}

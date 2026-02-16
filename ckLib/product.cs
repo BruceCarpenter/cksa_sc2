@@ -14,7 +14,7 @@ namespace ckLib
 		public class AlsoLike
 		{
 			public string ItemNumber { get; set; }
-			public string ItemId { get; set; }
+			public int ItemId { get; set; }
 			public string ImageUrl { get; set; }
 			public string Description { get; set; }
 			public string Price { get; set; }
@@ -1300,7 +1300,7 @@ namespace ckLib
 						while (reader.Read())
 						{
 							var l = new AlsoLike();
-							l.ItemId = reader.ReadString("ItemId");
+							l.ItemId = reader.ReadInt32("ItemId");
 							l.ItemNumber = reader.ReadString("Item Number").Trim();
 							l.Description = reader.ReadString("Description");
 							var price = reader.ReadDecimal("Price");

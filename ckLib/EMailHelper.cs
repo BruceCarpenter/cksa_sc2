@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
@@ -139,6 +140,9 @@ namespace ckLib
 		/// </summary>
 		static public void SendMail(MailMessage mailMsg, string toEmail, string toName, string fromEmail = "account@countrykitchensa.com", bool forceForTesting = true)
 		{
+
+			if (Debugger.IsAttached) return;
+
 			//
 			// Account has sent too many so use this for time being
 			//

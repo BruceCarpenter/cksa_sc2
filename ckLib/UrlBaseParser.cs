@@ -28,11 +28,10 @@ namespace ckLib
 		}
 
 		/// <summary>
-		/// Same format for this. param1 is emtpy and param 2 is not empty and is a digit.
+		/// Same format for this. param1 is emtpy and param 2 is not empty and is a digit and not 0.
 		/// </summary>
 		/// <param name="param1">value that needs to be obtained if empty</param>
 		/// <param name="intParamId">used to get param1 must be int</param>
-		/// <returns></returns>
 		protected bool GetFirstParamValue(string param1, string intParamId)
 		{
 			bool getParam = false;
@@ -40,12 +39,23 @@ namespace ckLib
 
 			getParam = string.IsNullOrEmpty(param1) &&
 			   string.IsNullOrEmpty(intParamId) == false &&
-				Int64.TryParse(intParamId, out forTryParse);
+				Int64.TryParse(intParamId, out forTryParse) &&
+				forTryParse != 0;
 
 			return getParam;
 		}
 
-		protected int GetValueInt(string sql, string whereParam, string field)
+		protected bool GetFirstParamValue(int param1, int paramId)
+		{
+			return param1 != 0 && paramId != 0;
+		}
+
+		protected bool GetFirstParamValue(string param1, int paramId)
+		{
+			return !string.IsNullOrEmpty(param1) && paramId != 0;
+		}
+
+		protected int GetValueInt(string sql, int whereParam, string field)
 		{
 			var convertToInt = GetValue(sql, whereParam, field);
 			if (int.TryParse(convertToInt, out int result))
@@ -56,7 +66,7 @@ namespace ckLib
 			return 0;
 		}
 
-		protected string GetValue(string sql, string whereParam, string field)
+		protected string GetValue(string sql, int whereParam, string field)
 		{
 			var id = string.Empty;
 

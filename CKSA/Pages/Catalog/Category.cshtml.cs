@@ -38,6 +38,8 @@ namespace CKSA.Pages.Catalog
 			try
 			{
 				_ShopName = ShopName;
+
+				DbDriver.OpenCounter = 0;
 				
 				if (!CheckParameters(ShopId))
 				{
