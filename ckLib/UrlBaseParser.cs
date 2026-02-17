@@ -45,25 +45,39 @@ namespace ckLib
 			return getParam;
 		}
 
-		protected bool GetFirstParamValue(int param1, int paramId)
-		{
-			return param1 != 0 && paramId != 0;
-		}
-
-		protected bool GetFirstParamValue(string param1, int paramId)
-		{
-			return !string.IsNullOrEmpty(param1) && paramId != 0;
-		}
-
 		protected int GetValueInt(string sql, int whereParam, string field)
 		{
-			var convertToInt = GetValue(sql, whereParam, field);
-			if (int.TryParse(convertToInt, out int result))
+			int value = 0;
+
+			try
 			{
-				return result;
+				using var conn = DbDriver.OpenConnection();
+				using (var command = conn.CreateCommand())
+				{
+					command.CommandType = CommandType.Text;
+					command.CommandText = sql;
+					command.Parameters.AddWithValue("@c0", whereParam);
+
+					using (var read = command.ExecuteReader())
+					{
+						if (read.Read())
+						{
+							var columnIndex = read.GetOrdinal(field);
+							if (!read.IsDBNull(columnIndex))
+							{
+								value = read.GetInt32(columnIndex);
+							}
+						}
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				ErrorHandler.Handle(ex, "GetValue", sql);
+				throw;
 			}
 
-			return 0;
+			return value;
 		}
 
 		protected string GetValue(string sql, int whereParam, string field)

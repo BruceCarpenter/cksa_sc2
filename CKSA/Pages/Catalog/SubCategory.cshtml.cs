@@ -45,7 +45,7 @@ namespace CKSA.Pages.Catalog
 					GetData();
 					CreateImages();
 
-					SubCatModel.Breadcrumbs = SubCatModel.Parser.GenerateListBreadcrumb(UrlProductParser.Step.Shop);
+					SubCatModel.Breadcrumbs = SubCatModel.Parser.GenerateListBreadcrumb(UrlProductParser.Step.Category);
 					SubCatModel.H1Tag = SubCatModel.Parser.CategoryName;
 
 					cacher.Store(SubCatModel, key);

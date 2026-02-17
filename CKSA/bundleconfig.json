@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/js/countrykitchen.min.js",
+    "inputFiles": [
+      "wwwroot/js/countrykitchen.js"
+    ]
+  }
+]
